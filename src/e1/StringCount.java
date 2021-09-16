@@ -14,11 +14,22 @@ public class StringCount {
         }
 
         int nWords = 0;
+        char[] chars = text.toCharArray();
 
         boolean isWord = false;
 
         for (int i = 0; i < text.length(); i++) {
 
+            // if a word is detected, isWord turns true,
+            // and it counts one word.
+            if (Character.isLetter(chars[i]) && !isWord) {
+                isWord = true;
+                nWords++;
+
+                // if a word ends, isWord turns false.
+            } else if (!Character.isLetter(chars[i]) && isWord) {
+                isWord = false;
+            }
         }
 
         return nWords;
