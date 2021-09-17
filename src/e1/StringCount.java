@@ -72,7 +72,27 @@ public class StringCount {
      * @param c    the character to be found
      * @return Number of times the character appears in the String or zero if null
      */
-    public static int countCharIgnoringCase(String text, char c) { /* ... */ }
+    public static int countCharIgnoringCase(String text, char c) {
+        if (text == null || text.isEmpty()) {
+            return 0;
+        }
+
+        int nTimes = 0;
+        char[] chars = text.toCharArray();
+
+        for (int i = 0; i < text.length(); i++) {
+
+            // if one character is found,
+            // it counts one.
+            if (Character.toUpperCase(chars[i]) == c) {
+                nTimes++;
+            } else if (Character.toLowerCase(chars[i]) == c) {
+                nTimes++;
+            }
+        }
+
+        return nTimes;
+    }
 
     /**
      * Checks if a password is safe according to the following rules :
