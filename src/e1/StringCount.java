@@ -105,6 +105,39 @@ public class StringCount {
      * @param password The password , we assume it is not null .
      * @return true if the password is safe , false otherwise
      */
-    public static boolean isPasswordSafe(String password) { /* ... */ }
+    public static boolean isPasswordSafe(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
 
+        char[] chars = password.toCharArray();
+        char[] specialChars = {'?', '@', '#', '$', '.', ','};
+
+        boolean upperCase = false;
+        boolean lowerCase = false;
+        boolean digit = false;
+        boolean special = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(chars[i])) {
+                upperCase = true;
+            }
+
+            if (Character.isLowerCase(chars[i])) {
+                lowerCase = true;
+            }
+
+            if (Character.isDigit(chars[i])) {
+                digit = true;
+            }
+
+            for (char specialChar : specialChars) {
+                if (chars[i] == specialChar) {
+                    special = true;
+                    break;
+                }
+            }
+        }
+        return upperCase && lowerCase && digit && special;
+    }
 }
