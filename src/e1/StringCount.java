@@ -22,12 +22,12 @@ public class StringCount {
 
             // if a word is detected, isWord turns true,
             // and it counts one word.
-            if (Character.isLetter(chars[i]) && !isWord) {
+            if (chars[i] != ' ' && !isWord) {
                 isWord = true;
                 nWords++;
 
                 // if a word ends, isWord turns false.
-            } else if (!Character.isLetter(chars[i]) && isWord) {
+            } else if (chars[i] == ' ' && isWord) {
                 isWord = false;
             }
         }
