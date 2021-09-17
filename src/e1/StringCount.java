@@ -65,7 +65,7 @@ public class StringCount {
 
     /**
      * Counts the number of times the given character appears in the String .
-     * The case is ignored so an ’a’ is equal to an ’A ’.
+     * The case is ignored so an ’a’ is equal to an ’A’.
      * Accented characters are considered different characters .
      *
      * @param text String with the characters
@@ -84,9 +84,7 @@ public class StringCount {
 
             // if one character is found,
             // it counts one.
-            if (Character.toUpperCase(chars[i]) == c) {
-                nTimes++;
-            } else if (Character.toLowerCase(chars[i]) == c) {
+            if (Character.toUpperCase(chars[i]) == c || Character.toLowerCase(chars[i]) == c) {
                 nTimes++;
             }
         }
@@ -136,10 +134,12 @@ public class StringCount {
             }
 
             // check if there is a special character
-            for (char specialChar : specialChars) {
-                if (chars[i] == specialChar) {
-                    special = true;
-                    break;
+            if (!special) {
+                for (char specialChar : specialChars) {
+                    if (chars[i] == specialChar) {
+                        special = true;
+                        break;
+                    }
                 }
             }
         }
