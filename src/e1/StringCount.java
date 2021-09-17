@@ -125,7 +125,7 @@ public class StringCount {
                 upperCase = true;
             }
 
-            // check if there is an lower case
+            // check if there is a lower case
             if (Character.isLowerCase(chars[i])) {
                 lowerCase = true;
             }
