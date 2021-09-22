@@ -9,14 +9,15 @@ public class StringCount {
      * @return Number of words in the String or zero if it is null
      */
     public static int countWords(String text) {
+        int nWords = 0;
+        char[] chars;
+        boolean isWord = false;
+
         if (text == null || text.isEmpty()) {
             return 0;
         }
 
-        int nWords = 0;
-        char[] chars = text.toCharArray();
-
-        boolean isWord = false;
+        chars = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
 
@@ -44,12 +45,14 @@ public class StringCount {
      * @return Number of times the character appears in the String or zero if null
      */
     public static int countChar(String text, char c) {
+        int nTimes = 0;
+        char[] chars;
+
         if (text == null || text.isEmpty()) {
             return 0;
         }
 
-        int nTimes = 0;
-        char[] chars = text.toCharArray();
+        chars = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
 
@@ -73,12 +76,14 @@ public class StringCount {
      * @return Number of times the character appears in the String or zero if null
      */
     public static int countCharIgnoringCase(String text, char c) {
+        int nTimes = 0;
+        char[] chars;
+
         if (text == null || text.isEmpty()) {
             return 0;
         }
 
-        int nTimes = 0;
-        char[] chars = text.toCharArray();
+        chars = text.toCharArray();
 
         for (int i = 0; i < text.length(); i++) {
 
@@ -104,10 +109,6 @@ public class StringCount {
      * @return true if the password is safe , false otherwise
      */
     public static boolean isPasswordSafe(String password) {
-        if (password.length() < 8) {
-            return false;
-        }
-
         char[] chars = password.toCharArray();
         char[] specialChars = {'?', '@', '#', '$', '.', ','};
 
@@ -115,6 +116,10 @@ public class StringCount {
         boolean lowerCase = false;
         boolean digit = false;
         boolean special = false;
+
+        if (password.length() < 8) {
+            return false;
+        }
 
         for (int i = 0; i < password.length(); i++) {
 
