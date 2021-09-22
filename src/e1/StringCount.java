@@ -22,12 +22,12 @@ public class StringCount {
 
             // if a word is detected, isWord turns true,
             // and it counts one word.
-            if (Character.isLetter(chars[i]) && !isWord) {
+            if (chars[i] != ' ' && !isWord) {
                 isWord = true;
                 nWords++;
 
                 // if a word ends, isWord turns false.
-            } else if (!Character.isLetter(chars[i]) && isWord) {
+            } else if (chars[i] == ' ' && isWord) {
                 isWord = false;
             }
         }
@@ -65,7 +65,7 @@ public class StringCount {
 
     /**
      * Counts the number of times the given character appears in the String .
-     * The case is ignored so an ’a’ is equal to an ’A ’.
+     * The case is ignored so an ’a’ is equal to an ’A’.
      * Accented characters are considered different characters .
      *
      * @param text String with the characters
@@ -84,9 +84,7 @@ public class StringCount {
 
             // if one character is found,
             // it counts one.
-            if (Character.toUpperCase(chars[i]) == c) {
-                nTimes++;
-            } else if (Character.toLowerCase(chars[i]) == c) {
+            if (Character.toUpperCase(chars[i]) == c || Character.toLowerCase(chars[i]) == c) {
                 nTimes++;
             }
         }
@@ -120,26 +118,28 @@ public class StringCount {
 
         for (int i = 0; i < password.length(); i++) {
 
-            // checks if there is an upper case
+            // check if there is an upper case
             if (Character.isUpperCase(chars[i])) {
                 upperCase = true;
             }
 
-            // checks if there is a lower case
+            // check if there is a lower case
             if (Character.isLowerCase(chars[i])) {
                 lowerCase = true;
             }
 
-            // checks if there is a digit
+            // check if there is a digit
             if (Character.isDigit(chars[i])) {
                 digit = true;
             }
 
-            // checks if there is a special character
-            for (char specialChar : specialChars) {
-                if (chars[i] == specialChar) {
-                    special = true;
-                    break;
+            // check if there is a special character
+            if (!special) {
+                for (char specialChar : specialChars) {
+                    if (chars[i] == specialChar) {
+                        special = true;
+                        break;
+                    }
                 }
             }
         }
