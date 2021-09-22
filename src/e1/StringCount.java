@@ -118,22 +118,22 @@ public class StringCount {
 
         for (int i = 0; i < password.length(); i++) {
 
-            // check if there is an upper case
+            // checks if there is an upper case
             if (Character.isUpperCase(chars[i])) {
                 upperCase = true;
             }
 
-            // check if there is a lower case
+            // checks if there is a lower case
             if (Character.isLowerCase(chars[i])) {
                 lowerCase = true;
             }
 
-            // check if there is a digit
+            // checks if there is a digit
             if (Character.isDigit(chars[i])) {
                 digit = true;
             }
 
-            // check if there is a special character
+            // checks if there is a special character
             if (!special) {
                 for (char specialChar : specialChars) {
                     if (chars[i] == specialChar) {
