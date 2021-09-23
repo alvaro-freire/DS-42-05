@@ -29,6 +29,7 @@ public class TheSlope {
      * Params , return value and thrown expections as in downTheSlope ...
      */
     public static int jumpTheSlope(char[][] slopeMap, int right, int down) {
+
         return 0;
     }
 }
