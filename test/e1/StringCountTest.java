@@ -18,17 +18,24 @@ class StringCountTest {
 
     @Test
     void countWords() {
+        assertEquals(0, StringCount.countWords(null));
+        assertEquals(2, StringCount.countWords("Hello World"));
+        assertEquals(1, StringCount.countWords("Hello World"));
+        assertEquals(2, StringCount.countWords("Hello World"));
     }
 
     @Test
     void countChar() {
+
     }
 
     @Test
     void countCharIgnoringCase() {
+
     }
 
     @Test
     void isPasswordSafe() {
+
     }
 }
