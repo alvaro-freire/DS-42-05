@@ -20,11 +20,11 @@ public class TheSlope {
      */
     public static int downTheSlope(char[][] slopeMap, int right, int down) {
 
-        for (int i = 0; i < slopeMap.length; i++) {
-            for (int j = 0; j < slopeMap[i].length; j++) {
-                if (slopeMap[i][j] != '.' && slopeMap[i][j] != '#')
+        for (char[] chars : slopeMap) {
+            for (char aChar : chars) {
+                if (aChar != '.' && aChar != '#')
                     return 0;
-                if (slopeMap.length != slopeMap[i].length)
+                if (slopeMap.length != chars.length)
                     return 0;
             }
         }
