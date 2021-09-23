@@ -8,6 +8,7 @@ class TheSlopeTest {
 
     @Test
     void downTheSlope() {
+        assertEquals(0, TheSlope.downTheSlope(null, 3, 0));
     }
 
     @Test

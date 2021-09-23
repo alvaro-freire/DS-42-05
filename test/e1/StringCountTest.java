@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCountTest {
+
     @Test
     public void countWords() {
         assertEquals(0, StringCount.countWords(null));
