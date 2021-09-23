@@ -13,5 +13,6 @@ class TheSlopeTest {
 
     @Test
     void jumpTheSlope() {
+        assertEquals(0, TheSlope.jumpTheSlope(null, 3, 0));
     }
 }
