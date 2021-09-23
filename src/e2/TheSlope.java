@@ -1,5 +1,7 @@
 package e2;
 
+import java.lang.reflect.Array;
+
 public class TheSlope {
     /**
      * Traverses the slope map making the right and down movements and
@@ -17,7 +19,16 @@ public class TheSlope {
      *                                  - down >= number of rows of the matrix or down < 1
      */
     public static int downTheSlope(char[][] slopeMap, int right, int down) {
-        return 0;
+
+        for (int i = 0; i < slopeMap.length; i++) {
+            for (int j = 0; j < slopeMap[i].length; j++) {
+                if (slopeMap[i][j] != '.' && slopeMap[i][j] != '#')
+                    return 0;
+                if (slopeMap.length != slopeMap[i].length)
+                    return 0;
+            }
+        }
+        return 1;
     }
 
     /**
