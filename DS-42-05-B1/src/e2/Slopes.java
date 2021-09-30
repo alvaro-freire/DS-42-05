@@ -22,29 +22,35 @@ public class Slopes {
         int x = 0, y = 0, tree = 0;
 
         /* Se recorre el mapa para corroborar que sea válido */
-        for (char[] chars : slopeMap) {
-            for (char aChar : chars) {
-                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
-                    return 0;
+        for (int i = 0; i < slopeMap.length; i++) {
+            for (int j = 0; j < slopeMap[i].length; j++) {
+                if ((slopeMap[i][j] != '.' && slopeMap[i][j] != '#') || slopeMap.length != slopeMap[i].length)
+                    return -1;
             }
+        }
+
+        if (slopeMap[0][0] == '#') {
+            tree++;
         }
 
         while (y <= slopeMap.length) {
             for (int a = 0; a < right; a++) {
+                x++;
                 if (x == slopeMap[0].length) {
                     x = 0;
                 }
                 if (slopeMap[y][x] == '#') {
                     tree++;
                 }
-                x++;
             }
-            y++;
             for (int b = 0; b < down; b++) {
+                y++;
+                if (y == slopeMap.length) {
+                    return tree;
+                }
                 if (slopeMap[y][x] == '#') {
                     tree++;
                 }
-                y++;
             }
         }
         return tree;

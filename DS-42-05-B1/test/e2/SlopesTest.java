@@ -45,11 +45,11 @@ class SlopesTest {
 
     @Test
     void downTheSlope() {
-        assertEquals(0, Slopes.downTheSlope(invalidCharacter, 1, 1));
-        assertEquals(0, Slopes.downTheSlope(nonSquareMap1, 1, 1));
-        assertEquals(0, Slopes.downTheSlope(nonSquareMap2, 1, 1));
-        assertEquals(1, Slopes.downTheSlope(map, 1, 1));
-        assertEquals(1, Slopes.downTheSlope(miniMap, 1, 1));
+        assertEquals(-1, Slopes.downTheSlope(invalidCharacter, 1, 1));
+        assertEquals(-1, Slopes.downTheSlope(nonSquareMap1, 1, 1));
+        assertEquals(-1, Slopes.downTheSlope(nonSquareMap2, 1, 1));
+        assertEquals(5, Slopes.downTheSlope(map, 1, 1));
+        assertEquals(6, Slopes.downTheSlope(miniMap, 2, 1));
     }
 
     @Test
