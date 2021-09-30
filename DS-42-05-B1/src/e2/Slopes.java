@@ -1,7 +1,5 @@
 package e2;
 
-import java.lang.reflect.Array;
-
 public class Slopes {
     /**
      * Traverses the slope map making the right and down movements and
@@ -65,7 +63,37 @@ public class Slopes {
      * Params , return value and thrown expections as in downTheSlope ...
      */
     public static int jumpTheSlope(char[][] slopeMap, int right, int down) {
+        int x = 0, y = 0, tree = 0;
 
-        return 0;
+        /* Se recorre el mapa para corroborar que sea válido */
+        for (char[] chars : slopeMap) {
+            for (char aChar : chars) {
+                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
+                    return -1;
+            }
+        }
+
+        if (slopeMap[0][0] == '#') {
+            tree++;
+        }
+
+        while (y < slopeMap.length) {
+            for (int a = 0; a < right; a++) {
+                x++;
+                if (x == slopeMap[0].length) {
+                    x = 0;
+                }
+            }
+            for (int b = 0; b < down; b++) {
+                y++;
+                if (y >= slopeMap.length) {
+                    break;
+                }
+            }
+            if (y < slopeMap.length && slopeMap[y][x] == '#') {
+                tree++;
+            }
+        }
+        return tree;
     }
 }
