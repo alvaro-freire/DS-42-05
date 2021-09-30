@@ -18,17 +18,36 @@ public class TheSlope {
      *                                  - right >= number of columns or right < 1
      *                                  - down >= number of rows of the matrix or down < 1
      */
-    public static int downTheSlope(char[][] slopeMap, int right, int down) {
+     public static int downTheSlope(char[][] slopeMap, int right, int down) {
+        int x = 0, y = 0, tree = 0;
 
+        /* Se recorre el mapa para corroborar que sea válido */
         for (char[] chars : slopeMap) {
             for (char aChar : chars) {
-                if (aChar != '.' && aChar != '#')
-                    return 0;
-                if (slopeMap.length != chars.length)
+                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
                     return 0;
             }
         }
-        return 1;
+
+        while (y <= slopeMap.length) {
+            for (; x <= right; x++) {
+                if (x == slopeMap[0].length) {
+                    x = 0;
+                }
+                if (slopeMap[y][x] == '#')
+                    tree++;
+            }
+            if (down == 0) {
+             return tree;
+            } else {
+                y++;
+                for (; y <= down; y++) {
+                    if (slopeMap[y][x] == '#')
+                        tree++;
+                }
+            }
+        }
+        return tree;
     }
 
     /**
