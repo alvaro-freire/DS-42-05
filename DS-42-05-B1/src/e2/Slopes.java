@@ -23,7 +23,7 @@ public class Slopes {
         }
 
         /* Se comprueba si los movimientos son correctos */
-        if (right > slopeMap.length || right < 0 || down > slopeMap[0].length || down < 1)
+        if (right >= slopeMap.length || right < 0 || down >= slopeMap[0].length || down < 1)
             throw new IllegalArgumentException();
 
         /* Se comprueba si en la posición de partida hay un árbol */
