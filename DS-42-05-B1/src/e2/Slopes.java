@@ -10,11 +10,6 @@ public class Slopes {
      * @param right    Movement to the right
      * @param down     Downward movement
      * @return Number of trees
-     * @throws IllegalArgumentException if the matrix is incorrect because :
-     *                                  - It is not square .
-     *                                  - It has characters other than "." and "#"
-     *                                  - right >= number of columns or right < 1
-     *                                  - down >= number of rows of the matrix or down < 1
      */
     public static int downTheSlope(char[][] slopeMap, int right, int down) {
         int x = 0, y = 0, tree = 0;
@@ -23,14 +18,21 @@ public class Slopes {
         for (char[] chars : slopeMap) {
             for (char aChar : chars) {
                 if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
-                    return -1;
+                    throw new IllegalArgumentException();
             }
         }
 
+        /* Se comprueba si los movimientos son correctos */
+        if (right > slopeMap.length || right < 0 || down > slopeMap[0].length || down < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        /* Se comprueba si en la posición de partida hay un árbol */
         if (slopeMap[0][0] == '#') {
             tree++;
         }
-
+        /* Se realiza el algoritmo para recorrer el mapa
+         * realizando los movimientos correspondientes */
         while (y < slopeMap.length) {
             for (int a = 0; a < right; a++) {
                 x++;
