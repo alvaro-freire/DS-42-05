@@ -66,9 +66,13 @@ public class Slopes {
         for (char[] chars : slopeMap) {
             for (char aChar : chars) {
                 if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
-                    return -1;
+                    throw new IllegalArgumentException();
             }
         }
+
+        /* Se comprueba si los movimientos son correctos */
+        if (right >= slopeMap.length || right < 0 || down >= slopeMap[0].length || down < 1)
+            throw new IllegalArgumentException();
 
         if (slopeMap[0][0] == '#') {
             tree++;

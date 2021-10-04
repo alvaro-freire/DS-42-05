@@ -77,5 +77,13 @@ class SlopesTest {
         assertEquals( 0, Slopes.jumpTheSlope(miniMap,  1,  1));
         assertEquals( 1, Slopes.jumpTheSlope(miniMap,  3,  2));
         assertEquals( 0, Slopes.jumpTheSlope(miniMap,  4,  3));
+
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(nonSquareMap1, 1, 1));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(nonSquareMap2, 1, 1));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(invalidCharacter, 1, 1));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(map, 11, 1));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(map, 1, 11));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(map, -1, 1));
+        assertThrows(IllegalArgumentException.class, () -> Slopes.jumpTheSlope(map, 1, 0));
     }
 }
