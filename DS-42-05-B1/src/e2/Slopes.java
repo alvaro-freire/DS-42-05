@@ -23,34 +23,29 @@ public class Slopes {
         }
 
         /* Se comprueba si los movimientos son correctos */
-        if (right > slopeMap.length || right < 0 || down > slopeMap[0].length || down < 1) {
+        if (right > slopeMap.length || right < 0 || down > slopeMap[0].length || down < 1)
             throw new IllegalArgumentException();
-        }
 
         /* Se comprueba si en la posición de partida hay un árbol */
-        if (slopeMap[0][0] == '#') {
+        if (slopeMap[0][0] == '#')
             tree++;
-        }
+
         /* Se realiza el algoritmo para recorrer el mapa
          * realizando los movimientos correspondientes */
         while (y < slopeMap.length) {
             for (int a = 0; a < right; a++) {
                 x++;
-                if (x == slopeMap[0].length) {
+                if (x == slopeMap[0].length)
                     x = 0;
-                }
-                if (slopeMap[y][x] == '#') {
+                if (slopeMap[y][x] == '#')
                     tree++;
-                }
             }
             for (int b = 0; b < down; b++) {
                 y++;
-                if (y >= slopeMap.length) {
+                if (y >= slopeMap.length)
                     break;
-                }
-                if (slopeMap[y][x] == '#') {
+                if (slopeMap[y][x] == '#')
                     tree++;
-                }
             }
         }
         return tree;
