@@ -1,10 +1,25 @@
 package e3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Melody {
+    enum Notes {DO, RE, MI, FA, SOL, LA, SI}
+
+    enum Accidentals {NATURAL, SHARP, FLAT}
+
+    float Time;
+
+    List<Notes> NotesList = new ArrayList<>();
+    List<Accidentals> AccidentalsList = new ArrayList<>();
+    List<Float> TimesList = new ArrayList<>();
+
     /**
      * Creates an empty Melody instance .
      */
-    public Melody() { /* ... */ }
+    public Melody() {
+
+    }
 
     /**
      * Add a note at the end of this melody .
@@ -24,7 +39,13 @@ public class Melody {
      * @return The note on index .
      * @throws IllegalArgumentException if the index is not a valid position .
      */
-    public Notes getNote(int index) { /* ... */ }
+    public Notes getNote(int index) {
+        if (index > NotesList.size() || index < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        return NotesList.get(index);
+    }
 
     /**
      * Returns the accidental of the note on the given position
@@ -42,21 +63,37 @@ public class Melody {
      * @return The time on index .
      * @throws IllegalArgumentException if the index is not a valid position .
      */
-    public float getTime(int index) { /* ... */ }
+    public float getTime(int index) {
+        if (index > TimesList.size() || index < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        return TimesList.get(index);
+    }
 
     /**
      * Returns the number of notes in this melody .
      *
      * @return The number of notes in this melody .
      */
-    public int size() { /* ... */ }
+    public int size() {
+        return NotesList.size();
+    }
 
     /**
      * Returns the duration of this melody .
      *
      * @return The duration of this melody in milliseconds .
      */
-    public float getDuration() { /* ... */ }
+    public float getDuration() {
+        float result = 0;
+
+        for (Float aFloat : TimesList) {
+            result += aFloat;
+        }
+
+        return result;
+    }
 
     /**
      * Performs the equality tests of the current melody with another melody
@@ -68,7 +105,9 @@ public class Melody {
      * @return true if the melodies are equals , false otherwise .
      */
     @Override
-    public boolean equals(Object o) { /* ... */ }
+    public boolean equals(Object o) {
+        return true;
+    }
 
     /**
      * Returns an integer that is a hash code representation of the melody .
@@ -78,7 +117,9 @@ public class Melody {
      * @return The hash code of this melody .
      */
     @Override
-    public int hashCode() { /* ... */ }
+    public int hashCode() {
+        return 0;
+    }
 
     /**
      * The string representation of this melody .

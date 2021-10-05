@@ -33,7 +33,9 @@ public class Calculator {
      * @throws ArithmeticException If the operation returns an invalid value
      * ( division by zero )
      */
-    public float executeOperations () { /* ... */ }
+    public float executeOperations () {
+        return 0;
+    }
     /**
      * Current internal state of calculator is printed
      * FORMAT :
@@ -42,5 +44,7 @@ public class Calculator {
      * @return String of the internal state of the calculator
      */
     @Override
-    public String toString () { /* ... */ }
+    public String toString () {
+        return "hola";
+    }
 }
