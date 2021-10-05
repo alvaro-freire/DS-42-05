@@ -30,7 +30,9 @@ public class Melody {
      * @throws IllegalArgumentException if the note , the accidental
      *                                  or the time are not valid values .
      */
-    public void addNote(Notes note, Accidentals accidental, float time) {/* ... */}
+    public void addNote(Notes note, Accidentals accidental, float time) {
+
+    }
 
     /**
      * Returns the note on the given position
@@ -54,7 +56,13 @@ public class Melody {
      * @return The accidental on index .
      * @throws IllegalArgumentException if the index is not a valid position .
      */
-    public Accidentals getAccidental(int index) { /* ... */ }
+    public Accidentals getAccidental(int index) {
+        if (index > AccidentalsList.size() || index < 1) {
+            throw new IllegalArgumentException();
+        }
+
+        return AccidentalsList.get(index);
+    }
 
     /**
      * Returns the duration of the note on the given position
@@ -101,7 +109,6 @@ public class Melody {
      * music fragment regardless of the name of its notes .
      *
      * @param o The melody to be compared with the current melody .
-     *          6
      * @return true if the melodies are equals , false otherwise .
      */
     @Override
@@ -127,5 +134,7 @@ public class Melody {
      * @return The String representantion of this melody .
      */
     @Override
-    public String toString() { /* ... */ }
+    public String toString() {
+        return "gola";
+    }
 }
