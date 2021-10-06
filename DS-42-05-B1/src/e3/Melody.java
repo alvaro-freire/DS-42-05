@@ -3,7 +3,6 @@ package e3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Melody {
     enum Notes {DO, RE, MI, FA, SOL, LA, SI}
@@ -287,7 +286,64 @@ public class Melody {
      */
     @Override
     public int hashCode() {
-        return 0;
+        int hash = 0;
+
+        for (int i = 0; i < NotesList.size(); i++) {
+            switch (NotesList.get(i)) {
+                case DO:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += 9;
+                        case SHARP -> hash += 1;
+                        case FLAT -> hash += 8;
+                    }
+                    break;
+                case RE:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
+                        case SHARP -> hash += 2;
+                        case FLAT -> hash += 1;
+                    }
+                    break;
+                case MI:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += 3;
+                        case SHARP -> hash += 4;
+                        case FLAT -> hash += 2;
+                    }
+                    break;
+                case FA:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += 4;
+                        case SHARP -> hash += 5;
+                        case FLAT -> hash += 3;
+                    }
+                    break;
+                case SOL:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
+                        case SHARP -> hash += 6;
+                        case FLAT -> hash += 5;
+                    }
+                    break;
+                case LA:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
+                        case SHARP -> hash += 7;
+                        case FLAT -> hash += 6;
+                    }
+                    break;
+                case SI:
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += 8;
+                        case SHARP -> hash += 9;
+                        case FLAT -> hash += 7;
+                    }
+                    break;
+            }
+            hash += TimesList.get(i) * 13;
+        }
+
+        return hash;
     }
 
     /**
