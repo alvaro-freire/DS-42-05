@@ -33,6 +33,9 @@ public class Melody {
      *                                  or the time are not valid values .
      */
     public void addNote(Notes note, Accidentals accidental, float time) {
+        if (note == null || accidental == null || time <= 0) {
+            throw new IllegalArgumentException();
+        }
         NotesList.add(note);
         AccidentalsList.add(accidental);
         TimesList.add(time);
@@ -46,7 +49,7 @@ public class Melody {
      * @throws IllegalArgumentException if the index is not a valid position .
      */
     public Notes getNote(int index) {
-        if (index > NotesList.size() || index < 0) {
+        if (index > NotesList.size() - 1 || index < 0) {
             throw new IllegalArgumentException();
         }
 
@@ -61,7 +64,7 @@ public class Melody {
      * @throws IllegalArgumentException if the index is not a valid position .
      */
     public Accidentals getAccidental(int index) {
-        if (index > AccidentalsList.size() || index < 1) {
+        if (index > AccidentalsList.size() - 1 || index < 0) {
             throw new IllegalArgumentException();
         }
 
@@ -76,7 +79,7 @@ public class Melody {
      * @throws IllegalArgumentException if the index is not a valid position .
      */
     public float getTime(int index) {
-        if (index > TimesList.size() || index < 1) {
+        if (index > TimesList.size() || index < 0) {
             throw new IllegalArgumentException();
         }
 
@@ -271,6 +274,9 @@ public class Melody {
                         break;
                 }
             }
+            if (!Objects.equals(this.AccidentalsList.get(i), melody.AccidentalsList.get(i))) {
+                return false;
+            }
         }
         return true;
     }
@@ -294,6 +300,24 @@ public class Melody {
      */
     @Override
     public String toString() {
-        return "gola";
+        String s = "";
+        for (int i = 0; i < NotesList.size(); i++) {
+            if (i != 0) {
+                s = s.concat(" ");
+            }
+            s = s.concat(NotesList.get(i).name());
+            switch (AccidentalsList.get(i)) {
+                case SHARP:
+                    s = s + "#";
+                    break;
+                case FLAT:
+                    s = s + "b";
+                    break;
+                case NATURAL:
+                    break;
+            }
+            s = s + "(" + TimesList.get(i).toString() + ")";
+        }
+        return s;
     }
 }
