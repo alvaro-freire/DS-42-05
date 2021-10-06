@@ -10,8 +10,6 @@ public class Melody {
 
     enum Accidentals {NATURAL, SHARP, FLAT}
 
-    float Time;
-
     List<Notes> NotesList = new ArrayList<>();
     List<Accidentals> AccidentalsList = new ArrayList<>();
     List<Float> TimesList = new ArrayList<>();
@@ -273,8 +271,7 @@ public class Melody {
                         }
                         break;
                 }
-            }
-            if (!Objects.equals(this.AccidentalsList.get(i), melody.AccidentalsList.get(i))) {
+            } else if (!Objects.equals(this.AccidentalsList.get(i), melody.AccidentalsList.get(i))) {
                 return false;
             }
         }
