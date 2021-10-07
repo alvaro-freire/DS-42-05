@@ -1,9 +1,15 @@
 package e2;
 
 public class Slopes {
-    /*
-     * Se recorre el mapa para comprobar si es
-     * válido y si los movimientos son válidos:
+    /**
+     * Goes through the map and check if it
+     * is valid and also if movements are .
+     *
+     * @param slopeMap A square matrix representing the slope with spaces
+     *                 represented as "." and trees represented as "#".
+     * @param right    Movement to the right
+     * @param down     Downward movement
+     *
      */
     private static void mapCheck(char[][] slopeMap, int right, int down) {
         for (char[] chars : slopeMap) {
