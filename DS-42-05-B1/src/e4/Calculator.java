@@ -10,19 +10,19 @@ public class Calculator {
      * Class containing the four operations
      * available for the calculator
      */
-    public enum Operator {
+    public enum Operation {
         ADD("+"),
         SUB("-"),
         MUL("*"),
         DIV("/");
 
-        /* field type const */
+        /* Field type const */
         private final String op; /* string of the operation */
 
         /*
          * Constructor of enum operator
          */
-        Operator(String op) {
+        Operation(String op) {
             this.op = op;
         }
 
@@ -33,6 +33,8 @@ public class Calculator {
     }
 
     float result;
+
+    /* Lists for internal state of the calculator */
     List<String> Operations = new ArrayList<>();
     List<Float> Operators = new ArrayList<>();
     List<String> InternalState = new ArrayList<>();
@@ -76,15 +78,15 @@ public class Calculator {
         boolean wasEmptyList = Operators.isEmpty();
 
         /* Check if operation does not exist: */
-        if (!Objects.equals(operation, Operator.ADD.getOp()) &&
-                !Objects.equals(operation, Operator.SUB.getOp()) &&
-                !Objects.equals(operation, Operator.MUL.getOp()) &&
-                !Objects.equals(operation, Operator.DIV.getOp())) {
+        if (!Objects.equals(operation, Operation.ADD.getOp()) &&
+                !Objects.equals(operation, Operation.SUB.getOp()) &&
+                !Objects.equals(operation, Operation.MUL.getOp()) &&
+                !Objects.equals(operation, Operation.DIV.getOp())) {
             throw new IllegalArgumentException();
         }
         Operations.add(operation);
 
-        string = "[" + Operations.get(OperationSize) + "]";
+        string = "[" + operation + "]";
 
         for (Float value : values) {
             /* Check if two values were introduced
@@ -104,7 +106,7 @@ public class Calculator {
         }
 
         if (nValues == 2) {
-            if (Objects.equals(Operations.get(OperationSize), Operator.DIV.getOp())) {
+            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
                 if (Operators.get(OperatorSize + 1) != 0) {
                     InternalState.add(string);
                 }
@@ -112,7 +114,7 @@ public class Calculator {
                 InternalState.add(string);
             }
         } else {
-            if (Objects.equals(Operations.get(OperationSize), Operator.DIV.getOp())) {
+            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
                 if (Operators.get(OperatorSize) != 0) {
                     InternalState.add(string);
                 }
