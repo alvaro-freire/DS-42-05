@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Melody {
     enum Notes {DO, RE, MI, FA, SOL, LA, SI}
     enum Accidentals {NATURAL, SHARP, FLAT}

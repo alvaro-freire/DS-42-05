@@ -105,7 +105,7 @@ public class Calculator {
         }
 
         if (nValues == 2) {
-            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
+            if (Objects.equals(operation, Operation.DIV.getOp())) {
                 if (Operators.get(OperatorSize + 1) != 0) {
                     InternalState.add(string);
                 }
@@ -113,7 +113,7 @@ public class Calculator {
                 InternalState.add(string);
             }
         } else {
-            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
+            if (Objects.equals(operation, Operation.DIV.getOp())) {
                 if (Operators.get(OperatorSize) != 0) {
                     InternalState.add(string);
                 }
