@@ -5,24 +5,35 @@ import java.util.List;
 import java.util.Objects;
 
 public class Calculator {
-    float result;
+
+    /*
+     * Class containing the four operations
+     * available for the calculator
+     */
     public enum Operator {
         ADD ("+"),
         SUB ("-"),
         MUL ("*"),
         DIV ("/");
 
-        private final String op;
+        /* field type const */
+        private final String op; /* string of the operation */
 
+        /*
+         * Constructor of enum operator
+         */
         Operator(String op) {
             this.op = op;
         }
 
+        /* Method of enum class */
         public String getOp() { return op; }
     }
+
+    float result;
     List<String> Operations = new ArrayList<>();
-    List<String> InternalState = new ArrayList<>();
     List<Float> Operators = new ArrayList<>();
+    List<String> InternalState = new ArrayList<>();
 
     /**
      * Public constructor of the calculator .
