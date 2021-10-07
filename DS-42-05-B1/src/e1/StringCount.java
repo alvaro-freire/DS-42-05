@@ -21,14 +21,14 @@ public class StringCount {
 
         for (int i = 0; i < text.length(); i++) {
 
-            // if a word is detected, isWord turns true,
-            // and it counts one word.
+            /* if a word is detected, isWord turns
+             * true, and it counts one word. */
             if (chars[i] != ' ' && !isWord) {
                 isWord = true;
                 nWords++;
-
-                // if a word ends, isWord turns false.
-            } else if (chars[i] == ' ' && isWord) {
+            }
+            /* if a word ends, isWord turns false. */
+            else if (chars[i] == ' ' && isWord) {
                 isWord = false;
             }
         }
@@ -56,8 +56,8 @@ public class StringCount {
 
         for (int i = 0; i < text.length(); i++) {
 
-            // if one character is found,
-            // it counts one.
+            /* if one character is
+             * found, it counts one. */
             if (chars[i] == c) {
                 nTimes++;
             }
