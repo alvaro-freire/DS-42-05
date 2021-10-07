@@ -3,12 +3,14 @@ package e3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.lang.Math;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Melody {
     enum Notes {DO, RE, MI, FA, SOL, LA, SI}
+
     enum Accidentals {NATURAL, SHARP, FLAT}
 
     List<Notes> NotesList = new ArrayList<>();
@@ -288,61 +290,80 @@ public class Melody {
      */
     @Override
     public int hashCode() {
-        int hash = 0;
+        /* Starting value of hash code: */
+        int hash = 5;
 
+        /* Set the equivalents notes in pairs, this way:
+         *  1:  Do #  = Re b
+         *  2:  Re #  = Mi b
+         *  3:  Mi    = Fa b
+         *  4:  Mi #  = Fa
+         *  5:  Fa #  = Sol b
+         *  6:  Sol # = La b
+         *  7:  La #  = Si b
+         *  8:  Si    = Do b
+         *  9:  Si #  = Do
+         *
+         *  For these pairs, hash code is calculated by adding
+         *  hash raised to the number of the pair it belongs to.
+         *
+         *  For the notes which are not in pairs (LA, SOL, RE),
+         *  hash code is calculated by adding the value of the
+         *  first letter in ASCII and multiplying it by 13.
+         */
         for (int i = 0; i < NotesList.size(); i++) {
             switch (NotesList.get(i)) {
-                case DO:
+                case DO -> {
                     switch (this.AccidentalsList.get(i)) {
-                        case NATURAL -> hash += 9;
-                        case SHARP -> hash += 1;
-                        case FLAT -> hash += 8;
+                        case NATURAL -> hash += Math.pow(hash, 9);
+                        case SHARP -> hash += Math.pow(hash, 1);
+                        case FLAT -> hash += Math.pow(hash, 8);
                     }
-                    break;
-                case RE:
-                    switch (this.AccidentalsList.get(i)) {
-                        case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
-                        case SHARP -> hash += 2;
-                        case FLAT -> hash += 1;
-                    }
-                    break;
-                case MI:
-                    switch (this.AccidentalsList.get(i)) {
-                        case NATURAL -> hash += 3;
-                        case SHARP -> hash += 4;
-                        case FLAT -> hash += 2;
-                    }
-                    break;
-                case FA:
-                    switch (this.AccidentalsList.get(i)) {
-                        case NATURAL -> hash += 4;
-                        case SHARP -> hash += 5;
-                        case FLAT -> hash += 3;
-                    }
-                    break;
-                case SOL:
+                }
+                case RE -> {
                     switch (this.AccidentalsList.get(i)) {
                         case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
-                        case SHARP -> hash += 6;
-                        case FLAT -> hash += 5;
+                        case SHARP -> hash += Math.pow(hash, 2);
+                        case FLAT -> hash += Math.pow(hash, 1);
                     }
-                    break;
-                case LA:
+                }
+                case MI -> {
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += Math.pow(hash, 3);
+                        case SHARP -> hash += Math.pow(hash, 4);
+                        case FLAT -> hash += Math.pow(hash, 2);
+                    }
+                }
+                case FA -> {
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += Math.pow(hash, 4);
+                        case SHARP -> hash += Math.pow(hash, 5);
+                        case FLAT -> hash += Math.pow(hash, 3);
+                    }
+                }
+                case SOL -> {
                     switch (this.AccidentalsList.get(i)) {
                         case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
-                        case SHARP -> hash += 7;
-                        case FLAT -> hash += 6;
+                        case SHARP -> hash += Math.pow(hash, 6);
+                        case FLAT -> hash += Math.pow(hash, 5);
                     }
-                    break;
-                case SI:
+                }
+                case LA -> {
                     switch (this.AccidentalsList.get(i)) {
-                        case NATURAL -> hash += 8;
-                        case SHARP -> hash += 9;
-                        case FLAT -> hash += 7;
+                        case NATURAL -> hash += NotesList.get(i).name().charAt(0) * 13;
+                        case SHARP -> hash += Math.pow(hash, 7);
+                        case FLAT -> hash += Math.pow(hash, 6);
                     }
-                    break;
+                }
+                case SI -> {
+                    switch (this.AccidentalsList.get(i)) {
+                        case NATURAL -> hash += Math.pow(hash, 8);
+                        case SHARP -> hash += Math.pow(hash, 9);
+                        case FLAT -> hash += Math.pow(hash, 7);
+                    }
+                }
             }
-            hash += TimesList.get(i) * 13;
+            hash *= Math.pow(TimesList.get(i), 2);
         }
 
         return hash;
