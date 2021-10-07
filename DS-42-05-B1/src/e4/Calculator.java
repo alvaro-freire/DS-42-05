@@ -6,6 +6,20 @@ import java.util.Objects;
 
 public class Calculator {
     float result;
+    public enum Operator {
+        ADD ("+"),
+        SUB ("-"),
+        MUL ("*"),
+        DIV ("/");
+
+        private final String op;
+
+        Operator(String op) {
+            this.op = op;
+        }
+
+        public String getOp() { return op; }
+    }
     List<String> Operations = new ArrayList<>();
     List<String> InternalState = new ArrayList<>();
     List<Float> Operators = new ArrayList<>();
@@ -49,10 +63,10 @@ public class Calculator {
         boolean wasEmptyList = Operators.isEmpty();
 
         /* Check if operation does not exist: */
-        if (!Objects.equals(operation, "+") &&
-                !Objects.equals(operation, "-") &&
-                !Objects.equals(operation, "*") &&
-                !Objects.equals(operation, "/")) {
+        if (!Objects.equals(operation, Operator.ADD.getOp()) &&
+                !Objects.equals(operation, Operator.SUB.getOp()) &&
+                !Objects.equals(operation, Operator.MUL.getOp()) &&
+                !Objects.equals(operation, Operator.DIV.getOp())) {
             throw new IllegalArgumentException();
         }
         Operations.add(operation);
@@ -77,7 +91,7 @@ public class Calculator {
         }
 
         if (nValues == 2) {
-            if (Objects.equals(Operations.get(OperationSize), "/")) {
+            if (Objects.equals(Operations.get(OperationSize), Operator.DIV.getOp())) {
                 if (Operators.get(OperatorSize + 1) != 0) {
                     InternalState.add(string);
                 }
@@ -85,7 +99,7 @@ public class Calculator {
                 InternalState.add(string);
             }
         } else {
-            if (Objects.equals(Operations.get(OperationSize), "/")) {
+            if (Objects.equals(Operations.get(OperationSize), Operator.DIV.getOp())) {
                 if (Operators.get(OperatorSize) != 0) {
                     InternalState.add(string);
                 }
