@@ -1,6 +1,23 @@
 package e2;
 
 public class Slopes {
+    /*
+     * Se recorre el mapa para comprobar si es
+     * válido y si los movimientos son válidos:
+     */
+    private static void mapCheck(char[][] slopeMap, int right, int down) {
+        for (char[] chars : slopeMap) {
+            for (char aChar : chars) {
+                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
+                    throw new IllegalArgumentException();
+            }
+        }
+
+        if (right >= slopeMap.length || right < 0 || down >= slopeMap[0].length || down < 1) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     /**
      * Traverses the slope map making the right and down movements and
      * returns the number of trees found along the way .
@@ -14,17 +31,7 @@ public class Slopes {
     public static int downTheSlope(char[][] slopeMap, int right, int down) {
         int x = 0, y = 0, tree = 0;
 
-        /* Se recorre el mapa para corroborar que sea válido */
-        for (char[] chars : slopeMap) {
-            for (char aChar : chars) {
-                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
-                    throw new IllegalArgumentException();
-            }
-        }
-
-        /* Se comprueba si los movimientos son correctos */
-        if (right >= slopeMap.length || right < 0 || down >= slopeMap[0].length || down < 1)
-            throw new IllegalArgumentException();
+        mapCheck(slopeMap, right, down);
 
         /* Se comprueba si en la posición de partida hay un árbol */
         if (slopeMap[0][0] == '#')
@@ -62,17 +69,7 @@ public class Slopes {
     public static int jumpTheSlope(char[][] slopeMap, int right, int down) {
         int x = 0, y = 0, tree = 0;
 
-        /* Se recorre el mapa para corroborar que sea válido */
-        for (char[] chars : slopeMap) {
-            for (char aChar : chars) {
-                if ((aChar != '.' && aChar != '#') || slopeMap.length != chars.length)
-                    throw new IllegalArgumentException();
-            }
-        }
-
-        /* Se comprueba si los movimientos son correctos */
-        if (right >= slopeMap.length || right < 0 || down >= slopeMap[0].length || down < 1)
-            throw new IllegalArgumentException();
+        mapCheck(slopeMap, right, down);
 
         if (slopeMap[0][0] == '#') {
             tree++;
