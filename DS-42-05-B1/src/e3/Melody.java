@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Melody {
     enum Notes {DO, RE, MI, FA, SOL, LA, SI}
-
     enum Accidentals {NATURAL, SHARP, FLAT}
 
     List<Notes> NotesList = new ArrayList<>();
