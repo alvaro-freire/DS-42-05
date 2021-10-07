@@ -108,6 +108,15 @@ public class Calculator {
             OperatorSize++;
         }
 
+        /* Check if the operation is a division by 0
+         * before adding to the internal state: */
+        if (Objects.equals(operation, Operation.DIV.getOp())) {
+            if (Operators.get(OperatorSize) != 0) {
+                InternalState.add(string);
+            }
+        } else {
+            InternalState.add(string);
+        }
     }
 
     /**
