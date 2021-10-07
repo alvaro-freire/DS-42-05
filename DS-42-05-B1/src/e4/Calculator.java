@@ -105,21 +105,7 @@ public class Calculator {
         }
 
         if (nValues == 2) {
-            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
-                if (Operators.get(OperatorSize + 1) != 0) {
-                    InternalState.add(string);
-                }
-            } else {
-                InternalState.add(string);
-            }
-        } else {
-            if (Objects.equals(Operations.get(OperationSize), Operation.DIV.getOp())) {
-                if (Operators.get(OperatorSize) != 0) {
-                    InternalState.add(string);
-                }
-            } else {
-                InternalState.add(string);
-            }
+            OperatorSize++;
         }
 
     }
