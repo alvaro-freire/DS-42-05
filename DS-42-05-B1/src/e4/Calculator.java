@@ -73,7 +73,6 @@ public class Calculator {
         String string;
         int nValues = values.length;
         int count = 1;
-        int OperationSize = Operations.size();
         int OperatorSize = Operators.size();
         boolean wasEmptyList = Operators.isEmpty();
 
@@ -137,6 +136,7 @@ public class Calculator {
      */
     public float executeOperations() {
 
+        /* First, do the operations for the first two values: */
         switch (Operations.get(0)) {
             case "+" -> result = Operators.get(0) + Operators.get(1);
             case "-" -> result = Operators.get(0) - Operators.get(1);
@@ -151,6 +151,7 @@ public class Calculator {
             }
         }
 
+        /* Calculate the next values: */
         for (int i = 1; i < Operations.size(); i++) {
             switch (Operations.get(i)) {
                 case "+" -> result += Operators.get(i + 1);
@@ -165,6 +166,7 @@ public class Calculator {
             }
         }
 
+        /* Clear lists */
         Operators.clear();
         Operations.clear();
 
@@ -186,9 +188,9 @@ public class Calculator {
         for (String s : InternalState) {
             string = string.concat(s);
         }
-
         string = string.concat("]");
 
+        /* Clear the internal state of the calculator: */
         InternalState.clear();
 
         return string;
