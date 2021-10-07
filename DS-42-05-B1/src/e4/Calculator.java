@@ -11,10 +11,10 @@ public class Calculator {
      * available for the calculator
      */
     public enum Operator {
-        ADD ("+"),
-        SUB ("-"),
-        MUL ("*"),
-        DIV ("/");
+        ADD("+"),
+        SUB("-"),
+        MUL("*"),
+        DIV("/");
 
         /* field type const */
         private final String op; /* string of the operation */
@@ -27,7 +27,9 @@ public class Calculator {
         }
 
         /* Method of enum class */
-        public String getOp() { return op; }
+        public String getOp() {
+            return op;
+        }
     }
 
     float result;
