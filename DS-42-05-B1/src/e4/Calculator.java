@@ -22,6 +22,7 @@ public class Calculator {
     public void cleanOperations() {
         Operators.clear();
         Operations.clear();
+        InternalState.clear();
         result = 0;
     }
 
@@ -40,6 +41,12 @@ public class Calculator {
      * @throws IllegalArgumentException If the operation does not exist .
      */
     public void addOperation(String operation, float... values) {
+        String string;
+        int nValues = values.length;
+        int count = 1;
+        int OperationSize = Operations.size();
+        int OperatorSize = Operators.size();
+        boolean wasEmptyList = Operators.isEmpty();
 
         /* Check if operation does not exist: */
         if (!Objects.equals(operation, "+") &&
@@ -50,9 +57,43 @@ public class Calculator {
         }
         Operations.add(operation);
 
+        string = "[" + Operations.get(OperationSize) + "]";
+
         for (Float value : values) {
+            /* Check if two values were introduced
+             * and it was not the first operation: */
+            if (!wasEmptyList && nValues == 2) {
+                Operators.add(value);
+                string = string.concat(value.toString());
+                break;
+            }
             Operators.add(value);
+            if (nValues == 2 && count == 1) {
+                string = string.concat(value.toString() + "_");
+            } else {
+                string = string.concat(value.toString());
+            }
+            count++;
         }
+
+        if (nValues == 2) {
+            if (Objects.equals(Operations.get(OperationSize), "/")) {
+                if (Operators.get(OperatorSize + 1) != 0) {
+                    InternalState.add(string);
+                }
+            } else {
+                InternalState.add(string);
+            }
+        } else {
+            if (Objects.equals(Operations.get(OperationSize), "/")) {
+                if (Operators.get(OperatorSize) != 0) {
+                    InternalState.add(string);
+                }
+            } else {
+                InternalState.add(string);
+            }
+        }
+
     }
 
     /**
@@ -66,7 +107,6 @@ public class Calculator {
      *                             ( division by zero )
      */
     public float executeOperations() {
-        String string;
 
         switch (Operations.get(0)) {
             case "+" -> result = Operators.get(0) + Operators.get(1);
@@ -74,12 +114,13 @@ public class Calculator {
             case "*" -> result = Operators.get(0) * Operators.get(1);
             case "/" -> {
                 if (Operators.get(1) == 0) {
+                    Operators.clear();
+                    Operations.clear();
                     throw new ArithmeticException();
                 }
                 result = Operators.get(0) / Operators.get(1);
             }
         }
-        string = "[" + Operations.get(0) + "]";
 
         for (int i = 1; i < Operations.size(); i++) {
             switch (Operations.get(i)) {
@@ -87,16 +128,16 @@ public class Calculator {
                 case "-" -> result -= Operators.get(i + 1);
                 case "*" -> result *= Operators.get(i + 1);
                 case "/" -> {
-                    if (Operators.get(1) == 0) {
+                    if (Operators.get(i + 1) == 0) {
                         throw new ArithmeticException();
                     }
                     result /= Operators.get(i + 1);
                 }
             }
-            string = string.concat("_" + Operators.get(i).toString());
         }
 
-        InternalState.add(string);
+        Operators.clear();
+        Operations.clear();
 
         return result;
     }
@@ -118,6 +159,8 @@ public class Calculator {
         }
 
         string = string.concat("]");
+
+        InternalState.clear();
 
         return string;
     }
