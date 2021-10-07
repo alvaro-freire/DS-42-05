@@ -40,6 +40,7 @@ public class Slopes {
         /* Se realiza el algoritmo para recorrer el mapa
          * realizando los movimientos correspondientes */
         while (y < slopeMap.length) {
+            /* movements to the right: */
             for (int a = 0; a < right; a++) {
                 x++;
                 if (x == slopeMap[0].length)
@@ -47,6 +48,7 @@ public class Slopes {
                 if (slopeMap[y][x] == '#')
                     tree++;
             }
+            /* movements down: */
             for (int b = 0; b < down; b++) {
                 y++;
                 if (y >= slopeMap.length)
@@ -75,13 +77,17 @@ public class Slopes {
             tree++;
         }
 
+        /* Se realiza el algoritmo para recorrer el mapa
+         * realizando los movimientos correspondientes */
         while (y < slopeMap.length) {
+            /* movements to the right: */
             for (int a = 0; a < right; a++) {
                 x++;
                 if (x == slopeMap[0].length) {
                     x = 0;
                 }
             }
+            /* movements down: */
             for (int b = 0; b < down; b++) {
                 y++;
                 if (y >= slopeMap.length) {
