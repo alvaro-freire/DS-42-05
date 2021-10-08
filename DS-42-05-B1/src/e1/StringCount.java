@@ -1,3 +1,12 @@
+/*
+ * TITLE: Software Design
+ * SUBTITLE: exercise 1
+ * AUTHOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
+ * AUTHOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GROUP: 4.2
+ * DATE: 08 / 10 / 2021
+ */
+
 package e1;
 
 public class StringCount {
