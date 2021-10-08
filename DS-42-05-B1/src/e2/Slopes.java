@@ -1,6 +1,6 @@
 /*
  * TITLE: Software Design
- * SUBTITLE: exercise 4
+ * SUBTITLE: exercise 2
  * AUTHOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
  * AUTHOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
  * GROUP: 4.2
