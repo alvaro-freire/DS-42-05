@@ -1,3 +1,12 @@
+/*
+ * TITLE: Software Design
+ * SUBTITLE: exercise 3
+ * AUTHOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
+ * AUTHOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GROUP: 4.2
+ * DATE: 08 / 10 / 2021
+ */
+
 package e3;
 
 import java.util.ArrayList;
@@ -9,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Melody {
-    enum Notes {DO, RE, MI, FA, SOL, LA, SI}
+    enum Notes {DO, RE, MI, FA, SOL, LA, SI} /* Enum for the notes */
 
-    enum Accidentals {NATURAL, SHARP, FLAT}
+    enum Accidentals {NATURAL, SHARP, FLAT} /* Enum for the accidentals */
 
+    /* Lists for saving notes, accidentals and times. */
     List<Notes> NotesList = new ArrayList<>();
     List<Accidentals> AccidentalsList = new ArrayList<>();
     List<Float> TimesList = new ArrayList<>();
@@ -34,9 +44,11 @@ public class Melody {
      *                                  or the time are not valid values .
      */
     public void addNote(Notes note, Accidentals accidental, float time) {
+        /* Check if parameters received are valid: */
         if (note == null || accidental == null || time <= 0) {
             throw new IllegalArgumentException();
         }
+
         NotesList.add(note);
         AccidentalsList.add(accidental);
         TimesList.add(time);
@@ -132,149 +144,154 @@ public class Melody {
         }
         Melody melody = (Melody) o;
         for (int i = 0; i < NotesList.size(); i++) {
+            /* If times are different, notes can't be equal */
             if (!Objects.equals(this.TimesList.get(i), melody.TimesList.get(i))) {
                 return false;
             }
+
+            /* If notes are different, check if they are equivalent: */
             if (!Objects.equals(this.NotesList.get(i), melody.NotesList.get(i))) {
                 switch (this.NotesList.get(i)) {
-                    case DO:
+                    case DO -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case NATURAL:
+                            case NATURAL -> {
                                 if (melody.NotesList.get(i) != Notes.SI ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
-                            case SHARP:
+                            }
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.RE ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.SI ||
                                         melody.AccidentalsList.get(i) != Accidentals.NATURAL) {
                                     return false;
                                 }
-                                break;
+                            }
+
                         }
-                        break;
-                    case RE:
+                    }
+                    case RE -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case SHARP:
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.MI ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.DO ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
-                    case MI:
+                    }
+                    case MI -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case NATURAL:
+                            case NATURAL -> {
                                 if (melody.NotesList.get(i) != Notes.FA ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case SHARP:
+                            }
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.FA ||
                                         melody.AccidentalsList.get(i) != Accidentals.NATURAL) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.RE ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
-                    case FA:
+                    }
+                    case FA -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case NATURAL:
+                            case NATURAL -> {
                                 if (melody.NotesList.get(i) != Notes.MI ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
-                            case SHARP:
+                            }
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.SOL ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.MI ||
                                         melody.AccidentalsList.get(i) != Accidentals.NATURAL) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
-                    case SOL:
+                    }
+                    case SOL -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case SHARP:
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.LA ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.FA ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
-                    case LA:
+                    }
+                    case LA -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case SHARP:
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.SI ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.SOL ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
-                    case SI:
+                    }
+                    case SI -> {
                         switch (this.AccidentalsList.get(i)) {
-                            case NATURAL:
+                            case NATURAL -> {
                                 if (melody.NotesList.get(i) != Notes.DO ||
                                         melody.AccidentalsList.get(i) != Accidentals.FLAT) {
                                     return false;
                                 }
-                                break;
-                            case SHARP:
+                            }
+                            case SHARP -> {
                                 if (melody.NotesList.get(i) != Notes.DO ||
                                         melody.AccidentalsList.get(i) != Accidentals.NATURAL) {
                                     return false;
                                 }
-                                break;
-                            case FLAT:
+                            }
+                            case FLAT -> {
                                 if (melody.NotesList.get(i) != Notes.LA ||
                                         melody.AccidentalsList.get(i) != Accidentals.SHARP) {
                                     return false;
                                 }
-                                break;
+                            }
                         }
-                        break;
+                    }
                 }
             } else if (!Objects.equals(this.AccidentalsList.get(i), melody.AccidentalsList.get(i))) {
+                /* Notes are equal, but not accidentals */
                 return false;
             }
         }
@@ -377,22 +394,26 @@ public class Melody {
     @Override
     public String toString() {
         String s = "";
+
         for (int i = 0; i < NotesList.size(); i++) {
+
             if (i != 0) {
                 s = s.concat(" ");
             }
+
+            /* Add the note to the string: */
             s = s.concat(NotesList.get(i).name());
+
+            /* Add the accidental to the string: */
             switch (AccidentalsList.get(i)) {
-                case SHARP:
-                    s = s + "#";
-                    break;
-                case FLAT:
-                    s = s + "b";
-                    break;
-                case NATURAL:
-                    break;
+                case SHARP -> s = s.concat("#");
+                case FLAT -> s = s.concat("b");
+                default -> {
+                }
             }
-            s = s + "(" + TimesList.get(i).toString() + ")";
+
+            /* Add the time to the string: */
+            s = s.concat("(" + TimesList.get(i).toString() + ")");
         }
         return s;
     }

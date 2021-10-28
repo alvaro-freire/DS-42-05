@@ -1,3 +1,12 @@
+/*
+ * TITLE: Software Design
+ * SUBTITLE: exercise 4
+ * AUTHOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
+ * AUTHOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GROUP: 4.2
+ * DATE: 08 / 10 / 2021
+ */
+
 package e4;
 
 import java.util.ArrayList;
@@ -6,7 +15,7 @@ import java.util.Objects;
 
 public class Calculator {
 
-    /*
+    /**
      * Class containing the four operations
      * available for the calculator
      */
@@ -96,10 +105,12 @@ public class Calculator {
                 break;
             }
             Operators.add(value);
+
+            string = string.concat(value.toString());
+
+            /* Space for the first operation: */
             if (nValues == 2 && count == 1) {
-                string = string.concat(value.toString() + "_");
-            } else {
-                string = string.concat(value.toString());
+                string = string.concat("_");
             }
             count++;
         }
@@ -108,14 +119,12 @@ public class Calculator {
             OperatorSize++;
         }
 
-        /* Check if the operation is a division by 0
-         * before adding to the internal state: */
-        if (Objects.equals(operation, Operation.DIV.getOp())) {
-            if (Operators.get(OperatorSize) != 0) {
-                InternalState.add(string);
-            }
-        } else {
-            InternalState.add(string);
+        InternalState.add(string);
+
+        /* Check if the operation is a division by 0: */
+        if (Objects.equals(operation, Operation.DIV.getOp()) &&
+                Operators.get(OperatorSize) == 0) {
+            InternalState.remove(string);
         }
     }
 

@@ -1,3 +1,12 @@
+/*
+ * TITLE: Software Design
+ * SUBTITLE: exercise 1
+ * AUTHOR 1: Mateo Díaz Allegue LOGIN 1: mateo.diaz
+ * AUTHOR 2: Álvaro Freire Ares LOGIN 2: alvaro.freirea
+ * GROUP: 4.2
+ * DATE: 08 / 10 / 2021
+ */
+
 package e1;
 
 public class StringCount {
@@ -21,14 +30,14 @@ public class StringCount {
 
         for (int i = 0; i < text.length(); i++) {
 
-            // if a word is detected, isWord turns true,
-            // and it counts one word.
+            /* if a word is detected, isWord turns
+             * true, and it counts one word. */
             if (chars[i] != ' ' && !isWord) {
                 isWord = true;
                 nWords++;
-
-                // if a word ends, isWord turns false.
-            } else if (chars[i] == ' ' && isWord) {
+            }
+            /* if a word ends, isWord turns false. */
+            else if (chars[i] == ' ' && isWord) {
                 isWord = false;
             }
         }
@@ -56,8 +65,8 @@ public class StringCount {
 
         for (int i = 0; i < text.length(); i++) {
 
-            // if one character is found,
-            // it counts one.
+            /* if one character is
+             * found, it counts one. */
             if (chars[i] == c) {
                 nTimes++;
             }
@@ -87,8 +96,8 @@ public class StringCount {
 
         for (int i = 0; i < text.length(); i++) {
 
-            // if one character is found,
-            // it counts one.
+            /* if one character is
+             * found, it counts one. */
             if (Character.toUpperCase(chars[i]) == c || Character.toLowerCase(chars[i]) == c) {
                 nTimes++;
             }
@@ -123,22 +132,22 @@ public class StringCount {
 
         for (int i = 0; i < password.length(); i++) {
 
-            // checks if there is an upper case
+            /* checks if there is an upper case */
             if (Character.isUpperCase(chars[i])) {
                 upperCase = true;
             }
 
-            // checks if there is a lower case
+            /* checks if there is a lower case */
             if (Character.isLowerCase(chars[i])) {
                 lowerCase = true;
             }
 
-            // checks if there is a digit
+            /* checks if there is a digit */
             if (Character.isDigit(chars[i])) {
                 digit = true;
             }
 
-            // checks if there is a special character
+            /* checks if there is a special character */
             if (!special) {
                 for (char specialChar : specialChars) {
                     if (chars[i] == specialChar) {
