@@ -12,9 +12,13 @@ public class Colegio {
     List<Integrante> IntegrantesList = new ArrayList<>();
 
     /* constructor */
-    public Colegio(String name) { this.name = name; }
+    public Colegio(String name) {
+        this.name = name;
+    }
 
-    public void addIntegrante(Integrante integrante) { IntegrantesList.add(integrante); }
+    public void addIntegrante(Integrante integrante) {
+        IntegrantesList.add(integrante);
+    }
 
     public String imprimirRecompensas() {
         float recompensaTotal = 0;
