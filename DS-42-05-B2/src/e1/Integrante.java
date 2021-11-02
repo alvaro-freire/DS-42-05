@@ -7,13 +7,21 @@ public abstract class Integrante {
     public int edad;
     public int destroyedHorrocruxes;
 
-    public String getName() {
-        return this.nombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public int getAge() {
-        return this.edad;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public abstract int recompensa();
+    public int getEdad() {
+        return edad;
+    }
+
+    public int getDestroyedHorrocruxes() {
+        return destroyedHorrocruxes;
+    }
+
+    public abstract float recompensa();
 }

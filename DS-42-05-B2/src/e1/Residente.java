@@ -2,6 +2,8 @@ package e1;
 
 public abstract class Residente extends Integrante {
 
+    public House casa;
+
     public enum House {
         Gryffindor("Gryffindor"),
         Hufflepuff("Hufflepuff"),
@@ -12,8 +14,8 @@ public abstract class Residente extends Integrante {
 
         House(String casa) { this.casa = casa; }
 
-        public String getHouse(){ return casa; }
-    }
+        public String getHouse() { return casa; }
 
+    }
 
 }

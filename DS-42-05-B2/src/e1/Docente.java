@@ -3,20 +3,44 @@ package e1;
 public class Docente extends Personal {
 
     public enum Asignatura {
-        Historia("Historia"),
-        Tranformaciones("Tranformaciones"),
-        Defensa("Defensa"),
-        Herbologia("Herbología"),
-        Pociones("Pociones");
+        Historia(200),
+        Tranformaciones(400),
+        Defensa(500),
+        Herbologia(250),
+        Pociones(350);
 
-        private final String materia;
+        private final int sueldo;
 
-        Asignatura(String materia) { this.materia = materia; }
+        Asignatura(int sueldo) { this.sueldo = sueldo; }
 
-        public String getMateria() { return materia; }
+        public int getSueldo() { return sueldo; }
     }
 
-    public int recompensa() {
-        return this.destroyedHorrocruxes * 50;
+    Asignatura asignatura;
+
+    /* constructor */
+    public Docente(String nombre, String apellidos, int edad, int destroyedHorrocruxes, Asignatura asignatura) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.destroyedHorrocruxes = destroyedHorrocruxes;
+        this.asignatura = asignatura;
+    }
+
+    /* cálculo de la recompensa */
+    @Override
+    public float recompensa() {
+        float reward;
+
+        reward = this.destroyedHorrocruxes * 50;
+        if (asignatura == Asignatura.Defensa) {
+            reward *= 0.75;
+        }
+        return reward;
+    }
+
+    @Override
+    public int getSalario() {
+        return this.asignatura.getSueldo();
     }
 }
