@@ -16,7 +16,23 @@ public class Colegio {
         this.name = name;
     }
 
+    public boolean findSubject(Docente docente) {
+        for (Integrante i : IntegrantesList) {
+            if (i.getClass() == Docente.class && ((Docente) i).asignatura == docente.asignatura) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addIntegrante(Integrante integrante) {
+        if (integrante.getClass() == Docente.class) {
+            if (findSubject((Docente) integrante)) {
+                // error ***********************
+                return;
+            }
+        }
+
         IntegrantesList.add(integrante);
     }
 
@@ -37,7 +53,8 @@ public class Colegio {
             } else if (i.getClass() == Conserje.class) {
                 string = string.concat("(Conserje ");
             } else {
-                // error
+                // error ***********************
+                throw new IllegalArgumentException();
             }
             string = string.concat(", " + i.getDestroyedHorrocruxes() + " horrocruxes): "
                     + i.recompensa() + " galeones\n");
