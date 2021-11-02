@@ -17,11 +17,11 @@ public class Colegio {
     public void addIntegrante(Integrante integrante) { IntegrantesList.add(integrante); }
 
     public String imprimirRecompensas() {
-        int recompensaTotal = 0;
+        float recompensaTotal = 0;
         String string = "";
 
         for (Integrante i : IntegrantesList) {
-            string = string.concat(i.getNombre() + i.getApellidos());
+            string = string.concat(i.getNombre() + " " + i.getApellidos());
             if (i.getClass() == Estudiante.class) {
                 string = string.concat("(Estudiante de " + ((Estudiante) i).casa);
             } else if (i.getClass() == Fantasma.class) {
@@ -35,18 +35,36 @@ public class Colegio {
             } else {
                 // error
             }
-            string = string.concat(", " + i.getDestroyedHorrocruxes() + "horrocruxes): "
-                    + i.recompensa() + "galeones\n");
+            string = string.concat(", " + i.getDestroyedHorrocruxes() + " horrocruxes): "
+                    + i.recompensa() + " galeones\n");
             recompensaTotal += i.recompensa();
         }
 
-        string += "La recompensa total del Colegio " + name + "es de " + recompensaTotal + "galeones\n";
+        string += "La recompensa total del Colegio " + name + " es de " + recompensaTotal + " galeones\n";
 
         return string;
     }
 
     public String imprimirSalarios() {
+        int salarioTotal = 0;
         String string = "";
+
+        for (Integrante i : IntegrantesList) {
+            if (i.getClass() != Estudiante.class && i.getClass() != Fantasma.class) {
+                string = string.concat(i.getNombre() + i.getApellidos());
+                if (i.getClass() == Guardabosques.class) {
+                    string = string.concat("(Guardabosques) ");
+                } else if (i.getClass() == Docente.class) {
+                    string = string.concat("(Docente de " + ((Docente) i).asignatura + ") ");
+                } else if (i.getClass() == Conserje.class) {
+                    string = string.concat("(Conserje) ");
+                }
+                string = string.concat(((Personal) i).getSalario() + " galeones\n");
+                salarioTotal += ((Personal) i).getSalario();
+            }
+        }
+
+        string += "El gasto de " + name + " en personal es de " + salarioTotal + " galeones\n";
 
         return string;
     }
