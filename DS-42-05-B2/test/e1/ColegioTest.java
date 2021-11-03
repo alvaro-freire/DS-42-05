@@ -40,24 +40,24 @@ class ColegioTest {
     @Test
     void testBasic() {
 
-        assertEquals("""
-                Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones
-                Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones
-                Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones
-                Argus Filch(Conserje, 1 horrocruxes): 65.0 galeones
-                Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones
-                Severus Snape(Docente de Defensa, 1 horrocruxes): 37.5 galeones
-                Minerva McGonagall(Docente de Tranformaciones, 2 horrocruxes): 100.0 galeones
-                La recompensa total del Colegio Hogwarts es de 802.5 galeones
-                """, Hogwarts.imprimirRecompensas());
+        assertEquals(
+                "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
+                "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
+                "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" + 
+                "Argus Filch(Conserje, 1 horrocruxes): 65.0 galeones\n" +
+                "Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones\n" +
+                "Severus Snape(Docente de Defensa, 1 horrocruxes): 37.5 galeones\n" +
+                "Minerva McGonagall(Docente de Tranformaciones, 2 horrocruxes): 100.0 galeones\n" +
+                "La recompensa total del Colegio Hogwarts es de 802.5 galeones\n"
+                , Hogwarts.imprimirRecompensas());
 
-        assertEquals("""
-                Argus Filch(Conserje): 160 galeones
-                Rubeus Hagrid(Guardabosques): 180 galeones
-                Severus Snape(Docente de Defensa): 500 galeones
-                Minerva McGonagall(Docente de Tranformaciones): 400 galeones
-                El gasto de Hogwarts en personal es de 1240 galeones
-                """, Hogwarts.imprimirSalarios());
+        assertEquals(
+                "Argus Filch(Conserje): 160 galeones\n" +
+                "Rubeus Hagrid(Guardabosques): 180 galeones\n" +
+                "Severus Snape(Docente de Defensa): 500 galeones\n" +
+                "Minerva McGonagall(Docente de Tranformaciones): 400 galeones\n" +
+                "El gasto de Hogwarts en personal es de 1240 galeones\n"
+                , Hogwarts.imprimirSalarios());
 
     }
 
