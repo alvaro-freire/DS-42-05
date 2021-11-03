@@ -40,7 +40,7 @@ public class Docente extends Personal {
     }
 
     @Override
-    public int getSalario() {
+    public int salario() {
         return this.asignatura.getSueldo();
     }
 }

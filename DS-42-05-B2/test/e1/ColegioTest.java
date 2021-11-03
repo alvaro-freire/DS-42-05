@@ -1,10 +1,7 @@
 package e1;
 
-import e3.Melody;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.print.Doc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,8 +20,8 @@ class ColegioTest {
         Estudiante Draco = new Estudiante("Draco", "Malfoy", 19, 1, Residente.House.Slytherin);
         Hogwarts.addIntegrante(Draco);
 
-        Fantasma Mindy = new Fantasma("Mindy", "fantasma", 143, 0, Residente.House.Ravenclaw);
-        Hogwarts.addIntegrante(Mindy);
+        Fantasma Baron = new Fantasma("Baron", "Sanguinario", 143, 0, Residente.House.Ravenclaw);
+        Hogwarts.addIntegrante(Baron);
 
         Conserje Argus = new Conserje("Argus", "Filch", 56, 1);
         Hogwarts.addIntegrante(Argus);
@@ -42,20 +39,30 @@ class ColegioTest {
 
     @Test
     void testBasic() {
-        assertEquals("Harry Potter(Estudiante de Gryffindor, 2 horrocruxes): 180.0 galeones\n" +
-                "Mindy fantasma(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
-                "La recompensa total del Colegio Hogwarts es de 180.0 galeones\n", Hogwarts.imprimirRecompensas());
+
+        assertEquals("""
+                Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones
+                Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones
+                Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones
+                Argus Filch(Conserje, 1 horrocruxes): 65.0 galeones
+                Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones
+                Severus Snape(Docente de Defensa, 1 horrocruxes): 37.5 galeones
+                Minerva McGonagall(Docente de Tranformaciones, 2 horrocruxes): 100.0 galeones
+                La recompensa total del Colegio Hogwarts es de 802.5 galeones
+                """, Hogwarts.imprimirRecompensas());
+
+        assertEquals("""
+                Argus Filch(Conserje): 160 galeones
+                Rubeus Hagrid(Guardabosques): 180 galeones
+                Severus Snape(Docente de Defensa): 500 galeones
+                Minerva McGonagall(Docente de Tranformaciones): 400 galeones
+                El gasto de Hogwarts en personal es de 1240 galeones
+                """, Hogwarts.imprimirSalarios());
+
     }
 
     @Test
     public void imprimirRecompensa() {
-        assertEquals(0, StringCount.countWords(null));
-        assertEquals(1, StringCount.countWords("OneWord"));
-        assertEquals(2, StringCount.countWords("Two words"));
-        assertEquals(4, StringCount.countWords("spaces at the end     "));
-        assertEquals(4, StringCount.countWords("    many    spaces   between      words   "));
-        assertEquals(1, StringCount.countWords("words,separated-by.special$characters@"));
-        assertEquals(10, StringCount.countWords("Normal text a little long with CAPITALS and lowercase letters"));
-        assertEquals(7, StringCount.countWords("Oración en español con eñe y acentos"));
+
     }
 }

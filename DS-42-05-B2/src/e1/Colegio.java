@@ -1,6 +1,5 @@
 package e1;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +46,11 @@ public class Colegio {
             } else if (i.getClass() == Fantasma.class) {
                 string = string.concat("(Fantasma de " + ((Fantasma) i).casa);
             } else if (i.getClass() == Guardabosques.class) {
-                string = string.concat("(Guardabosques ");
+                string = string.concat("(Guardabosques");
             } else if (i.getClass() == Docente.class) {
                 string = string.concat("(Docente de " + ((Docente) i).asignatura);
             } else if (i.getClass() == Conserje.class) {
-                string = string.concat("(Conserje ");
+                string = string.concat("(Conserje");
             } else {
                 // error ***********************
                 throw new IllegalArgumentException();
@@ -72,16 +71,16 @@ public class Colegio {
 
         for (Integrante i : IntegrantesList) {
             if (i.getClass() != Estudiante.class && i.getClass() != Fantasma.class) {
-                string = string.concat(i.getNombre() + i.getApellidos());
+                string = string.concat(i.getNombre() + " " + i.getApellidos());
                 if (i.getClass() == Guardabosques.class) {
-                    string = string.concat("(Guardabosques) ");
+                    string = string.concat("(Guardabosques): ");
                 } else if (i.getClass() == Docente.class) {
-                    string = string.concat("(Docente de " + ((Docente) i).asignatura + ") ");
+                    string = string.concat("(Docente de " + ((Docente) i).asignatura + "): ");
                 } else if (i.getClass() == Conserje.class) {
-                    string = string.concat("(Conserje) ");
+                    string = string.concat("(Conserje): ");
                 }
-                string = string.concat(((Personal) i).getSalario() + " galeones\n");
-                salarioTotal += ((Personal) i).getSalario();
+                string = string.concat(((Personal) i).salario() + " galeones\n");
+                salarioTotal += ((Personal) i).salario();
             }
         }
 

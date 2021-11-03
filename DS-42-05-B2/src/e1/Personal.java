@@ -4,5 +4,5 @@ public abstract class Personal extends Integrante {
 
     public int salario;
 
-    public abstract int getSalario();
+    public abstract int salario();
 }

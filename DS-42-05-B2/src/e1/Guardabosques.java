@@ -17,7 +17,7 @@ public class Guardabosques extends Personal {
     }
 
     @Override
-    public int getSalario() {
+    public int salario() {
         return 180;
     }
 }
