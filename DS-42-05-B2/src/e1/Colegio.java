@@ -80,8 +80,8 @@ public class Colegio {
                 } else if (i.getClass() == Conserje.class) {
                     string = string.concat("(Conserje) ");
                 }
-                string = string.concat(((Personal) i).getSalario() + " galeones\n");
-                salarioTotal += ((Personal) i).getSalario();
+                string = string.concat(((Personal) i).salario() + " galeones\n");
+                salarioTotal += ((Personal) i).salario();
             }
         }
 
