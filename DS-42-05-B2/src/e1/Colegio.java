@@ -35,6 +35,14 @@ public class Colegio {
         IntegrantesList.add(integrante);
     }
 
+    public void removeIntegrante(Integrante integrante) {
+        IntegrantesList.remove(integrante);
+    }
+
+    public void clearList() {
+        IntegrantesList.clear();
+    }
+
     public String imprimirRecompensas() {
         float recompensaTotal = 0;
         String string = "";
