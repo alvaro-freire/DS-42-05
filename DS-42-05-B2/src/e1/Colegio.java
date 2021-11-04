@@ -17,7 +17,7 @@ public class Colegio {
 
     private boolean findSubject(Docente docente) {
         for (Integrante i : IntegrantesList) {
-            if (i.getClass() == Docente.class && ((Docente) i).asignatura == docente.asignatura) {
+            if (i.getClass() == Docente.class && ((Docente) i).getAsignatura() == docente.getAsignatura()) {
                 return true;
             }
         }
@@ -32,14 +32,13 @@ public class Colegio {
 
         if (integrante.getClass() == Docente.class) {
             if (findSubject((Docente) integrante)) {
-                // error ***********************
-                return;
+                throw new IllegalArgumentException();
             }
         }
 
         for (Integrante i : IntegrantesList) {
            if (i.equals(integrante)) {
-               // error
+               throw new IllegalArgumentException();
            }
         }
 
@@ -47,7 +46,14 @@ public class Colegio {
     }
 
     public void removeIntegrante(Integrante integrante) {
-        IntegrantesList.remove(integrante);
+
+        for (Integrante i : IntegrantesList) {
+            if (i.equals(integrante)) {
+                IntegrantesList.remove(integrante);
+                return;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     public void clearList() {
@@ -61,13 +67,13 @@ public class Colegio {
         for (Integrante i : IntegrantesList) {
             string = string.concat(i.getNombre() + " " + i.getApellidos());
             if (i.getClass() == Estudiante.class) {
-                string = string.concat("(Estudiante de " + ((Estudiante) i).casa);
+                string = string.concat("(Estudiante de " + ((Estudiante) i).getCasa());
             } else if (i.getClass() == Fantasma.class) {
-                string = string.concat("(Fantasma de " + ((Fantasma) i).casa);
+                string = string.concat("(Fantasma de " + ((Fantasma) i).getCasa());
             } else if (i.getClass() == Guardabosques.class) {
                 string = string.concat("(Guardabosques");
             } else if (i.getClass() == Docente.class) {
-                string = string.concat("(Docente de " + ((Docente) i).asignatura);
+                string = string.concat("(Docente de " + ((Docente) i).getAsignatura());
             } else if (i.getClass() == Conserje.class) {
                 string = string.concat("(Conserje");
             } else {
@@ -94,7 +100,7 @@ public class Colegio {
                 if (i.getClass() == Guardabosques.class) {
                     string = string.concat("(Guardabosques): ");
                 } else if (i.getClass() == Docente.class) {
-                    string = string.concat("(Docente de " + ((Docente) i).asignatura + "): ");
+                    string = string.concat("(Docente de " + ((Docente) i).getAsignatura() + "): ");
                 } else if (i.getClass() == Conserje.class) {
                     string = string.concat("(Conserje): ");
                 }

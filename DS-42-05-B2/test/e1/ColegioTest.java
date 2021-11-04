@@ -1,5 +1,6 @@
 package e1;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ColegioTest {
 
+    /* se crea un colegio */
     private final Colegio Hogwarts = new Colegio("Hogwarts");
 
+    /* se crean los integrantes del colegio */
     Estudiante Harry = new Estudiante("Harry", "Potter",
             18, 3, Residente.House.Gryffindor);
 
@@ -27,6 +30,9 @@ class ColegioTest {
     Docente Snape = new Docente("Severus", "Snape",
             26, 1, Docente.Asignatura.Defensa);
 
+    Docente Remus = new Docente("Remus", "Lupin",
+            48, 1, Docente.Asignatura.Defensa);
+
     Docente Minerva = new Docente("Minerva", "McGonagall",
             13, 2, Docente.Asignatura.Tranformaciones);
 
@@ -36,7 +42,26 @@ class ColegioTest {
     }
 
     @Test
-    void imprimirSalarios() {
+    void testException() {
+
+        /* se envía un parámetro no válido */
+        assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(null));
+
+        /* se añade el mismo integrante dos veces */
+        Hogwarts.addIntegrante(Harry);
+        assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(Harry));
+
+        /* se añaden dos profesores de la misma asignatura */
+        Hogwarts.addIntegrante(Snape);
+        assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(Remus));
+
+        /* se intenta borrar integrante inexistente */
+        assertThrows(IllegalArgumentException.class, () -> Hogwarts.removeIntegrante(Minerva));
+
+    }
+
+    @Test
+    void testImprimirSalarios() {
 
         Hogwarts.addIntegrante(Harry);
         assertEquals(
@@ -105,7 +130,7 @@ class ColegioTest {
     }
 
     @Test
-    public void imprimirRecompensa() {
+    public void testImprimirRecompensa() {
 
         Hogwarts.addIntegrante(Harry);
         assertEquals(
@@ -193,4 +218,10 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
     }
+
+    @AfterEach
+    public void clearList() {
+        Hogwarts.clearList();
+    }
+
 }

@@ -18,15 +18,28 @@ public class Docente extends Personal {
         public int getSueldo() { return sueldo; }
     }
 
-    Asignatura asignatura;
+    private Asignatura asignatura;
+
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
+    }
 
     /* constructor */
     public Docente(String nombre, String apellidos, int edad, int destroyedHorrocruxes, Asignatura asignatura) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.destroyedHorrocruxes = destroyedHorrocruxes;
-        this.asignatura = asignatura;
+
+        if (nombre == null || apellidos == null || asignatura == null) {
+            throw new IllegalArgumentException();
+        }
+
+        setNombre(nombre);
+        setApellidos(apellidos);
+        setEdad(edad);
+        setDestroyedHorrocruxes(destroyedHorrocruxes);
+        setAsignatura(asignatura);
     }
 
     /* cálculo de la recompensa */
@@ -34,7 +47,7 @@ public class Docente extends Personal {
     public float recompensa() {
         float reward;
 
-        reward = this.destroyedHorrocruxes * 50;
+        reward = getDestroyedHorrocruxes() * 50;
         if (asignatura == Asignatura.Defensa) {
             reward *= 0.75;
         }
@@ -51,16 +64,11 @@ public class Docente extends Personal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Docente docente = (Docente) o;
-        return (salario == docente.salario &&
-                Objects.equals(nombre, docente.nombre) &&
-                Objects.equals(apellidos, docente.apellidos) &&
-                edad == docente.edad &&
-                destroyedHorrocruxes == docente.destroyedHorrocruxes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(salario);
+        return (getSalario() == docente.getSalario() &&
+                Objects.equals(getNombre(), docente.getNombre()) &&
+                Objects.equals(getApellidos(), docente.getApellidos()) &&
+                getEdad() == docente.getEdad() &&
+                getDestroyedHorrocruxes() == docente.getDestroyedHorrocruxes());
     }
 
 }

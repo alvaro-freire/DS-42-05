@@ -5,18 +5,15 @@ public abstract class Residente extends Integrante {
     public House casa;
 
     public enum House {
-        Gryffindor("Gryffindor"),
-        Hufflepuff("Hufflepuff"),
-        Ravenclaw("Ravenclaw"),
-        Slytherin("Slytherin");
-
-        private final String casa;
-
-        House(String casa) { this.casa = casa; }
-
-        public String getHouse() { return casa; }
-
+        Gryffindor,
+        Hufflepuff,
+        Ravenclaw,
+        Slytherin
     }
+
+    public void setCasa(House casa) { this.casa = casa; }
+
+    public House getCasa() { return casa; }
 
     public abstract boolean equals(Object obj);
 

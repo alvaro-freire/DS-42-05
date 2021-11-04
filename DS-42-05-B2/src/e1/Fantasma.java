@@ -6,11 +6,16 @@ public class Fantasma extends Residente {
 
     /* constructor */
     public Fantasma(String nombre, String apellidos, int edad, int destroyedHorrocruxes, House casa) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.destroyedHorrocruxes = destroyedHorrocruxes;
-        this.casa = casa;
+
+        if (nombre == null || apellidos == null || casa == null) {
+            throw new IllegalArgumentException();
+        }
+
+        setNombre(nombre);
+        setApellidos(apellidos);
+        setEdad(edad);
+        setDestroyedHorrocruxes(destroyedHorrocruxes);
+        setCasa(casa);
     }
 
     /* cálculo de la recompensa */
@@ -18,8 +23,8 @@ public class Fantasma extends Residente {
     public float recompensa() {
         int reward;
 
-        reward = this.destroyedHorrocruxes * 80;
-        if (casa == House.Slytherin) {
+        reward = getDestroyedHorrocruxes() * 80;
+        if (getCasa() == House.Slytherin) {
             reward *= 2;
         }
         return reward;
@@ -30,10 +35,10 @@ public class Fantasma extends Residente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fantasma fantasma = (Fantasma) o;
-        return (casa == fantasma.casa &&
-                Objects.equals(nombre, fantasma.nombre) &&
-                Objects.equals(apellidos, fantasma.apellidos) &&
-                edad == fantasma.edad &&
-                destroyedHorrocruxes == fantasma.destroyedHorrocruxes);
+        return (getCasa() == fantasma.getCasa() &&
+                Objects.equals(getNombre(), fantasma.getNombre()) &&
+                Objects.equals(getApellidos(), fantasma.getApellidos()) &&
+                getEdad() == fantasma.getEdad() &&
+                getDestroyedHorrocruxes() == fantasma.getDestroyedHorrocruxes());
     }
 }

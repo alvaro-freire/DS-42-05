@@ -6,16 +6,21 @@ public class Conserje extends Personal {
 
     /* constructor */
     public Conserje(String nombre, String apellidos, int edad, int destroyedHorrocruxes) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.destroyedHorrocruxes = destroyedHorrocruxes;
+
+        if (nombre == null || apellidos == null) {
+            throw new IllegalArgumentException();
+        }
+
+        setNombre(nombre);
+        setApellidos(apellidos);
+        setEdad(edad);
+        setDestroyedHorrocruxes(destroyedHorrocruxes);
     }
 
     /* cálculo de la recompensa */
     @Override
     public float recompensa() {
-        return this.destroyedHorrocruxes * 65;
+        return getDestroyedHorrocruxes() * 65;
     }
 
     @Override
@@ -28,16 +33,11 @@ public class Conserje extends Personal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Conserje conserje = (Conserje) o;
-        return (salario == conserje.salario &&
-                Objects.equals(nombre, conserje.nombre) &&
-                Objects.equals(apellidos, conserje.apellidos) &&
-                edad == conserje.edad &&
-                destroyedHorrocruxes == conserje.destroyedHorrocruxes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(salario);
+        return (getSalario() == conserje.getSalario() &&
+                Objects.equals(getNombre(), conserje.getNombre()) &&
+                Objects.equals(getApellidos(), conserje.getApellidos()) &&
+                getEdad() == conserje.getEdad() &&
+                getDestroyedHorrocruxes() == conserje.getDestroyedHorrocruxes());
     }
 
 }
