@@ -1,5 +1,7 @@
 package e1;
 
+import java.util.Objects;
+
 public class Docente extends Personal {
 
     public enum Asignatura {
@@ -43,4 +45,22 @@ public class Docente extends Personal {
     public int salario() {
         return this.asignatura.getSueldo();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Docente docente = (Docente) o;
+        return (salario == docente.salario &&
+                Objects.equals(nombre, docente.nombre) &&
+                Objects.equals(apellidos, docente.apellidos) &&
+                edad == docente.edad &&
+                destroyedHorrocruxes == docente.destroyedHorrocruxes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(salario);
+    }
+
 }

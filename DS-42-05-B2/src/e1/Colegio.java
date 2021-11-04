@@ -15,7 +15,7 @@ public class Colegio {
         this.name = name;
     }
 
-    public boolean findSubject(Docente docente) {
+    private boolean findSubject(Docente docente) {
         for (Integrante i : IntegrantesList) {
             if (i.getClass() == Docente.class && ((Docente) i).asignatura == docente.asignatura) {
                 return true;
@@ -25,11 +25,22 @@ public class Colegio {
     }
 
     public void addIntegrante(Integrante integrante) {
+
+        if (integrante == null) {
+            throw new IllegalArgumentException();
+        }
+
         if (integrante.getClass() == Docente.class) {
             if (findSubject((Docente) integrante)) {
                 // error ***********************
                 return;
             }
+        }
+
+        for (Integrante i : IntegrantesList) {
+           if (i.equals(integrante)) {
+               // error
+           }
         }
 
         IntegrantesList.add(integrante);

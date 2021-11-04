@@ -1,5 +1,7 @@
 package e1;
 
+import java.util.Objects;
+
 public class Conserje extends Personal {
 
     /* constructor */
@@ -20,4 +22,22 @@ public class Conserje extends Personal {
     public int salario() {
         return 160;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conserje conserje = (Conserje) o;
+        return (salario == conserje.salario &&
+                Objects.equals(nombre, conserje.nombre) &&
+                Objects.equals(apellidos, conserje.apellidos) &&
+                edad == conserje.edad &&
+                destroyedHorrocruxes == conserje.destroyedHorrocruxes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(salario);
+    }
+
 }

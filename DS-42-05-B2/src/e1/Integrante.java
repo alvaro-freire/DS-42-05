@@ -24,4 +24,6 @@ public abstract class Integrante {
     }
 
     public abstract float recompensa();
+
+    public abstract boolean equals(Object obj);
 }

@@ -18,4 +18,6 @@ public abstract class Residente extends Integrante {
 
     }
 
+    public abstract boolean equals(Object obj);
+
 }

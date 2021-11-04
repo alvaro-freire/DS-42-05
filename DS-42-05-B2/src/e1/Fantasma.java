@@ -1,5 +1,7 @@
 package e1;
 
+import java.util.Objects;
+
 public class Fantasma extends Residente {
 
     /* constructor */
@@ -21,5 +23,17 @@ public class Fantasma extends Residente {
             reward *= 2;
         }
         return reward;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fantasma fantasma = (Fantasma) o;
+        return (casa == fantasma.casa &&
+                Objects.equals(nombre, fantasma.nombre) &&
+                Objects.equals(apellidos, fantasma.apellidos) &&
+                edad == fantasma.edad &&
+                destroyedHorrocruxes == fantasma.destroyedHorrocruxes);
     }
 }
