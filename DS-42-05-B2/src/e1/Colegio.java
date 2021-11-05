@@ -8,7 +8,7 @@ public class Colegio {
     private final String name;
 
     /* lista de integrantes del Colegio */
-    List<Integrante> IntegrantesList = new ArrayList<>();
+    private final List<Integrante> integrantesList = new ArrayList<>();
 
     /* constructor */
     public Colegio(String name) {
@@ -19,8 +19,10 @@ public class Colegio {
         return name;
     }
 
+    public List<Integrante> getList() { return integrantesList; }
+
     private boolean findSubject(Docente docente) {
-        for (Integrante i : IntegrantesList) {
+        for (Integrante i : integrantesList) {
             if (i.getClass() == Docente.class && ((Docente) i).getAsignatura() == docente.getAsignatura()) {
                 return true;
             }
@@ -40,20 +42,20 @@ public class Colegio {
             }
         }
 
-        for (Integrante i : IntegrantesList) {
+        for (Integrante i : integrantesList) {
             if (i.equals(integrante)) {
                 throw new IllegalArgumentException();
             }
         }
 
-        IntegrantesList.add(integrante);
+        integrantesList.add(integrante);
     }
 
     public void removeIntegrante(Integrante integrante) {
 
-        for (Integrante i : IntegrantesList) {
+        for (Integrante i : integrantesList) {
             if (i.equals(integrante)) {
-                IntegrantesList.remove(integrante);
+                integrantesList.remove(integrante);
                 return;
             }
         }
@@ -61,14 +63,14 @@ public class Colegio {
     }
 
     public void clearList() {
-        IntegrantesList.clear();
+        integrantesList.clear();
     }
 
     public String imprimirRecompensas() {
         float recompensaTotal = 0;
         String string = "";
 
-        for (Integrante i : IntegrantesList) {
+        for (Integrante i : integrantesList) {
             string = string.concat(i.getNombre() + " " + i.getApellidos());
             if (i.getClass() == Estudiante.class) {
                 string = string.concat("(Estudiante de " + ((Estudiante) i).getCasa());
@@ -78,12 +80,10 @@ public class Colegio {
                 string = string.concat("(Guardabosques");
             } else if (i.getClass() == Docente.class) {
                 string = string.concat("(Docente de " + ((Docente) i).getAsignatura());
-            } else if (i.getClass() == Conserje.class) {
-                string = string.concat("(Conserje");
             } else {
-                // error ***********************
-                throw new IllegalArgumentException();
+                string = string.concat("(Conserje");
             }
+
             string = string.concat(", " + i.getDestroyedHorrocruxes() + " horrocruxes): "
                     + i.recompensa() + " galeones\n");
             recompensaTotal += i.recompensa();
@@ -98,7 +98,7 @@ public class Colegio {
         int salarioTotal = 0;
         String string = "";
 
-        for (Integrante i : IntegrantesList) {
+        for (Integrante i : integrantesList) {
             if (i.getClass() != Estudiante.class && i.getClass() != Fantasma.class) {
                 string = string.concat(i.getNombre() + " " + i.getApellidos());
                 if (i.getClass() == Guardabosques.class) {

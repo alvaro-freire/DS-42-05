@@ -8,10 +8,6 @@ public abstract class Personal extends Integrante {
         return salario;
     }
 
-    public void setSalario(int salario) {
-        this.salario = salario;
-    }
-
     public abstract int salario();
 
     public abstract boolean equals(Object obj);
