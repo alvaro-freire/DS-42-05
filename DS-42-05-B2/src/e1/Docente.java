@@ -13,9 +13,13 @@ public class Docente extends Personal {
 
         private final int sueldo;
 
-        Asignatura(int sueldo) { this.sueldo = sueldo; }
+        Asignatura(int sueldo) {
+            this.sueldo = sueldo;
+        }
 
-        public int getSueldo() { return sueldo; }
+        public int getSueldo() {
+            return sueldo;
+        }
     }
 
     private Asignatura asignatura;

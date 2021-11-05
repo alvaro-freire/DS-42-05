@@ -37,9 +37,9 @@ public class Colegio {
         }
 
         for (Integrante i : IntegrantesList) {
-           if (i.equals(integrante)) {
-               throw new IllegalArgumentException();
-           }
+            if (i.equals(integrante)) {
+                throw new IllegalArgumentException();
+            }
         }
 
         IntegrantesList.add(integrante);
