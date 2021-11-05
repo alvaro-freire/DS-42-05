@@ -44,7 +44,7 @@ class ColegioTest {
     }
 
     @Test
-    void nullName() {
+    void testNullName() {
         assertThrows(IllegalArgumentException.class, () -> new Estudiante(null, "Granger",
                 21, 1, Residente.House.Gryffindor));
 
