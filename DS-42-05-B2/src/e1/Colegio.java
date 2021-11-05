@@ -113,7 +113,7 @@ public class Colegio {
             }
         }
 
-        string += "El gasto de " + name + " en personal es de " + salarioTotal + " galeones\n";
+        string += "El gasto de " + getNombre() + " en personal es de " + salarioTotal + " galeones\n";
 
         return string;
     }
