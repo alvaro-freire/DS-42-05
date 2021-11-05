@@ -2,7 +2,7 @@ package e1;
 
 public abstract class Residente extends Integrante {
 
-    public House casa;
+    private House casa;
 
     public enum House {
         Gryffindor,

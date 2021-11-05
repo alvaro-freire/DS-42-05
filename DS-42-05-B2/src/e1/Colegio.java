@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Colegio {
 
-    public String name;
+    private final String name;
 
     /* lista de integrantes del Colegio */
     List<Integrante> IntegrantesList = new ArrayList<>();
@@ -13,6 +13,10 @@ public class Colegio {
     /* constructor */
     public Colegio(String name) {
         this.name = name;
+    }
+
+    public String getNombre() {
+        return name;
     }
 
     private boolean findSubject(Docente docente) {
