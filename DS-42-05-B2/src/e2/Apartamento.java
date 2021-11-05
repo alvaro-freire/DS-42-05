@@ -4,20 +4,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Apartamentos {
+public class Apartamento {
 
-    private List<Anuncio> anuncioList = new ArrayList<>();
+    private final List<Anuncio> anuncioList = new ArrayList<>();
 
     private SortBy comparador;
 
     /* constructor */
-    public Apartamentos() { this.comparador = null; }
+    public Apartamento() {
+        this.comparador = null;
+    }
 
-    public List<Anuncio> getList() { return anuncioList; }
+    public List<Anuncio> getList() {
+        return anuncioList;
+    }
 
-    public void setComparador(SortBy comparador) { this.comparador = comparador; }
+    public void setComparador(SortBy comparador) {
+        this.comparador = comparador;
+    }
 
-    public SortBy getComparador() { return comparador; }
+    public SortBy getComparador() {
+        return comparador;
+    }
 
     public void addAnuncio(Anuncio anuncio) {
 
