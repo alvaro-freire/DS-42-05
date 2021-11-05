@@ -1,18 +1,17 @@
 package e2;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Apartamento {
+public class Apartamentos {
 
     private List<Anuncio> anuncioList = new ArrayList<>();
 
     private SortBy comparador;
 
     /* constructor */
-    public Apartamento() { this.comparador = null; }
+    public Apartamentos() { this.comparador = null; }
 
     public List<Anuncio> getList() { return anuncioList; }
 
