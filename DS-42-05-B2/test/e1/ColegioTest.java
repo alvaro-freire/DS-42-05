@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ColegioTest {
 
     /* se crea un colegio */
-    private final Colegio Hogwarts = new Colegio("Hogwarts");
+    Colegio Hogwarts = new Colegio("Hogwarts");
 
     /* se crean los integrantes del colegio */
     Estudiante Harry = new Estudiante("Harry", "Potter",
