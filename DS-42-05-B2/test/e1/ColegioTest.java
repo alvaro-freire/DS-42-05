@@ -8,31 +8,34 @@ import static org.junit.jupiter.api.Assertions.*;
 class ColegioTest {
 
     /* se crea un colegio */
-    Colegio Hogwarts = new Colegio("Hogwarts");
+    private final Colegio Hogwarts = new Colegio("Hogwarts");
 
     /* se crean los integrantes del colegio */
-    Estudiante Harry = new Estudiante("Harry", "Potter",
+    private final Estudiante Harry = new Estudiante("Harry", "Potter",
             18, 3, Residente.House.Gryffindor);
 
-    Estudiante Draco = new Estudiante("Draco", "Malfoy",
+    private final Estudiante Draco = new Estudiante("Draco", "Malfoy",
             19, 1, Residente.House.Slytherin);
 
-    Fantasma Baron = new Fantasma("Baron", "Sanguinario",
-            143, 0, Residente.House.Ravenclaw);
+    private final Estudiante Hermione = new Estudiante("Hermione", "Granger",
+            21, 1, Residente.House.Gryffindor);
 
-    Conserje Argus = new Conserje("Argus", "Filch",
+    private final Fantasma Baron = new Fantasma("Baron", "Sanguinario",
+            143, 0, Residente.House.Slytherin);
+
+    private final Conserje Argus = new Conserje("Argus", "Filch",
             56, 1);
 
-    Guardabosques Hagrid = new Guardabosques("Rubeus",
+    private final Guardabosques Hagrid = new Guardabosques("Rubeus",
             "Hagrid", 96, 2);
 
-    Docente Snape = new Docente("Severus", "Snape",
+    private final Docente Snape = new Docente("Severus", "Snape",
             26, 1, Docente.Asignatura.Defensa);
 
-    Docente Remus = new Docente("Remus", "Lupin",
+    private final Docente Remus = new Docente("Remus", "Lupin",
             48, 1, Docente.Asignatura.Defensa);
 
-    Docente Minerva = new Docente("Minerva", "McGonagall",
+    private final Docente Minerva = new Docente("Minerva", "McGonagall",
             13, 2, Docente.Asignatura.Tranformaciones);
 
     @BeforeEach
@@ -41,7 +44,25 @@ class ColegioTest {
     }
 
     @Test
-    void testException() {
+    void nullName() {
+        assertThrows(IllegalArgumentException.class, () -> new Estudiante(null, "Granger",
+                21, 1, Residente.House.Gryffindor));
+
+        assertThrows(IllegalArgumentException.class, () -> new Fantasma(null, "Sanguinario",
+                143, 0, Residente.House.Slytherin));
+
+        assertThrows(IllegalArgumentException.class, () -> new Conserje(null, "Filch",
+                56, 1));
+
+        assertThrows(IllegalArgumentException.class, () -> new Guardabosques(null, "Hagrid",
+                96, 2));
+
+        assertThrows(IllegalArgumentException.class, () -> new Docente(null, "Snape",
+                26, 1, Docente.Asignatura.Defensa));
+    }
+
+    @Test
+    void testThrows() {
 
         /* se envía un parámetro no válido */
         assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(null));
@@ -56,6 +77,32 @@ class ColegioTest {
 
         /* se intenta borrar integrante inexistente */
         assertThrows(IllegalArgumentException.class, () -> Hogwarts.removeIntegrante(Minerva));
+
+
+    }
+
+    @Test
+    void testEquals() {
+
+        Docente Snape2 = new Docente("Severus", "Snape",
+                26, 1, Docente.Asignatura.Defensa);
+        assertEquals(Snape, Snape2);
+
+        Estudiante Hermione2 = new Estudiante("Hermione", "Granger",
+                21, 1, Residente.House.Gryffindor);
+        assertEquals(Hermione, Hermione2);
+
+        Fantasma Baron2 = new Fantasma("Baron", "Sanguinario",
+                143, 0, Residente.House.Slytherin);
+        assertEquals(Baron, Baron2);
+
+        Conserje Argus2 = new Conserje("Argus", "Filch",
+                56, 1);
+        assertEquals(Argus, Argus2);
+
+        Guardabosques Hagrid2 = new Guardabosques("Rubeus",
+                "Hagrid", 96, 2);
+        assertEquals(Hagrid, Hagrid2);
 
     }
 
@@ -122,6 +169,7 @@ class ColegioTest {
         );
 
         Hogwarts.clearList();
+        Hogwarts.addIntegrante(Hermione);
         assertEquals(
                 "El gasto de Hogwarts en personal es de 0 galeones\n",
                 Hogwarts.imprimirSalarios()
@@ -151,7 +199,7 @@ class ColegioTest {
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
                         "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "La recompensa total del Colegio Hogwarts es de 450.0 galeones\n",
                 Hogwarts.imprimirRecompensas()
         );
@@ -160,7 +208,7 @@ class ColegioTest {
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
                         "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "Argus Filch(Conserje, 1 horrocruxes): 65.0 galeones\n" +
                         "La recompensa total del Colegio Hogwarts es de 515.0 galeones\n",
                 Hogwarts.imprimirRecompensas()
@@ -171,7 +219,7 @@ class ColegioTest {
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
                         "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones\n" +
                         "La recompensa total del Colegio Hogwarts es de 600.0 galeones\n",
                 Hogwarts.imprimirRecompensas()
@@ -181,7 +229,7 @@ class ColegioTest {
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
                         "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones\n" +
                         "Severus Snape(Docente de Defensa, 1 horrocruxes): 37.5 galeones\n" +
                         "La recompensa total del Colegio Hogwarts es de 637.5 galeones\n",
@@ -192,7 +240,7 @@ class ColegioTest {
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
                         "Draco Malfoy(Estudiante de Slytherin, 1 horrocruxes): 180.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones\n" +
                         "Severus Snape(Docente de Defensa, 1 horrocruxes): 37.5 galeones\n" +
                         "Minerva McGonagall(Docente de Tranformaciones, 2 horrocruxes): 100.0 galeones\n" +
@@ -204,7 +252,7 @@ class ColegioTest {
         Hogwarts.removeIntegrante(Snape);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
-                        "Baron Sanguinario(Fantasma de Ravenclaw, 0 horrocruxes): 0.0 galeones\n" +
+                        "Baron Sanguinario(Fantasma de Slytherin, 0 horrocruxes): 0.0 galeones\n" +
                         "Rubeus Hagrid(Guardabosques, 2 horrocruxes): 150.0 galeones\n" +
                         "Minerva McGonagall(Docente de Tranformaciones, 2 horrocruxes): 100.0 galeones\n" +
                         "La recompensa total del Colegio Hogwarts es de 520.0 galeones\n",
@@ -212,8 +260,10 @@ class ColegioTest {
         );
 
         Hogwarts.clearList();
+        Hogwarts.addIntegrante(Hermione);
         assertEquals(
-                "La recompensa total del Colegio Hogwarts es de 0.0 galeones\n",
+                "Hermione Granger(Estudiante de Gryffindor, 1 horrocruxes): 90.0 galeones\n" +
+                        "La recompensa total del Colegio Hogwarts es de 90.0 galeones\n",
                 Hogwarts.imprimirRecompensas()
         );
     }
