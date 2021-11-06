@@ -19,6 +19,8 @@ class ApartamentosTest {
     void setUp() {
 
         alquilerApartamentos.clearList();
+        alquilerApartamentos.setComparador(null);
+        alquilerApartamentos.sortList();
 
         /* anuncio1 */
         anuncio1.setNumReferencia(1);
@@ -268,6 +270,28 @@ class ApartamentosTest {
                         "\tPrecio total: 150\n" +
                         "\tTamaño: 55\n" +
                         "\tCódigo postal: 15608\n",
+                alquilerApartamentos.toString());
+
+        /* se ordena la lista por código postal: */
+        alquilerApartamentos.setComparador(new SortByCp());
+        alquilerApartamentos.sortList();
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 2\n" +
+                        "\tPrecio base: 150\n" +
+                        "\tPrecio plazas: 50\n" +
+                        "\tNº plazas: 0\n" +
+                        "\tPrecio total: 150\n" +
+                        "\tTamaño: 55\n" +
+                        "\tCódigo postal: 15608\n" +
+                        "Anuncio 1:\n" +
+                        "\tNº Ref.: 1\n" +
+                        "\tPrecio base: 110\n" +
+                        "\tPrecio plazas: 20\n" +
+                        "\tNº plazas: 1\n" +
+                        "\tPrecio total: 130\n" +
+                        "\tTamaño: 50\n" +
+                        "\tCódigo postal: 15630\n",
                 alquilerApartamentos.toString());
 
         /* se elimina de la lista el primer anuncio: */
