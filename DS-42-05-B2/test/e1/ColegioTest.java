@@ -10,7 +10,8 @@ class ColegioTest {
     /* se crea un colegio */
     private final Colegio Hogwarts = new Colegio("Hogwarts");
 
-    /* se crean los integrantes del colegio */
+    /* se crean los integrantes del colegio: */
+
     private final Estudiante Harry = new Estudiante("Harry", "Potter",
             18, 3, Residente.House.Gryffindor);
 
@@ -45,19 +46,21 @@ class ColegioTest {
 
     @Test
     void testNullName() {
+        /* se comprueba la creación de un integrante con nombre/apellido a 'null': */
+
         assertThrows(IllegalArgumentException.class, () -> new Estudiante(null, "Granger",
                 21, 1, Residente.House.Gryffindor));
 
         assertThrows(IllegalArgumentException.class, () -> new Fantasma(null, "Sanguinario",
                 143, 0, Residente.House.Slytherin));
 
-        assertThrows(IllegalArgumentException.class, () -> new Conserje(null, "Filch",
+        assertThrows(IllegalArgumentException.class, () -> new Conserje("Argus", null,
                 56, 1));
 
         assertThrows(IllegalArgumentException.class, () -> new Guardabosques(null, "Hagrid",
                 96, 2));
 
-        assertThrows(IllegalArgumentException.class, () -> new Docente(null, "Snape",
+        assertThrows(IllegalArgumentException.class, () -> new Docente("Severus", null,
                 26, 1, Docente.Asignatura.Defensa));
     }
 
@@ -77,56 +80,80 @@ class ColegioTest {
 
         /* se intenta borrar integrante inexistente */
         assertThrows(IllegalArgumentException.class, () -> Hogwarts.removeIntegrante(Minerva));
-
-
     }
 
     @Test
     void testEquals() {
 
+        /* se crean integrantes auxiliares y se comprueba si
+         * son iguales y si son distintos para cada clase: */
+
         Docente Snape2 = new Docente("Severus", "Snape",
                 26, 1, Docente.Asignatura.Defensa);
         assertEquals(Snape, Snape2);
+
+        Snape2.setEdad(15);
+        assertNotEquals(Snape, Snape2);
 
         Estudiante Hermione2 = new Estudiante("Hermione", "Granger",
                 21, 1, Residente.House.Gryffindor);
         assertEquals(Hermione, Hermione2);
 
+        Hermione2.setDestroyedHorrocruxes(14);
+        assertNotEquals(Hermione, Hermione2);
+
         Fantasma Baron2 = new Fantasma("Baron", "Sanguinario",
                 143, 0, Residente.House.Slytherin);
         assertEquals(Baron, Baron2);
+
+        Baron2.setApellidos("Flitch");
+        assertNotEquals(Baron, Baron2);
 
         Conserje Argus2 = new Conserje("Argus", "Filch",
                 56, 1);
         assertEquals(Argus, Argus2);
 
+        Argus2.setNombre("Baron");
+        assertNotEquals(Argus, Argus2);
+
         Guardabosques Hagrid2 = new Guardabosques("Rubeus",
                 "Hagrid", 96, 2);
         assertEquals(Hagrid, Hagrid2);
+
+        Hagrid2.setEdad(133);
+        assertNotEquals(Hagrid, Hagrid2);
 
     }
 
     @Test
     void testImprimirSalarios() {
 
+        /* RESIDENTES: */
+
+        /* se añade un estudiante y se imprimen los salarios: */
         Hogwarts.addIntegrante(Harry);
         assertEquals(
                 "El gasto de Hogwarts en personal es de 0 galeones\n",
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se añade un estudiante: */
         Hogwarts.addIntegrante(Draco);
         assertEquals(
                 "El gasto de Hogwarts en personal es de 0 galeones\n",
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se añade un fantasma: */
         Hogwarts.addIntegrante(Baron);
         assertEquals(
                 "El gasto de Hogwarts en personal es de 0 galeones\n",
                 Hogwarts.imprimirSalarios()
         );
 
+        /* PERSONAL: */
+
+        /* se añade un conserje: */
         Hogwarts.addIntegrante(Argus);
         assertEquals(
                 "Argus Filch(Conserje): 160 galeones\n" +
@@ -135,6 +162,7 @@ class ColegioTest {
         );
         Hogwarts.removeIntegrante(Argus);
 
+        /* se elimina el anterior y se añade un guardabosques: */
         Hogwarts.addIntegrante(Hagrid);
         assertEquals(
                 "Rubeus Hagrid(Guardabosques): 180 galeones\n" +
@@ -142,6 +170,7 @@ class ColegioTest {
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se añade un docente de Defensa: */
         Hogwarts.addIntegrante(Snape);
         assertEquals(
                 "Rubeus Hagrid(Guardabosques): 180 galeones\n" +
@@ -150,6 +179,7 @@ class ColegioTest {
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se añade un docente de Transformaciones: */
         Hogwarts.addIntegrante(Minerva);
         assertEquals(
                 "Rubeus Hagrid(Guardabosques): 180 galeones\n" +
@@ -159,6 +189,7 @@ class ColegioTest {
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se eliminan dos integrantes de la lista: */
         Hogwarts.removeIntegrante(Draco);
         Hogwarts.removeIntegrante(Snape);
         assertEquals(
@@ -168,6 +199,7 @@ class ColegioTest {
                 Hogwarts.imprimirSalarios()
         );
 
+        /* se limpia la lista y se añade un estudiante: */
         Hogwarts.clearList();
         Hogwarts.addIntegrante(Hermione);
         assertEquals(
@@ -179,6 +211,9 @@ class ColegioTest {
     @Test
     public void testImprimirRecompensa() {
 
+        /* RESIDENTES: */
+
+        /* se añade un estudiante y se imprimen las recompensas: */
         Hogwarts.addIntegrante(Harry);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -186,6 +221,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* se añade un estudiante: */
         Hogwarts.addIntegrante(Draco);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -194,7 +230,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
-
+        /* se añade un fantasma: */
         Hogwarts.addIntegrante(Baron);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -204,6 +240,9 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* PERSONAL: */
+
+        /* se añade un conserje: */
         Hogwarts.addIntegrante(Argus);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -215,6 +254,7 @@ class ColegioTest {
         );
         Hogwarts.removeIntegrante(Argus);
 
+        /* se elimina el anterior y se añade un guardabosques: */
         Hogwarts.addIntegrante(Hagrid);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -225,6 +265,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* se añade un docente de Defensa: */
         Hogwarts.addIntegrante(Snape);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -236,6 +277,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* se añade un docente de Transformaciones: */
         Hogwarts.addIntegrante(Minerva);
         assertEquals(
                 "Harry Potter(Estudiante de Gryffindor, 3 horrocruxes): 270.0 galeones\n" +
@@ -248,6 +290,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* se eliminan dos integrantes de la lista: */
         Hogwarts.removeIntegrante(Draco);
         Hogwarts.removeIntegrante(Snape);
         assertEquals(
@@ -259,6 +302,7 @@ class ColegioTest {
                 Hogwarts.imprimirRecompensas()
         );
 
+        /* se limpia la lista y se añade un estudiante: */
         Hogwarts.clearList();
         Hogwarts.addIntegrante(Hermione);
         assertEquals(
