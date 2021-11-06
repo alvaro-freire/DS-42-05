@@ -55,7 +55,7 @@ public class Apartamento {
 
     public Anuncio getAnuncio(int index) {
 
-        if (index < 0 || index >= anuncioList.size()) {
+        if (anuncioList.isEmpty() || index < 0 || index >= anuncioList.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
 
