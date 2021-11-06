@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Apartamento {
+public class Apartamentos {
 
     private final List<Anuncio> anuncioList = new ArrayList<>();
 
     private SortBy comparador;
 
     /* constructor */
-    public Apartamento() {
+    public Apartamentos() {
         this.comparador = null;
     }
 

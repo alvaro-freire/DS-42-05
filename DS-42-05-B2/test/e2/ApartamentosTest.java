@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ApartamentoTest {
+class ApartamentosTest {
 
-    private final Apartamento alquilerApartamentos = new Apartamento();
+    private final Apartamentos alquilerApartamentos = new Apartamentos();
 
     private final Anuncio anuncio1 = new Anuncio(1, 110, 20, 1, 50, 15630);
 
