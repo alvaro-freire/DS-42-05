@@ -53,6 +53,15 @@ public class Apartamento {
         throw new IllegalArgumentException();
     }
 
+    public Anuncio getAnuncio(int index) {
+
+        if (index < 0 || index >= anuncioList.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        return anuncioList.get(index);
+    }
+
     public void clearList() {
         anuncioList.clear();
     }
@@ -65,6 +74,23 @@ public class Apartamento {
             anuncioList.sort(comparador);
         }
 
+    }
+
+    public String toString() {
+        String string = "";
+        int i, totalPrize;
+
+        for (i = 0; i < anuncioList.size(); i++) {
+            totalPrize = anuncioList.get(i).getPrecioBase() +
+                    anuncioList.get(i).getPrecioPlaza() * anuncioList.get(i).getNumPlazas();
+            string = string.concat("Anuncio " + i + ":\n\tNº Ref.: " + anuncioList.get(i).getNumReferencia() +
+                    "\n\tPrecio base: " + anuncioList.get(i).getPrecioBase() + "\n\tPrecio plazas: " +
+                    anuncioList.get(i).getPrecioPlaza() + "\n\tNº plazas: " + anuncioList.get(i).getNumPlazas() +
+                    "\n\tPrecio total: " + totalPrize + "\n\tTamaño: " + anuncioList.get(i).getTamano() +
+                    "\n\tCódigo postal: " + anuncioList.get(i).getCp() + "\n");
+        }
+
+        return string;
     }
 
 }
