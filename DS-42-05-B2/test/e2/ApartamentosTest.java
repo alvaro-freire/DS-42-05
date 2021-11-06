@@ -306,5 +306,58 @@ class ApartamentosTest {
                         "\tTamaño: 55\n" +
                         "\tCódigo postal: 15608\n",
                 alquilerApartamentos.toString());
+
+        /* se añade el anuncio 3 a la lista: */
+        alquilerApartamentos.addAnuncio(anuncio3);
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 2\n" +
+                        "\tPrecio base: 150\n" +
+                        "\tPrecio plazas: 50\n" +
+                        "\tNº plazas: 0\n" +
+                        "\tPrecio total: 150\n" +
+                        "\tTamaño: 55\n" +
+                        "\tCódigo postal: 15608\n" +
+                        "Anuncio 1:\n" +
+                        "\tNº Ref.: 3\n" +
+                        "\tPrecio base: 140\n" +
+                        "\tPrecio plazas: 10\n" +
+                        "\tNº plazas: 2\n" +
+                        "\tPrecio total: 160\n" +
+                        "\tTamaño: 45\n" +
+                        "\tCódigo postal: 15609\n",
+                alquilerApartamentos.toString());
+
+        /* se añade de nuevo el anuncio 1 y se ordena la lista por tamaño: */
+        alquilerApartamentos.addAnuncio(anuncio1);
+        alquilerApartamentos.setComparador(new SortByTamano());
+        alquilerApartamentos.sortList();
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 3\n" +
+                        "\tPrecio base: 140\n" +
+                        "\tPrecio plazas: 10\n" +
+                        "\tNº plazas: 2\n" +
+                        "\tPrecio total: 160\n" +
+                        "\tTamaño: 45\n" +
+                        "\tCódigo postal: 15609\n" +
+                        "Anuncio 1:\n" +
+                        "\tNº Ref.: 1\n" +
+                        "\tPrecio base: 110\n" +
+                        "\tPrecio plazas: 20\n" +
+                        "\tNº plazas: 1\n" +
+                        "\tPrecio total: 130\n" +
+                        "\tTamaño: 50\n" +
+                        "\tCódigo postal: 15630\n" +
+                        "Anuncio 2:\n" +
+                        "\tNº Ref.: 2\n" +
+                        "\tPrecio base: 150\n" +
+                        "\tPrecio plazas: 50\n" +
+                        "\tNº plazas: 0\n" +
+                        "\tPrecio total: 150\n" +
+                        "\tTamaño: 55\n" +
+                        "\tCódigo postal: 15608\n",
+                alquilerApartamentos.toString());
+
     }
 }
