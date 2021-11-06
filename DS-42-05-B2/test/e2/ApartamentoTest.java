@@ -236,16 +236,51 @@ class ApartamentoTest {
     @Test
     public void testToString() {
 
+        /* se añade el primer anuncio a la lista y se imprimen los datos: */
         alquilerApartamentos.addAnuncio(anuncio1);
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 1\n" +
+                        "\tPrecio base: 110\n" +
+                        "\tPrecio plazas: 20\n" +
+                        "\tNº plazas: 1\n" +
+                        "\tPrecio total: 130\n" +
+                        "\tTamaño: 50\n" +
+                        "\tCódigo postal: 15630\n",
+                alquilerApartamentos.toString());
 
-        assertEquals("Anuncio 0:\n" +
-                "\tNº Ref.: 1\n" +
-                "\tPrecio base: 110\n" +
-                "\tPrecio plazas: 20\n" +
-                "\tNº plazas: 1\n" +
-                "\tPrecio total: 130\n" +
-                "\tTamaño: 50\n" +
-                "\tCódigo postal: 15630\n", alquilerApartamentos.toString());
+        /* se añade el segundo anuncio: */
+        alquilerApartamentos.addAnuncio(anuncio2);
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 1\n" +
+                        "\tPrecio base: 110\n" +
+                        "\tPrecio plazas: 20\n" +
+                        "\tNº plazas: 1\n" +
+                        "\tPrecio total: 130\n" +
+                        "\tTamaño: 50\n" +
+                        "\tCódigo postal: 15630\n" +
+                        "Anuncio 1:\n" +
+                        "\tNº Ref.: 2\n" +
+                        "\tPrecio base: 150\n" +
+                        "\tPrecio plazas: 50\n" +
+                        "\tNº plazas: 0\n" +
+                        "\tPrecio total: 150\n" +
+                        "\tTamaño: 55\n" +
+                        "\tCódigo postal: 15608\n",
+                alquilerApartamentos.toString());
 
+        /* se elimina de la lista el primer anuncio: */
+        alquilerApartamentos.removeAnuncio(anuncio1);
+        assertEquals(
+                "Anuncio 0:\n" +
+                        "\tNº Ref.: 2\n" +
+                        "\tPrecio base: 150\n" +
+                        "\tPrecio plazas: 50\n" +
+                        "\tNº plazas: 0\n" +
+                        "\tPrecio total: 150\n" +
+                        "\tTamaño: 55\n" +
+                        "\tCódigo postal: 15608\n",
+                alquilerApartamentos.toString());
     }
 }
