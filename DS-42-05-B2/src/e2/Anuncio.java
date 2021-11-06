@@ -111,7 +111,7 @@ public class Anuncio implements Comparable<Anuncio> {
 
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() == o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Anuncio anuncio = (Anuncio) o;
         return (precioBase == anuncio.getPrecioBase() &&
                 precioPlaza == anuncio.getPrecioPlaza() &&
