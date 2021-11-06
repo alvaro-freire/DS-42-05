@@ -21,16 +21,28 @@ class ApartamentoTest {
         alquilerApartamentos.clearList();
 
         /* anuncio1 */
-        anuncio1.setNumReferencia(1); anuncio1.setPrecioBase(110);anuncio1.setPrecioPlaza(20);
-        anuncio1.setNumPlazas(1);anuncio1.setTamano(50);anuncio1.setCp(15630);
+        anuncio1.setNumReferencia(1);
+        anuncio1.setPrecioBase(110);
+        anuncio1.setPrecioPlaza(20);
+        anuncio1.setNumPlazas(1);
+        anuncio1.setTamano(50);
+        anuncio1.setCp(15630);
 
         /* anuncio2 */
-        anuncio2.setNumReferencia(2); anuncio2.setPrecioBase(150);anuncio2.setPrecioPlaza(50);
-        anuncio2.setNumPlazas(0);anuncio2.setTamano(55);anuncio2.setCp(15608);
+        anuncio2.setNumReferencia(2);
+        anuncio2.setPrecioBase(150);
+        anuncio2.setPrecioPlaza(50);
+        anuncio2.setNumPlazas(0);
+        anuncio2.setTamano(55);
+        anuncio2.setCp(15608);
 
         /* anuncio3 */
-        anuncio3.setNumReferencia(3); anuncio3.setPrecioBase(140);anuncio3.setPrecioPlaza(10);
-        anuncio3.setNumPlazas(2);anuncio3.setTamano(45);anuncio3.setCp(15609);
+        anuncio3.setNumReferencia(3);
+        anuncio3.setPrecioBase(140);
+        anuncio3.setPrecioPlaza(10);
+        anuncio3.setNumPlazas(2);
+        anuncio3.setTamano(45);
+        anuncio3.setCp(15609);
     }
 
     @Test
@@ -88,8 +100,12 @@ class ApartamentoTest {
         assertThrows(IllegalArgumentException.class, () -> alquilerApartamentos.addAnuncio(anuncio1));
 
         /* se igualan los campos del anuncio1 y el anuncio2 y se intenta añadir a la lista */
-        anuncio2.setNumReferencia(1); anuncio2.setPrecioBase(110);anuncio2.setPrecioPlaza(20);
-        anuncio2.setNumPlazas(1);anuncio2.setTamano(50);anuncio2.setCp(15630);
+        anuncio2.setNumReferencia(1);
+        anuncio2.setPrecioBase(110);
+        anuncio2.setPrecioPlaza(20);
+        anuncio2.setNumPlazas(1);
+        anuncio2.setTamano(50);
+        anuncio2.setCp(15630);
         assertThrows(IllegalArgumentException.class, () -> alquilerApartamentos.addAnuncio(anuncio2));
 
         /* se intenta recuperar un anuncio de
@@ -111,8 +127,12 @@ class ApartamentoTest {
         assertEquals(anuncio1, anuncio1);
 
         /* se igualan los campos del anuncio1 y el anuncio2 */
-        anuncio2.setNumReferencia(1); anuncio2.setPrecioBase(110);anuncio2.setPrecioPlaza(20);
-        anuncio2.setNumPlazas(1);anuncio2.setTamano(50);anuncio2.setCp(15630);
+        anuncio2.setNumReferencia(1);
+        anuncio2.setPrecioBase(110);
+        anuncio2.setPrecioPlaza(20);
+        anuncio2.setNumPlazas(1);
+        anuncio2.setTamano(50);
+        anuncio2.setCp(15630);
 
         assertEquals(anuncio1, anuncio2);
     }
