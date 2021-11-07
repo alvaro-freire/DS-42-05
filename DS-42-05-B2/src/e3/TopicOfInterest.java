@@ -1,11 +1,21 @@
 package e3;
 
-public class TopicOfInterest {
+public enum TopicOfInterest {
 
-    private String topic;
+    Viajes("Viajes"),
+    Deportes("Deportes"),
+    Libros("Libros"),
+    Ropa("Ropa"),
+    Comida("Comida");
 
-    public TopicOfInterest(String topic) {
+    private final String topic;
+
+    TopicOfInterest(String topic) {
         this.topic = topic;
+    }
+
+    public String getTopic() {
+        return topic;
     }
 
 }
