@@ -1,6 +1,5 @@
 package e3;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,10 +7,11 @@ public class User {
 
     private final String username;
 
-    private final List<TopicOfInterest> topicsOfInterest = new ArrayList<>();
+    private final List<TopicOfInterest> topicsOfInterest;
 
-    public User(String username) {
+    public User(String username, List<TopicOfInterest> topicsOfInterest) {
         this.username = username;
+        this.topicsOfInterest = topicsOfInterest;
     }
 
     public String getUsername() {

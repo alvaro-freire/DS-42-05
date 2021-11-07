@@ -8,19 +8,19 @@ public class NetworkManager1 implements NetworkManager {
     private final List<User> userList = new ArrayList<>();
 
     @Override
-    public void addUser(String userName, List<TopicOfInterest> topicsOfInterest) {
+    public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
 
-        if (userName == null || topicsOfInterest == null) {
+        if (username == null || topicsOfInterest == null) {
             throw new IllegalArgumentException();
         }
 
         for (User u : userList) {
-            if (u.getUserName().equals(userName)) {
+            if (u.getUsername().equals(username)) {
                 throw new IllegalArgumentException();
             }
         }
 
-        User user = new User(userName, topicsOfInterest);
+        User user = new User(username, topicsOfInterest);
 
         userList.add(user);
     }
@@ -32,11 +32,7 @@ public class NetworkManager1 implements NetworkManager {
             throw new IllegalArgumentException();
         }
 
-        for (User u : userList) {
-            if (u.getUserName().equals(userName)) {
-                userList.remove(u);
-            }
-        }
+        userList.removeIf(u -> u.getUsername().equals(userName));
 
         throw new IllegalArgumentException();
     }
@@ -49,7 +45,7 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (User u : userList) {
-            if (u.getUserName().equals(userName)) {
+            if (u.getUsername().equals(userName)) {
                 for (TopicOfInterest t : u.getTopicsOfInterest()) {
                     if (t.equals(topicOfInterest)) {
                         throw new IllegalArgumentException();
@@ -68,7 +64,7 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (User u : userList) {
-            if (u.getUserName().equals(userName)) {
+            if (u.getUsername().equals(userName)) {
                 for (TopicOfInterest t : u.getTopicsOfInterest()) {
                     if (t.equals(topicOfInterest)) {
                         u.getTopicsOfInterest().remove(topicOfInterest);
@@ -85,7 +81,7 @@ public class NetworkManager1 implements NetworkManager {
         List<String> userList = new ArrayList<>();
 
         for (User u : this.userList) {
-            userList.add(u.getUserName());
+            userList.add(u.getUsername());
         }
         return userList;
     }
@@ -107,7 +103,7 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (User u : userList) {
-            if (u.getUserName().equals(userName)) {
+            if (u.getUsername().equals(userName)) {
                 return u.getTopicsOfInterest();
             }
         }
