@@ -1,57 +1,49 @@
 package e3;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Network {
 
-    private final List<User> userList = new ArrayList<>();
+    private NetworkManager networkManager;
 
-    public Network() {
-
+    /* constructor */
+    public Network(NetworkManager networkManager) {
+        this.networkManager = networkManager;
     }
 
-    public void addUser(User user) {
-
-        if (user == null) {
-            throw new IllegalArgumentException();
-        }
-
-        for (User u : userList) {
-            if (u.equals(user)) {
-                throw new IllegalArgumentException();
-            }
-        }
-
-        userList.add(user);
+    /* get & set */
+    public void setNetworkManager(NetworkManager networkManager) {
+        this.networkManager = networkManager;
+    }
+    public NetworkManager getNetworkManager() {
+        return networkManager;
     }
 
-    public void removeUser(User user) {
-        for (User u : userList) {
-            if (u.equals(user)) {
-                userList.remove(user);
-                return;
-            }
-        }
-        throw new IllegalArgumentException();
+    public void addUser(String user, List<TopicOfInterest> topicsOfInterest) {
+        networkManager.addUser(user, topicsOfInterest);
     }
 
-    public void clearList() {
-        userList.clear();
+    public void removeUser(String user) {
+        networkManager.removeUser(user);
     }
 
-    public User getUser(int index) {
-
-        if (userList.isEmpty() || index < 0 || index >= userList.size()) {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-
-        return userList.get(index);
+    public void addInterest(String user, TopicOfInterest topicOfInterest) {
+        networkManager.addInterest(user, topicOfInterest);
     }
 
-
-    public List<User> getList() {
-        return userList;
+    public void removeInterest(String user, TopicOfInterest topicOfInterest) {
+        networkManager.removeInterest(user, topicOfInterest);
     }
 
+    public List<String> getUsers() {
+        return networkManager.getUsers();
+    }
+
+    public List<TopicOfInterest> getInterests() {
+        return networkManager.getInterests();
+    }
+
+    public List<TopicOfInterest> getInterestsUser(String user) {
+        return networkManager.getInterestsUser(user);
+    }
 }
