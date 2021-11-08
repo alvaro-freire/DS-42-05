@@ -46,4 +46,22 @@ public class Network {
     public List<TopicOfInterest> getInterestsUser(String user) {
         return networkManager.getInterestsUser(user);
     }
+
+    public String toString() {
+        String string = "";
+        List<String> userList = getUsers();
+        List<TopicOfInterest> topicsList;
+
+        for (String s : userList) {
+            topicsList = getInterestsUser(s);
+            string = string.concat(s + " -> Topics { ");
+            for (TopicOfInterest topic : topicsList) {
+                string = string.concat(topic + " ");
+            }
+            string = string.concat("}\n");
+        }
+
+        return string;
+    }
+
 }
