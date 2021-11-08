@@ -30,7 +30,7 @@ public class Apartamentos {
     public void addAnuncio(Anuncio anuncio) {
 
         if (anuncio == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         for (Anuncio a : anuncioList) {
@@ -43,6 +43,10 @@ public class Apartamentos {
     }
 
     public void removeAnuncio(Anuncio anuncio) {
+
+        if (anuncio == null) {
+            throw new NullPointerException();
+        }
 
         for (Anuncio a : anuncioList) {
             if (a.equals(anuncio)) {
