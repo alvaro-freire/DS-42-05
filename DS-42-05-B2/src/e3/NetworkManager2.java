@@ -11,7 +11,7 @@ public class NetworkManager2 implements NetworkManager {
         Iterator<String> iter = map.keySet().iterator();
 
         if (username == null || topicsOfInterest == null || map.containsKey(username)) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         while(iter.hasNext()){
@@ -28,7 +28,7 @@ public class NetworkManager2 implements NetworkManager {
     public void removeUser(String username) {
 
         if (username == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         if (map.remove(username) == null) {
@@ -52,6 +52,10 @@ public class NetworkManager2 implements NetworkManager {
     @Override
     public void removeInterest(String username, TopicOfInterest topicOfInterest) {
         List<TopicOfInterest> list =  map.get(username);
+
+        if (topicOfInterest == null) {
+            throw new NullPointerException();
+        }
 
         for (TopicOfInterest topic : list) {
             if (topic.equals(topicOfInterest)) {
@@ -87,7 +91,7 @@ public class NetworkManager2 implements NetworkManager {
         List<TopicOfInterest> list = map.get(username);
 
         if (list == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         return list;
