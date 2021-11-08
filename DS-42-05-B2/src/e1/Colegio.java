@@ -33,7 +33,7 @@ public class Colegio {
     public void addIntegrante(Integrante integrante) {
 
         if (integrante == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         if (integrante.getClass() == Docente.class) {
@@ -52,6 +52,10 @@ public class Colegio {
     }
 
     public void removeIntegrante(Integrante integrante) {
+
+        if (integrante == null) {
+            throw new NullPointerException();
+        }
 
         for (Integrante i : integrantesList) {
             if (i.equals(integrante)) {

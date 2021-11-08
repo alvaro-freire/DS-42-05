@@ -36,7 +36,7 @@ public class Docente extends Personal {
     public Docente(String nombre, String apellidos, int edad, int destroyedHorrocruxes, Asignatura asignatura) {
 
         if (nombre == null || apellidos == null || asignatura == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         setNombre(nombre);

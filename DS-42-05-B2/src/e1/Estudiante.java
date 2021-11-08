@@ -8,7 +8,7 @@ public class Estudiante extends Residente {
     public Estudiante(String nombre, String apellidos, int edad, int destroyedHorrocruxes, House casa) {
 
         if (nombre == null || apellidos == null || casa == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         setNombre(nombre);

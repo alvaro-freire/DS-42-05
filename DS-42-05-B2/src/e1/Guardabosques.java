@@ -8,7 +8,7 @@ public class Guardabosques extends Personal {
     public Guardabosques(String nombre, String apellidos, int edad, int destroyedHorrocruxes) {
 
         if (nombre == null || apellidos == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         setNombre(nombre);
