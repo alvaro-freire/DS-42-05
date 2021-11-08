@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class User {
 
-    private final String username;
+    private String username;
 
     private final List<TopicOfInterest> topicsOfInterest;
 
@@ -16,6 +16,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<TopicOfInterest> getTopicsOfInterest() {
