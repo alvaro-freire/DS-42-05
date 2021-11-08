@@ -11,11 +11,11 @@ public class NetworkManager1 implements NetworkManager {
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
 
         if (username == null || topicsOfInterest == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         for (User u : userList) {
-            if (u.getUsername().equals(username)) {
+            if (u.getUsername().equals(username) || u.getTopicsOfInterest() == topicsOfInterest) {
                 throw new IllegalArgumentException();
             }
         }
@@ -26,26 +26,26 @@ public class NetworkManager1 implements NetworkManager {
     }
 
     @Override
-    public void removeUser(String userName) {
+    public void removeUser(String username) {
 
-        if (userName == null) {
-            throw new IllegalArgumentException();
+        if (username == null) {
+            throw new NullPointerException();
         }
 
-        userList.removeIf(u -> u.getUsername().equals(userName));
+        userList.removeIf(u -> u.getUsername().equals(username));
 
         throw new IllegalArgumentException();
     }
 
     @Override
-    public void addInterest(String userName, TopicOfInterest topicOfInterest) {
+    public void addInterest(String username, TopicOfInterest topicOfInterest) {
 
-        if (userName == null || topicOfInterest == null) {
-            throw new IllegalArgumentException();
+        if (username == null || topicOfInterest == null) {
+            throw new NullPointerException();
         }
 
         for (User u : userList) {
-            if (u.getUsername().equals(userName)) {
+            if (u.getUsername().equals(username)) {
                 for (TopicOfInterest t : u.getTopicsOfInterest()) {
                     if (t.equals(topicOfInterest)) {
                         throw new IllegalArgumentException();
@@ -57,14 +57,14 @@ public class NetworkManager1 implements NetworkManager {
     }
 
     @Override
-    public void removeInterest(String userName, TopicOfInterest topicOfInterest) {
+    public void removeInterest(String username, TopicOfInterest topicOfInterest) {
 
-        if (userName == null || topicOfInterest == null) {
-            throw new IllegalArgumentException();
+        if (username == null || topicOfInterest == null) {
+            throw new NullPointerException();
         }
 
         for (User u : userList) {
-            if (u.getUsername().equals(userName)) {
+            if (u.getUsername().equals(username)) {
                 for (TopicOfInterest t : u.getTopicsOfInterest()) {
                     if (t.equals(topicOfInterest)) {
                         u.getTopicsOfInterest().remove(topicOfInterest);
@@ -88,22 +88,28 @@ public class NetworkManager1 implements NetworkManager {
 
     @Override
     public List<TopicOfInterest> getInterests() {
-        List<TopicOfInterest> topicsOfInterests;
+        List<TopicOfInterest> topiclist = new ArrayList<>();
 
-        topicsOfInterests = List.of(TopicOfInterest.values());
+        for (User u : userList) {
+            for (TopicOfInterest topic : u.getTopicsOfInterest()) {
+                if (!topiclist.contains(topic)) {
+                    topiclist.add(topic);
+                }
+            }
+        }
 
-        return topicsOfInterests;
+        return topiclist;
     }
 
     @Override
-    public List<TopicOfInterest> getInterestsUser(String userName) {
+    public List<TopicOfInterest> getInterestsUser(String username) {
 
-        if (userName == null) {
-            throw new IllegalArgumentException();
+        if (username == null) {
+            throw new NullPointerException();
         }
 
         for (User u : userList) {
-            if (u.getUsername().equals(userName)) {
+            if (u.getUsername().equals(username)) {
                 return u.getTopicsOfInterest();
             }
         }
