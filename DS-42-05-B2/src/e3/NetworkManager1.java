@@ -185,7 +185,6 @@ public class NetworkManager1 implements NetworkManager {
                 for (int row = 1; row <= nTopics; row++) {
                     if ((boolean) table[row][column]) {
                         topiclist.add((TopicOfInterest) table[row][0]);
-                        break;
                     }
                 }
                 return topiclist;
@@ -194,4 +193,5 @@ public class NetworkManager1 implements NetworkManager {
 
         throw new IllegalArgumentException();
     }
+
 }
