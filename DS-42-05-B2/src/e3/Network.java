@@ -8,6 +8,9 @@ public class Network {
 
     /* constructor */
     public Network(NetworkManager networkManager) {
+        if (networkManager == null) {
+            throw new NullPointerException();
+        }
         this.networkManager = networkManager;
     }
 
