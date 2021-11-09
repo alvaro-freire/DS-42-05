@@ -8,7 +8,6 @@ public class NetworkManager2 implements NetworkManager {
 
     @Override
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
-        Iterator<String> iter = map.keySet().iterator();
 
         if (username == null || topicsOfInterest == null) {
             throw new NullPointerException();
@@ -23,11 +22,9 @@ public class NetworkManager2 implements NetworkManager {
 
     @Override
     public void removeUser(String username) {
-
         if (username == null) {
             throw new NullPointerException();
         }
-
         if (map.remove(username) == null) {
             throw new IllegalArgumentException();
         }
@@ -36,6 +33,14 @@ public class NetworkManager2 implements NetworkManager {
     @Override
     public void addInterest(String username, TopicOfInterest topicOfInterest) {
         List<TopicOfInterest> list =  map.get(username);
+
+        if (username == null || topicOfInterest == null) {
+            throw new NullPointerException();
+        }
+
+        if (list == null) {
+            throw new IllegalArgumentException();
+        }
 
         for (TopicOfInterest topic : list) {
             if (topic.equals(topicOfInterest)) {
@@ -50,8 +55,12 @@ public class NetworkManager2 implements NetworkManager {
     public void removeInterest(String username, TopicOfInterest topicOfInterest) {
         List<TopicOfInterest> list =  map.get(username);
 
-        if (topicOfInterest == null) {
+        if (username == null || topicOfInterest == null) {
             throw new NullPointerException();
+        }
+
+        if (list == null) {
+            throw new IllegalArgumentException();
         }
 
         for (TopicOfInterest topic : list) {
@@ -60,6 +69,7 @@ public class NetworkManager2 implements NetworkManager {
                 return;
             }
         }
+
         throw new IllegalArgumentException();
     }
 
@@ -87,8 +97,12 @@ public class NetworkManager2 implements NetworkManager {
     public List<TopicOfInterest> getInterestsUser(String username) {
         List<TopicOfInterest> list = map.get(username);
 
-        if (list == null) {
+        if (username == null) {
             throw new NullPointerException();
+        }
+
+        if (list == null) {
+            throw new IllegalArgumentException();
         }
 
         return list;
