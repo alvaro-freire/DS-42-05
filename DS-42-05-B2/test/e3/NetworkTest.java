@@ -101,6 +101,8 @@ class NetworkTest {
     @Test
     public void testToString() {
 
+        /* ---- TEST FOR NETWORK1 ---- */
+
         network1.addUser("user1", list1);
         network1.addUser("user2", list2);
         network1.addUser("user3", list3);
@@ -115,7 +117,6 @@ class NetworkTest {
                         "user3 -> Topics { Libros Ropa }\n",
                 network1.toString());
 
-        network1.addInterest("user3", TopicOfInterest.Ropa);
         network1.removeInterest("user1", TopicOfInterest.Libros);
         network1.removeInterest("user2", TopicOfInterest.Deportes);
 
@@ -131,5 +132,38 @@ class NetworkTest {
                 "user1 -> Topics { Viajes Comida }\n" +
                         "user3 -> Topics { Libros Ropa }\n",
                 network1.toString());
+
+
+        /* ---- TEST FOR NETWORK2 ---- */
+
+        network2.addUser("user1", list1);
+        network2.addUser("user2", list2);
+        network2.addUser("user3", list3);
+        network2.addInterest("user1", TopicOfInterest.Comida);
+        network2.addInterest("user2", TopicOfInterest.Viajes);
+        network2.addInterest("user2", TopicOfInterest.Libros);
+        network2.addInterest("user2", TopicOfInterest.Ropa);
+
+        assertEquals(
+                "user1 -> Topics { Viajes Libros Comida }\n" +
+                        "user2 -> Topics { Viajes Deportes Libros Ropa Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network2.toString());
+
+        network2.removeInterest("user1", TopicOfInterest.Libros);
+        network2.removeInterest("user2", TopicOfInterest.Deportes);
+
+        assertEquals(
+                "user1 -> Topics { Viajes Comida }\n" +
+                        "user2 -> Topics { Viajes Libros Ropa Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network2.toString());
+
+        network2.removeUser("user2");
+
+        assertEquals(
+                "user1 -> Topics { Viajes Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network2.toString());
     }
 }
