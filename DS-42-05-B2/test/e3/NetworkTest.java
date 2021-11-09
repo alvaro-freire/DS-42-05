@@ -1,5 +1,6 @@
 package e3;
 
+import e2.Anuncio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,17 @@ class NetworkTest {
 
     @BeforeEach
     public void setUp() {
+        List<String> userList;
+
+        userList = network1.getUsers();
+        for (String s : userList) {
+            network1.removeUser(s);
+        }
+
+        userList = network2.getUsers();
+        for (String s : userList) {
+            network2.removeUser(s);
+        }
 
         /* se añaden topics la lista1 */
         list1.add(TopicOfInterest.Viajes);
@@ -55,6 +67,11 @@ class NetworkTest {
         network2.addUser("user2", list2);
         network2.addUser("user3", list3);
 
+        /* se añaden topics */
+        network1.addInterest("user1", TopicOfInterest.Ropa);
+        network2.addInterest("user2", TopicOfInterest.Ropa);
+
+
         /* se añaden los usuarios en la lista
          * auxiliar en el orden correspondiente */
         userList.add("user1");
@@ -63,10 +80,6 @@ class NetworkTest {
 
         assertEquals(userList, network1.getUsers());
         assertEquals(userList, network2.getUsers());
-
-        /* se intenta añadir un usuario existente */
-        assertThrows(IllegalArgumentException.class, () -> network1.addUser("user1", list1));
-        assertThrows(IllegalArgumentException.class, () -> network2.addUser("user1", list1));
 
         /* se elimina al user1 */
         network1.removeUser("user1");
@@ -92,9 +105,61 @@ class NetworkTest {
         assertEquals(userList, network1.getUsers());
         assertEquals(userList, network2.getUsers());
 
+    }
+
+    @Test
+    public void testThrows() {
+
+        /* parámetro inválido al instanciar una network */
+        assertThrows(NullPointerException.class, () -> new Network(null));
+
+        /* parámetros inválidos enviados a los métodos */
+        assertThrows(NullPointerException.class, () -> network1.addUser(null, list1));
+        assertThrows(NullPointerException.class, () -> network2.addUser(null, list1));
+        assertThrows(NullPointerException.class, () -> network1.addUser("user1", null));
+        assertThrows(NullPointerException.class, () -> network2.addUser("user1", null));
+
+        assertThrows(NullPointerException.class, () -> network1.removeUser(null));
+        assertThrows(NullPointerException.class, () -> network2.removeUser(null));
+
+        assertThrows(NullPointerException.class, () -> network1.addInterest(null, TopicOfInterest.Viajes));
+        assertThrows(NullPointerException.class, () -> network2.addInterest(null, TopicOfInterest.Viajes));
+        assertThrows(NullPointerException.class, () -> network1.addInterest("user1", null));
+        assertThrows(NullPointerException.class, () -> network2.addInterest("user1", null));
+
+        assertThrows(NullPointerException.class, () -> network1.removeInterest(null, TopicOfInterest.Viajes));
+        assertThrows(NullPointerException.class, () -> network2.removeInterest(null, TopicOfInterest.Viajes));
+        assertThrows(NullPointerException.class, () -> network1.removeInterest("user1", null));
+        assertThrows(NullPointerException.class, () -> network2.removeInterest("user1", null));
+
+        assertThrows(NullPointerException.class, () -> network1.getInterestsUser(null));
+        assertThrows(NullPointerException.class, () -> network2.getInterestsUser(null));
+
+        /* se intenta añadir un usuario existente */
+        network1.addUser("user1", list1);
+        network2.addUser("user1", list1);
+        assertThrows(IllegalArgumentException.class, () -> network1.addUser("user1", list1));
+        assertThrows(IllegalArgumentException.class, () -> network2.addUser("user1", list1));
+
         /* se intenta eliminar un usuario inexistente */
         assertThrows(IllegalArgumentException.class, () -> network1.removeUser("user3"));
         assertThrows(IllegalArgumentException.class, () -> network2.removeUser("user3"));
+
+        /* se intenta añadir un topic que un usuario ya tiene */
+        assertThrows(IllegalArgumentException.class, () -> network1.addInterest("user1", TopicOfInterest.Viajes));
+        assertThrows(IllegalArgumentException.class, () -> network2.addInterest("user1", TopicOfInterest.Viajes));
+
+        /* se intenta añadir un topic a un usuario inexistente */
+        assertThrows(IllegalArgumentException.class, () -> network1.addInterest("user3", TopicOfInterest.Viajes));
+        assertThrows(IllegalArgumentException.class, () -> network2.addInterest("user3", TopicOfInterest.Viajes));
+
+        /* se intenta eliminar un topic a un usuario inexistente */
+        assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user3", TopicOfInterest.Viajes));
+        assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user3", TopicOfInterest.Viajes));
+
+        /* se intenta obtener la lista de topics de un usuario inexistente */
+        assertThrows(IllegalArgumentException.class, () -> network1.getInterestsUser("user3"));
+        assertThrows(IllegalArgumentException.class, () -> network2.getInterestsUser("user3"));
 
     }
 
