@@ -10,15 +10,12 @@ public class NetworkManager2 implements NetworkManager {
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
         Iterator<String> iter = map.keySet().iterator();
 
-        if (username == null || topicsOfInterest == null || map.containsKey(username)) {
+        if (username == null || topicsOfInterest == null) {
             throw new NullPointerException();
         }
 
-        while(iter.hasNext()){
-            String key = iter.next();
-            if (map.get(key) == topicsOfInterest) {
-                throw new IllegalArgumentException();
-            }
+        if (map.containsKey(username)) {
+            throw new IllegalArgumentException();
         }
 
         map.put(username, topicsOfInterest);

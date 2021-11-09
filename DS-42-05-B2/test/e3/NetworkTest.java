@@ -50,23 +50,52 @@ class NetworkTest {
         network1.addUser("user1", list1);
         network1.addUser("user2", list2);
         network1.addUser("user3", list3);
-        /* se añaden los usuarios en
-         * el orden correspondiente */
+
+        network2.addUser("user1", list1);
+        network2.addUser("user2", list2);
+        network2.addUser("user3", list3);
+
+        /* se añaden los usuarios en la lista
+         * auxiliar en el orden correspondiente */
         userList.add("user1");
         userList.add("user2");
         userList.add("user3");
 
         assertEquals(userList, network1.getUsers());
+        assertEquals(userList, network2.getUsers());
 
-        //alquilerApartamentos.removeAnuncio(anuncio2);
-        //assertEquals(anuncio1, alquilerApartamentos.getAnuncio(0));
-        //assertEquals(anuncio3, alquilerApartamentos.getAnuncio(1));
+        /* se intenta añadir un usuario existente */
+        assertThrows(IllegalArgumentException.class, () -> network1.addUser("user1", list1));
+        assertThrows(IllegalArgumentException.class, () -> network2.addUser("user1", list1));
 
-        //alquilerApartamentos.removeAnuncio(anuncio1);
-        //assertEquals(anuncio3, alquilerApartamentos.getAnuncio(0));
+        /* se elimina al user1 */
+        network1.removeUser("user1");
+        network2.removeUser("user1");
+        userList.remove("user1");
 
-        //alquilerApartamentos.removeAnuncio(anuncio3);
-        //assertThrows(ArrayIndexOutOfBoundsException.class, () -> alquilerApartamentos.getAnuncio(0));
+        assertEquals(userList, network1.getUsers());
+        assertEquals(userList, network2.getUsers());
+
+        /* se elimina al user2 */
+        network1.removeUser("user2");
+        network2.removeUser("user2");
+        userList.remove("user2");
+
+        assertEquals(userList, network1.getUsers());
+        assertEquals(userList, network2.getUsers());
+
+        /* se elimina al user3 */
+        network1.removeUser("user3");
+        network2.removeUser("user3");
+        userList.remove("user3");
+
+        assertEquals(userList, network1.getUsers());
+        assertEquals(userList, network2.getUsers());
+
+        /* se intenta eliminar un usuario inexistente */
+        assertThrows(IllegalArgumentException.class, () -> network1.removeUser("user3"));
+        assertThrows(IllegalArgumentException.class, () -> network2.removeUser("user3"));
+
     }
 
     @Test
