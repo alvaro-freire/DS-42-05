@@ -1,6 +1,5 @@
 package e3;
 
-import e2.Anuncio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
