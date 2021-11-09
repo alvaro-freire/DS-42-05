@@ -57,7 +57,7 @@ public class NetworkManager1 implements NetworkManager {
     @Override
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
         Object[] newRow = new Object[columns];
-        int j = 0;
+        boolean changedValue = false;
 
         if (username == null || topicsOfInterest == null) {
             throw new NullPointerException();
@@ -65,18 +65,18 @@ public class NetworkManager1 implements NetworkManager {
 
         newRow[0] = username;
 
-        for (int i = 1; i < columns - 1; ) {
-            if (table.getValueAt(0, i) == topicsOfInterest.get(j)) {
-                newRow[i] = true;
-            } else {
+        for (int i = 1; i < columns; i++) {
+            for (TopicOfInterest topic : topicsOfInterest) {
+                if (table.getValueAt(0, i) == topic) {
+                    newRow[i] = true;
+                    changedValue = true;
+                    break;
+                }
+            }
+            if (!changedValue) {
                 newRow[i] = false;
             }
-            i++;
-            if (j >= topicsOfInterest.size() - 1) {
-                newRow[i] = false;
-            } else {
-                j++;
-            }
+            changedValue = false;
         }
 
         for (int i = 1; i < rows; i++) {
@@ -118,7 +118,7 @@ public class NetworkManager1 implements NetworkManager {
         for (int i = 1; i < rows; i++) {
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
-                    if (table.getValueAt(i, j) == topicOfInterest) {
+                    if (table.getValueAt(0, j) == topicOfInterest) {
                         table.setValueAt(true, i, j);
                     }
                 }
@@ -139,7 +139,7 @@ public class NetworkManager1 implements NetworkManager {
         for (int i = 1; i < rows; i++) {
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
-                    if (table.getValueAt(i, j) == topicOfInterest) {
+                    if (table.getValueAt(0, j) == topicOfInterest) {
                         table.setValueAt(false, i, j);
                     }
                 }
