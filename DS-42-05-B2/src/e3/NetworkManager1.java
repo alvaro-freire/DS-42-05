@@ -65,7 +65,7 @@ public class NetworkManager1 implements NetworkManager {
 
         newRow[0] = username;
 
-        for (int i = 1; i < columns - 1;) {
+        for (int i = 1; i < columns - 1; ) {
             if (table.getValueAt(0, i) == topicsOfInterest.get(j)) {
                 newRow[i] = true;
             } else {
@@ -76,6 +76,12 @@ public class NetworkManager1 implements NetworkManager {
                 newRow[i] = false;
             } else {
                 j++;
+            }
+        }
+
+        for (int i = 1; i < rows; i++) {
+            if (table.getValueAt(i, 0) == username) {
+                throw new IllegalArgumentException();
             }
         }
 
