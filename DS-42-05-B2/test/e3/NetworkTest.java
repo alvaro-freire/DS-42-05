@@ -99,27 +99,37 @@ class NetworkTest {
     }
 
     @Test
-    public void testBasic() {
-        List<String> userList = new ArrayList<>();
-        List<TopicOfInterest> topicOfInterests = new ArrayList<>();
+    public void testToString() {
 
         network1.addUser("user1", list1);
-
         network1.addUser("user2", list2);
-
+        network1.addUser("user3", list3);
         network1.addInterest("user1", TopicOfInterest.Comida);
-
         network1.addInterest("user2", TopicOfInterest.Viajes);
-
         network1.addInterest("user2", TopicOfInterest.Libros);
-
         network1.addInterest("user2", TopicOfInterest.Ropa);
 
-        userList = network1.getUsers();
+        assertEquals(
+                "user1 -> Topics { Viajes Libros Comida }\n" +
+                        "user2 -> Topics { Viajes Deportes Libros Ropa Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network1.toString());
 
-        topicOfInterests = network1.getInterests();
+        network1.addInterest("user3", TopicOfInterest.Ropa);
+        network1.removeInterest("user1", TopicOfInterest.Libros);
+        network1.removeInterest("user2", TopicOfInterest.Deportes);
 
-        assertEquals("", network1.toString());
+        assertEquals(
+                "user1 -> Topics { Viajes Comida }\n" +
+                        "user2 -> Topics { Viajes Libros Ropa Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network1.toString());
 
+        network1.removeUser("user2");
+
+        assertEquals(
+                "user1 -> Topics { Viajes Comida }\n" +
+                        "user3 -> Topics { Libros Ropa }\n",
+                network1.toString());
     }
 }
