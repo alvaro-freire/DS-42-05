@@ -211,8 +211,8 @@ class NetworkTest {
 
         assertEquals(
                 "user1 -> Topics { Viajes Libros Comida }\n" +
-                        "user2 -> Topics { Viajes Deportes Libros Ropa Comida }\n" +
-                        "user3 -> Topics { Libros Ropa }\n",
+                        "user2 -> Topics { Comida Deportes Viajes Libros Ropa }\n" +
+                        "user3 -> Topics { Ropa Libros }\n",
                 network2.toString());
 
         network2.removeInterest("user1", TopicOfInterest.Libros);
@@ -220,15 +220,15 @@ class NetworkTest {
 
         assertEquals(
                 "user1 -> Topics { Viajes Comida }\n" +
-                        "user2 -> Topics { Viajes Libros Ropa Comida }\n" +
-                        "user3 -> Topics { Libros Ropa }\n",
+                        "user2 -> Topics { Comida Viajes Libros Ropa }\n" +
+                        "user3 -> Topics { Ropa Libros }\n",
                 network2.toString());
 
         network2.removeUser("user2");
 
         assertEquals(
                 "user1 -> Topics { Viajes Comida }\n" +
-                        "user3 -> Topics { Libros Ropa }\n",
+                        "user3 -> Topics { Ropa Libros }\n",
                 network2.toString());
     }
 }
