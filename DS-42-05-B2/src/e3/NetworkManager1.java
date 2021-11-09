@@ -119,6 +119,11 @@ public class NetworkManager1 implements NetworkManager {
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
                     if (table.getValueAt(0, j) == topicOfInterest) {
+                        if (table.getValueAt(i, j).getClass() == boolean.class) {
+                            if ((boolean) table.getValueAt(i, j)) {
+                                throw new IllegalArgumentException();
+                            }
+                        }
                         table.setValueAt(true, i, j);
                     }
                 }
