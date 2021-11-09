@@ -1,5 +1,6 @@
 package e3;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,93 +18,88 @@ import java.util.List;
 public class NetworkManager1 implements NetworkManager {
 
     private final int nTopics = TopicOfInterest.values().length;
-    private int nUsers = 0;
-    private final int rows = nTopics + 1;
-    private int columns = 2;
+    private final int columns = nTopics + 1;
+    private int rows = 1;
 
-    private Object[][] table = new Object[rows][columns];
+    DefaultTableModel table = new DefaultTableModel();
 
     public NetworkManager1() {
-        table[0][0] = "NETWORK";
-        table[1][0] = TopicOfInterest.Viajes;
-        table[2][0] = TopicOfInterest.Deportes;
-        table[3][0] = TopicOfInterest.Libros;
-        table[4][0] = TopicOfInterest.Ropa;
-        table[5][0] = TopicOfInterest.Comida;
+        Object[] firstRow = new Object[columns];
+
+        firstRow[0] = "NETWORK";
+        firstRow[1] = TopicOfInterest.Viajes;
+        firstRow[2] = TopicOfInterest.Deportes;
+        firstRow[3] = TopicOfInterest.Libros;
+        firstRow[4] = TopicOfInterest.Ropa;
+        firstRow[5] = TopicOfInterest.Comida;
+
+        table.addRow(firstRow);
+
+        table.addColumn("NETWORK");
+        table.setValueAt("NETWORK", 0, 0);
+
+        table.addColumn(TopicOfInterest.Viajes);
+        table.setValueAt(TopicOfInterest.Viajes, 0, 1);
+
+        table.addColumn(TopicOfInterest.Deportes);
+        table.setValueAt(TopicOfInterest.Deportes, 0, 2);
+
+        table.addColumn(TopicOfInterest.Libros);
+        table.setValueAt(TopicOfInterest.Libros, 0, 3);
+
+        table.addColumn(TopicOfInterest.Ropa);
+        table.setValueAt(TopicOfInterest.Ropa, 0, 4);
+
+        table.addColumn(TopicOfInterest.Comida);
+        table.setValueAt(TopicOfInterest.Comida, 0, 5);
     }
 
     @Override
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
+        Object[] newRow = new Object[columns];
+        int j = 0;
 
         if (username == null || topicsOfInterest == null) {
             throw new NullPointerException();
         }
 
-        table[0][++nUsers] = username;
-        for (int i = 1; i <= nTopics; i++) {
-            for (TopicOfInterest topic : topicsOfInterest) {
-                /* se ponen los topics del usuario a true o a false
-                 * en la tabla en función de la lista recibida */
-                if (topic == table[i][0]) {
-                    table[i][nUsers] = true;
-                    break;
-                } else {
-                    table[i][nUsers] = false;
-                }
+        newRow[0] = username;
+
+        for (int i = 1; i < columns - 1;) {
+            if (table.getValueAt(0, i) == topicsOfInterest.get(j)) {
+                newRow[i] = true;
+            } else {
+                newRow[i] = false;
+            }
+            i++;
+            if (j >= topicsOfInterest.size() - 1) {
+                newRow[i] = false;
+            } else {
+                j++;
             }
         }
 
-        table = resizeTable(table);
-    }
+        table.addRow(newRow);
+        rows++;
 
-    private Object[][] resizeTable(Object[][] oldTable) {
-        Object[][] newTable = new Object[rows][++columns];
-        for (int i = 0; i <= nTopics; i++) {
-            System.arraycopy(oldTable[i], 0, newTable[i], 0, nUsers + 1);
-        }
-
-        return newTable;
     }
 
     @Override
     public void removeUser(String username) {
-        int column;
-        boolean lastPos = false;
 
         if (username == null) {
             throw new NullPointerException();
         }
 
-        for (column = 1; column <= nUsers; column++) {
-            /* se busca el usuario en la tabla: */
-            if (username.equals(table[0][column])) {
-                /* se elimina el username y se comprueba
-                 * si se trataba de la última posición: */
-                table[0][column] = null;
-                if (column + 1 == nUsers) {
-                    lastPos = true;
-                }
-                break;
+        for (int i = 1; i < rows; i++) {
+            if (table.getValueAt(i, 0) == username) {
+                table.removeRow(i);
+                rows--;
+                return;
             }
         }
 
-        /* se elimina la columna entera: */
-        table[0][column] = null;
-        for (int row = 1; row <= nTopics; row++) {
-            table[row][column] = false;
-        }
-
-        if (!lastPos) {
-            while (column + 1 != nUsers) {
-                for (int row = 0; row <= nTopics; row++) {
-                    table[row][column] = table[row][column + 1];
-                }
-            }
-            table[0][column] = null;
-            for (int row = 1; row <= nTopics; row++) {
-                table[row][column] = false;
-            }
-        }
+        throw new IllegalArgumentException();
     }
 
     @Override
@@ -113,11 +109,13 @@ public class NetworkManager1 implements NetworkManager {
             throw new NullPointerException();
         }
 
-        for (int column = 1; column <= nUsers; column++) {
-            /* se busca el usuario en la tabla: */
-            if (username.equals(table[0][column])) {
-                /* se pone su topic a true: */
-                table[topicOfInterest.getTopicNumber()][column] = true;
+        for (int i = 1; i < rows; i++) {
+            if (table.getValueAt(i, 0) == username) {
+                for (int j = 1; j < columns; j++) {
+                    if (table.getValueAt(i, j) == topicOfInterest) {
+                        table.setValueAt(true, i, j);
+                    }
+                }
                 return;
             }
         }
@@ -132,11 +130,13 @@ public class NetworkManager1 implements NetworkManager {
             throw new NullPointerException();
         }
 
-        for (int column = 1; column <= nUsers; column++) {
-            /* se busca el usuario en la tabla: */
-            if (username.equals(table[0][column])) {
-                /* se pone su topic a true: */
-                table[topicOfInterest.getTopicNumber()][column] = false;
+        for (int i = 1; i < rows; i++) {
+            if (table.getValueAt(i, 0) == username) {
+                for (int j = 1; j < columns; j++) {
+                    if (table.getValueAt(i, j) == topicOfInterest) {
+                        table.setValueAt(false, i, j);
+                    }
+                }
                 return;
             }
         }
@@ -148,8 +148,8 @@ public class NetworkManager1 implements NetworkManager {
     public List<String> getUsers() {
         List<String> userList = new ArrayList<>();
 
-        for (int column = 1; column <= nUsers; column++) {
-            userList.add((String) table[0][column]);
+        for (int i = 1; i < rows; i++) {
+            userList.add((String) table.getValueAt(i, 0));
         }
 
         return userList;
@@ -159,10 +159,10 @@ public class NetworkManager1 implements NetworkManager {
     public List<TopicOfInterest> getInterests() {
         List<TopicOfInterest> topiclist = new ArrayList<>();
 
-        for (int row = 1; row <= nTopics; row++) {
-            for (int column = 1; column <= nUsers; column++) {
-                if ((boolean) table[row][column]) {
-                    topiclist.add((TopicOfInterest) table[row][0]);
+        for (int i = 1; i < rows; i++) {
+            for (int j = 1; j < columns; j++) {
+                if ((boolean) table.getValueAt(i, j)) {
+                    topiclist.add((TopicOfInterest) table.getValueAt(0, j));
                     break;
                 }
             }
@@ -179,12 +179,11 @@ public class NetworkManager1 implements NetworkManager {
             throw new NullPointerException();
         }
 
-        for (int column = 1; column <= nUsers; column++) {
-            /* se busca el usuario en la tabla: */
-            if (username.equals(table[0][column])) {
-                for (int row = 1; row <= nTopics; row++) {
-                    if ((boolean) table[row][column]) {
-                        topiclist.add((TopicOfInterest) table[row][0]);
+        for (int i = 1; i < rows; i++) {
+            if (table.getValueAt(i, 0) == username) {
+                for (int j = 1; j < columns; j++) {
+                    if ((boolean) table.getValueAt(i, j)) {
+                        topiclist.add((TopicOfInterest) table.getValueAt(0, j));
                     }
                 }
                 return topiclist;
@@ -193,5 +192,4 @@ public class NetworkManager1 implements NetworkManager {
 
         throw new IllegalArgumentException();
     }
-
 }
