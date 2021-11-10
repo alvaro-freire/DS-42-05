@@ -64,26 +64,36 @@ public class NetworkManager1 implements NetworkManager {
 
         newRow[0] = username;
 
+        /* se recorren las columnas de topics
+         * para asignárselas al usuario:  */
         for (int i = 1; i < columns; i++) {
+            /* se recorre la lista de topics a introducir: */
             for (TopicOfInterest topic : topicsOfInterest) {
+                /* si la columna coincide con el topic,
+                 * se le añade al usuario en su lista: */
                 if (table.getValueAt(0, i) == topic) {
                     newRow[i] = true;
                     changedValue = true;
                     break;
                 }
             }
+            /* si no se le ha puesto el topic
+             * a true, se pone a false: */
             if (!changedValue) {
                 newRow[i] = false;
             }
             changedValue = false;
         }
 
+        /* si se encuentra un usuario con el
+         * mismo username, se lanza un throw */
         for (int i = 1; i < rows; i++) {
             if (table.getValueAt(i, 0) == username) {
                 throw new IllegalArgumentException();
             }
         }
 
+        /* se añade la fila con los datos del usuario: */
         table.addRow(newRow);
         rows++;
 
@@ -97,7 +107,9 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (int i = 1; i < rows; i++) {
+            /* si se encuentra el usuario: */
             if (table.getValueAt(i, 0) == username) {
+                /* se elimina la fila: */
                 table.removeRow(i);
                 rows--;
                 return;
@@ -115,10 +127,14 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (int i = 1; i < rows; i++) {
+            /* si se encuentra al usuario (primera columna): */
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
+                    /* cuando se llega al topic: */
                     if (table.getValueAt(0, j) == topicOfInterest) {
+                        /* se comprueba que sea un boolean: */
                         if (table.getValueAt(i, j).getClass() == Boolean.class) {
+                            /* si ya estaba a true, se lanza un throw */
                             if ((boolean) table.getValueAt(i, j)) {
                                 throw new IllegalArgumentException();
                             }
@@ -144,10 +160,16 @@ public class NetworkManager1 implements NetworkManager {
             /* si se encuentra al usuario (primera columna): */
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
+                    /* cuando se llega al topic: */
                     if (table.getValueAt(0, j) == topicOfInterest) {
-                        if (!((boolean) table.getValueAt(i, j))) {
-                            throw new IllegalArgumentException();
+                        /* se comprueba que sea un boolean: */
+                        if (table.getValueAt(i, j).getClass() == Boolean.class) {
+                            /* si ya estaba a false, se lanza un throw */
+                            if (!((boolean) table.getValueAt(i, j))) {
+                                throw new IllegalArgumentException();
+                            }
                         }
+
                         table.setValueAt(false, i, j);
                         return;
                     }
