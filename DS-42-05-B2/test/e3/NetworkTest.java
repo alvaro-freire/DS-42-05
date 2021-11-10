@@ -24,11 +24,13 @@ class NetworkTest {
     public void setUp() {
         List<String> userList;
 
+        /* se limpia la network borrando todos los usuarios */
         userList = network1.getUsers();
         for (String s : userList) {
             network1.removeUser(s);
         }
 
+        /* se limpia la network borrando todos los usuarios */
         userList = network2.getUsers();
         for (String s : userList) {
             network2.removeUser(s);
@@ -65,12 +67,7 @@ class NetworkTest {
         network2.addUser("user1", list1);
         network2.addUser("user2", list2);
         network2.addUser("user3", list3);
-
-        /* se añaden topics */
-        network1.addInterest("user1", TopicOfInterest.Ropa);
-        network2.addInterest("user2", TopicOfInterest.Ropa);
-
-
+        
         /* se añaden los usuarios en la lista
          * auxiliar en el orden correspondiente */
         userList.add("user1");
@@ -244,6 +241,10 @@ class NetworkTest {
         /* se intenta eliminar un topic a un usuario inexistente */
         assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user3", TopicOfInterest.Viajes));
         assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user3", TopicOfInterest.Viajes));
+
+        /* se intenta eliminar de la lista de un un usuario un topic inexistente */
+        assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user1", TopicOfInterest.Ropa));
+        assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user1", TopicOfInterest.Ropa));
 
         /* se intenta obtener la lista de topics de un usuario inexistente */
         assertThrows(IllegalArgumentException.class, () -> network1.getInterestsUser("user3"));
