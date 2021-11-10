@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- *  TABLA:
+ *  MODELO TABLA:
  *
- *  NETWORK | USER1 | USER2 | USER3 | ...
- *  TOPIC1  | TRUE  | FALSE | TRUE  |
- *  TOPIC2  | FALSE | TRUE  | TRUE  |
- *  TOPIC3  | TRUE  | TRUE  | FALSE |
- *  TOPIC4  | TRUE  | FALSE | FALSE |
- *  TOPIC5  | TRUE  | FALSE | TRUE  |
- *    ...   |  ...  |  ...  |  ...  |
+ *  NETWORK | TOPIC1 | TOPIC2 | TOPIC3 | TOPIC4 | TOPIC5 |
+ *   USER1  |  TRUE  |  FALSE |  TRUE  |  TRUE  |  FALSE |
+ *   USER2  |  FALSE |  TRUE  |  TRUE  |  FALSE |  TRUE  |
+ *   USER3  |  TRUE  |  TRUE  |  FALSE |  TRUE  |  FALSE |
+ *   USER4  |  TRUE  |  FALSE |  FALSE |  FALSE |  FALSE |
+ *    ...   |   ...  |   ...  |   ...  |  FALSE |  FALSE |
  */
 public class NetworkManager1 implements NetworkManager {
 
@@ -142,16 +141,21 @@ public class NetworkManager1 implements NetworkManager {
         }
 
         for (int i = 1; i < rows; i++) {
+            /* si se encuentra al usuario (primera columna): */
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
                     if (table.getValueAt(0, j) == topicOfInterest) {
+                        if (!((boolean) table.getValueAt(i, j))) {
+                            throw new IllegalArgumentException();
+                        }
                         table.setValueAt(false, i, j);
+                        return;
                     }
                 }
-                return;
             }
         }
 
+        /* si no se encuentra al usuario en la tabla: */
         throw new IllegalArgumentException();
     }
 
@@ -182,7 +186,7 @@ public class NetworkManager1 implements NetworkManager {
                         isInList = false;
                         /* se comprueba que el topic no se haya insertado ya: */
                         for (TopicOfInterest topic : topiclist) {
-                            if (topic == (TopicOfInterest) table.getValueAt(0, j)) {
+                            if (topic == table.getValueAt(0, j)) {
                                 isInList = true;
                             }
                         }
