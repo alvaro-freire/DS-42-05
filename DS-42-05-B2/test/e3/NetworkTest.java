@@ -249,6 +249,9 @@ class NetworkTest {
         assertThrows(IllegalArgumentException.class, () -> network1.getInterestsUser("user3"));
         assertThrows(IllegalArgumentException.class, () -> network2.getInterestsUser("user3"));
 
+        /* se intenta eliminar un topic inexistente a un usuario */
+        assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user1", TopicOfInterest.Ropa));
+        assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user1", TopicOfInterest.Ropa));
     }
 
     @Test
