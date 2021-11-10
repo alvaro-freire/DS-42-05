@@ -94,8 +94,8 @@ class ApartamentosTest {
         assertThrows(IllegalArgumentException.class, () -> anuncio1.setTamano(-1));
         assertThrows(IllegalArgumentException.class, () -> anuncio1.setCp(-1));
 
-        /* parámetro inválido al añadir anuncio */
-        assertThrows(IllegalArgumentException.class, () -> alquilerApartamentos.addAnuncio(null));
+        /* parámetro "null" al añadir anuncio */
+        assertThrows(NullPointerException.class, () -> alquilerApartamentos.addAnuncio(null));
 
         /* se añade el mismo anuncio dos veces */
         alquilerApartamentos.addAnuncio(anuncio1);

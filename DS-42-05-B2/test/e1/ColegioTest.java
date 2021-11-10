@@ -56,26 +56,26 @@ class ColegioTest {
 
         /* se comprueba la creación de un integrante con parámetros a 'null': */
 
-        assertThrows(IllegalArgumentException.class, () -> new Estudiante(null, "Granger",
+        assertThrows(NullPointerException.class, () -> new Estudiante(null, "Granger",
                 21, 1, Residente.House.Gryffindor));
 
-        assertThrows(IllegalArgumentException.class, () -> new Fantasma(null, "Sanguinario",
+        assertThrows(NullPointerException.class, () -> new Fantasma(null, "Sanguinario",
                 143, 0, Residente.House.Slytherin));
 
-        assertThrows(IllegalArgumentException.class, () -> new Conserje("Argus", null,
+        assertThrows(NullPointerException.class, () -> new Conserje("Argus", null,
                 56, 1));
 
-        assertThrows(IllegalArgumentException.class, () -> new Guardabosques(null, "Hagrid",
+        assertThrows(NullPointerException.class, () -> new Guardabosques(null, "Hagrid",
                 96, 2));
 
-        assertThrows(IllegalArgumentException.class, () -> new Docente("Severus", null,
+        assertThrows(NullPointerException.class, () -> new Docente("Severus", null,
                 26, 1, Docente.Asignatura.Defensa));
 
-        assertThrows(IllegalArgumentException.class, () -> new Docente("Severus", "Snape",
+        assertThrows(NullPointerException.class, () -> new Docente("Severus", "Snape",
                 40, 1, null));
 
-        /* se envía un parámetro no válido */
-        assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(null));
+        /* se envía un parámetro "null" */
+        assertThrows(NullPointerException.class, () -> Hogwarts.addIntegrante(null));
 
         /* se añade el mismo integrante dos veces */
         Hogwarts.addIntegrante(Harry);
