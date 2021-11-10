@@ -107,6 +107,95 @@ class NetworkTest {
     }
 
     @Test
+    public void testInterests() {
+        /* listas auxiliares de intereses de la red */
+        List<TopicOfInterest> topicList = new ArrayList<>();
+        List<TopicOfInterest> usersInterests;
+
+        /* NETWORK1 */
+
+        network1.addUser("user1", list1); /* con Viajes y Libros */
+        network1.addUser("user2", list2); /* con Comida y Deportes */
+        network1.addUser("user3", list3); /* con Ropa y Libros */
+        topicList.add(TopicOfInterest.Viajes);
+        topicList.add(TopicOfInterest.Deportes);
+        topicList.add(TopicOfInterest.Libros);
+        topicList.add(TopicOfInterest.Ropa);
+        topicList.add(TopicOfInterest.Comida);
+
+        usersInterests = network1.getInterests();
+
+        topicList.sort(null);
+        usersInterests.sort(null);
+
+        assertEquals(topicList, usersInterests);
+
+        topicList.clear();
+        usersInterests.clear();
+
+        /* NETWORK2 */
+
+        network2.addUser("user1", list1); /* con Viajes y Libros */
+        network2.addUser("user2", list2); /* con Comida y Deportes */
+        network2.addUser("user3", list3); /* con Ropa y Libros */
+        topicList.add(TopicOfInterest.Viajes);
+        topicList.add(TopicOfInterest.Deportes);
+        topicList.add(TopicOfInterest.Libros);
+        topicList.add(TopicOfInterest.Ropa);
+        topicList.add(TopicOfInterest.Comida);
+
+        usersInterests = network2.getInterests();
+
+        topicList.sort(null);
+        usersInterests.sort(null);
+
+        assertEquals(topicList, usersInterests);
+
+        topicList.clear();
+        usersInterests.clear();
+
+        /* NETWORK1 */
+
+        network1.addInterest("user1", TopicOfInterest.Deportes);
+        network1.removeInterest("user1", TopicOfInterest.Libros);
+        network1.removeInterest("user2", TopicOfInterest.Comida);
+        network1.removeUser("user3");
+        topicList.add(TopicOfInterest.Viajes);
+        topicList.add(TopicOfInterest.Deportes);
+
+        usersInterests = network1.getInterests();
+
+        topicList.sort(null);
+        usersInterests.sort(null);
+
+        assertEquals(topicList, usersInterests);
+
+        topicList.clear();
+        usersInterests.clear();
+
+
+        /* NETWORK2 */
+
+        network2.addInterest("user1", TopicOfInterest.Deportes);
+        network2.removeInterest("user1", TopicOfInterest.Libros);
+        network2.removeInterest("user2", TopicOfInterest.Comida);
+        network2.removeUser("user3");
+        topicList.add(TopicOfInterest.Viajes);
+        topicList.add(TopicOfInterest.Deportes);
+
+        usersInterests = network2.getInterests();
+
+        topicList.sort(null);
+        usersInterests.sort(null);
+
+        assertEquals(topicList, usersInterests);
+
+        topicList.clear();
+        usersInterests.clear();
+
+    }
+
+    @Test
     public void testThrows() {
 
         /* parámetro inválido al instanciar una network */
@@ -165,7 +254,7 @@ class NetworkTest {
     @Test
     public void testToString() {
 
-                    /* ---- TEST FOR NETWORK1 ---- */
+        /* ---- TEST FOR NETWORK1 ---- */
 
         /* Red gestionada mediante una tabla. Utilizando esta    *
          * implementación, el método toString siempre imprimirá  *
@@ -204,7 +293,7 @@ class NetworkTest {
                 network1.toString());
 
 
-                    /* ---- TEST FOR NETWORK2 ---- */
+        /* ---- TEST FOR NETWORK2 ---- */
 
         /* se debe tener en cuenta que con esta implementación   *
          * el método toString no mantiene el mismo orden que la  *
