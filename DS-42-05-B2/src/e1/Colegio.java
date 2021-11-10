@@ -19,7 +19,9 @@ public class Colegio {
         return name;
     }
 
-    public List<Integrante> getList() { return integrantesList; }
+    public List<Integrante> getList() {
+        return integrantesList;
+    }
 
     private boolean findSubject(Docente docente) {
         for (Integrante i : integrantesList) {

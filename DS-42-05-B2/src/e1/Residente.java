@@ -13,9 +13,13 @@ public abstract class Residente extends Integrante {
         Slytherin
     }
 
-    public void setCasa(House casa) { this.casa = casa; }
+    public void setCasa(House casa) {
+        this.casa = casa;
+    }
 
-    public House getCasa() { return casa; }
+    public House getCasa() {
+        return casa;
+    }
 
     public abstract boolean equals(Object obj);
 
