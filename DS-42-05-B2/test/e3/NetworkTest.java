@@ -67,7 +67,7 @@ class NetworkTest {
         network2.addUser("user1", list1);
         network2.addUser("user2", list2);
         network2.addUser("user3", list3);
-        
+
         /* se añaden los usuarios en la lista
          * auxiliar en el orden correspondiente */
         userList.add("user1");
@@ -257,11 +257,11 @@ class NetworkTest {
 
         /* ---- TEST FOR NETWORK1 ---- */
 
-        /* Red gestionada mediante una tabla. Utilizando esta    *
-         * implementación, el método toString siempre imprimirá  *
-         * la lista de Topics de un usuario en un orden          *
-         * predefinido: "Viajes, Deportes, Libros, Ropa, Comida" *
-         * puesto que las columnas de la tabla son fijas.        */
+        /* Red gestionada mediante una tabla. Utilizando esta     */
+        /* implementación, el método toString siempre imprimirá   */
+        /* la lista de Topics de un usuario en un orden           */
+        /* predefinido: "Viajes, Deportes, Libros, Ropa, Comida"  */
+        /* puesto que las columnas de la tabla son fijas.         */
 
         network1.addUser("user1", list1);
         network1.addUser("user2", list2);
@@ -296,13 +296,13 @@ class NetworkTest {
 
         /* ---- TEST FOR NETWORK2 ---- */
 
-        /* se debe tener en cuenta que con esta implementación   *
-         * el método toString no mantiene el mismo orden que la  *
-         * implementación de la tabla (con valores fijos), por   *
-         * ello el output no será exactamente el mismo. Lo que   *
-         * consideramos importante es que la lista de Topics de  *
-         * cada usuario tenga los mismos elementos,              *
-         * independientemente del orden en el que se muestren.   */
+        /* se debe tener en cuenta que con esta implementación    */
+        /* el método toString no mantiene el mismo orden que la   */
+        /* implementación de la tabla (con columnas fijas), por   */
+        /* ello el output no será exactamente el mismo. Lo que    */
+        /* consideramos trivial es que la lista de Topics de cada */
+        /* usuario tenga los mismos elementos independientemente  */
+        /* del orden en el que se muestren.                       */
 
         network2.addUser("user1", list1);
         network2.addUser("user2", list2);
