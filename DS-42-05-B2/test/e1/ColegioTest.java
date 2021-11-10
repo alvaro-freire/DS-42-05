@@ -135,8 +135,43 @@ class ColegioTest {
     @Test
     public void testHashCode() {
 
-        assertNotEquals(Harry.hashCode(), Draco.hashCode());
+        /* se crean integrantes auxiliares y se comprueba si
+         * son iguales y si son distintos para cada clase: */
 
+        Docente Snape2 = new Docente("Severus", "Snape",
+                26, 1, Docente.Asignatura.Defensa);
+        assertEquals(Snape.hashCode(), Snape2.hashCode());
+
+        Snape2.setEdad(15);
+        assertNotEquals(Snape.hashCode(), Snape2.hashCode());
+
+        Estudiante Hermione2 = new Estudiante("Hermione", "Granger",
+                21, 1, Residente.House.Gryffindor);
+        assertEquals(Hermione.hashCode(), Hermione2.hashCode());
+
+        Hermione2.setDestroyedHorrocruxes(14);
+        assertNotEquals(Hermione.hashCode(), Hermione2.hashCode());
+
+        Fantasma Baron2 = new Fantasma("Baron", "Sanguinario",
+                143, 0, Residente.House.Slytherin);
+        assertEquals(Baron.hashCode(), Baron2.hashCode());
+
+        Baron2.setApellidos("Flitch");
+        assertNotEquals(Baron.hashCode(), Baron2.hashCode());
+
+        Conserje Argus2 = new Conserje("Argus", "Filch",
+                56, 1);
+        assertEquals(Argus.hashCode(), Argus2.hashCode());
+
+        Argus2.setNombre("Baron");
+        assertNotEquals(Argus.hashCode(), Argus2.hashCode());
+
+        Guardabosques Hagrid2 = new Guardabosques("Rubeus",
+                "Hagrid", 96, 2);
+        assertEquals(Hagrid.hashCode(), Hagrid2.hashCode());
+
+        Hagrid2.setEdad(133);
+        assertNotEquals(Hagrid.hashCode(), Hagrid2.hashCode());
     }
 
     @Test

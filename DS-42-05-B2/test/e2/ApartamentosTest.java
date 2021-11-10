@@ -140,6 +140,25 @@ class ApartamentosTest {
     }
 
     @Test
+    public void testHashCode() {
+        /* se comprueban anuncios distintos */
+        assertNotEquals(anuncio1.hashCode(), anuncio2.hashCode());
+
+        /* se comprueba el mismo objeto */
+        assertEquals(anuncio1.hashCode(), anuncio1.hashCode());
+
+        /* se igualan los campos del anuncio1 y el anuncio2 */
+        anuncio2.setNumReferencia(1);
+        anuncio2.setPrecioBase(110);
+        anuncio2.setPrecioPlaza(20);
+        anuncio2.setNumPlazas(1);
+        anuncio2.setTamano(50);
+        anuncio2.setCp(15630);
+
+        assertEquals(anuncio1.hashCode(), anuncio2.hashCode());
+    }
+
+    @Test
     public void testNaturalSort() {
 
         alquilerApartamentos.addAnuncio(anuncio2);
