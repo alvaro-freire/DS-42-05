@@ -169,12 +169,28 @@ public class NetworkManager1 implements NetworkManager {
     @Override
     public List<TopicOfInterest> getInterests() {
         List<TopicOfInterest> topiclist = new ArrayList<>();
+        boolean isInList;
 
+        /* recorremos la parte de la tabla que
+         * contiene los intereses de los usuarios: */
         for (int i = 1; i < rows; i++) {
             for (int j = 1; j < columns; j++) {
-                if ((boolean) table.getValueAt(i, j)) {
-                    topiclist.add((TopicOfInterest) table.getValueAt(0, j));
-                    break;
+                /* se comprueba que está tratando con un Boolean */
+                if (table.getValueAt(i, j).getClass() == Boolean.class) {
+                    /* si el topic está a true, se inserta en la lista: */
+                    if ((boolean) table.getValueAt(i, j)) {
+                        isInList = false;
+                        /* se comprueba que el topic no se haya insertado ya: */
+                        for (TopicOfInterest topic : topiclist) {
+                            if (topic == (TopicOfInterest) table.getValueAt(0, j)) {
+                                isInList = true;
+                            }
+                        }
+                        /* si no se había insertado antes, se inserta: */
+                        if (!isInList) {
+                            topiclist.add((TopicOfInterest) table.getValueAt(0, j));
+                        }
+                    }
                 }
             }
         }
