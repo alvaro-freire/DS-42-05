@@ -1,5 +1,7 @@
 package e2;
 
+import java.util.Objects;
+
 public class Anuncio implements Comparable<Anuncio> {
 
     private int numReferencia;
@@ -109,6 +111,7 @@ public class Anuncio implements Comparable<Anuncio> {
         this.cp = cp;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -118,6 +121,12 @@ public class Anuncio implements Comparable<Anuncio> {
                 numPlazas == anuncio.getNumPlazas() &&
                 tamano == anuncio.getTamano() &&
                 cp == anuncio.getCp());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPrecioBase(), getPrecioPlaza(),
+                getNumPlazas(), getTamano(), getCp());
     }
 
     @Override
