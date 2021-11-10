@@ -75,4 +75,8 @@ public class Docente extends Personal {
                 getDestroyedHorrocruxes() == docente.getDestroyedHorrocruxes());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), asignatura);
+    }
 }

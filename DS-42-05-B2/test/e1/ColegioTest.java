@@ -14,6 +14,8 @@ class ColegioTest {
 
     private final Estudiante Harry = new Estudiante("Harry", "Potter",
             18, 3, Residente.House.Gryffindor);
+    private final Estudiante Harry2 = new Estudiante("Harry", "Potter",
+            18, 3, Residente.House.Gryffindor);
 
     private final Estudiante Draco = new Estudiante("Draco", "Malfoy",
             19, 1, Residente.House.Slytherin);
@@ -46,7 +48,13 @@ class ColegioTest {
 
     @Test
     void testNullName() {
-        /* se comprueba la creación de un integrante con nombre/apellido a 'null': */
+
+    }
+
+    @Test
+    void testThrows() {
+
+        /* se comprueba la creación de un integrante con parámetros a 'null': */
 
         assertThrows(IllegalArgumentException.class, () -> new Estudiante(null, "Granger",
                 21, 1, Residente.House.Gryffindor));
@@ -62,10 +70,9 @@ class ColegioTest {
 
         assertThrows(IllegalArgumentException.class, () -> new Docente("Severus", null,
                 26, 1, Docente.Asignatura.Defensa));
-    }
 
-    @Test
-    void testThrows() {
+        assertThrows(IllegalArgumentException.class, () -> new Docente("Severus", "Snape",
+                40, 1, null));
 
         /* se envía un parámetro no válido */
         assertThrows(IllegalArgumentException.class, () -> Hogwarts.addIntegrante(null));
@@ -122,6 +129,13 @@ class ColegioTest {
 
         Hagrid2.setEdad(133);
         assertNotEquals(Hagrid, Hagrid2);
+
+    }
+
+    @Test
+    public void testHashCode() {
+
+        assertNotEquals(Harry.hashCode(), Draco.hashCode());
 
     }
 

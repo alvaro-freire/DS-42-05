@@ -1,5 +1,7 @@
 package e1;
 
+import java.util.Objects;
+
 public abstract class Integrante {
 
     private String nombre;
@@ -42,4 +44,9 @@ public abstract class Integrante {
     public abstract float recompensa();
 
     public abstract boolean equals(Object obj);
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, apellidos, edad, destroyedHorrocruxes);
+    }
 }
