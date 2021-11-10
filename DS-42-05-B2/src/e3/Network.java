@@ -18,6 +18,7 @@ public class Network {
     public void setNetworkManager(NetworkManager networkManager) {
         this.networkManager = networkManager;
     }
+
     public NetworkManager getNetworkManager() {
         return networkManager;
     }

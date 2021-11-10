@@ -32,7 +32,7 @@ public class NetworkManager2 implements NetworkManager {
 
     @Override
     public void addInterest(String username, TopicOfInterest topicOfInterest) {
-        List<TopicOfInterest> list =  map.get(username);
+        List<TopicOfInterest> list = map.get(username);
 
         if (username == null || topicOfInterest == null) {
             throw new NullPointerException();
@@ -53,7 +53,7 @@ public class NetworkManager2 implements NetworkManager {
 
     @Override
     public void removeInterest(String username, TopicOfInterest topicOfInterest) {
-        List<TopicOfInterest> list =  map.get(username);
+        List<TopicOfInterest> list = map.get(username);
 
         if (username == null || topicOfInterest == null) {
             throw new NullPointerException();
