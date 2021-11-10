@@ -242,7 +242,7 @@ class NetworkTest {
         assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user3", TopicOfInterest.Viajes));
         assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user3", TopicOfInterest.Viajes));
 
-        /* se intenta eliminar de la lista de un un usuario un topic inexistente */
+        /* se intenta eliminar un topic inexistente a un usuario */
         assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user1", TopicOfInterest.Ropa));
         assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user1", TopicOfInterest.Ropa));
 
@@ -250,9 +250,6 @@ class NetworkTest {
         assertThrows(IllegalArgumentException.class, () -> network1.getInterestsUser("user3"));
         assertThrows(IllegalArgumentException.class, () -> network2.getInterestsUser("user3"));
 
-        /* se intenta eliminar un topic inexistente a un usuario */
-        assertThrows(IllegalArgumentException.class, () -> network1.removeInterest("user1", TopicOfInterest.Ropa));
-        assertThrows(IllegalArgumentException.class, () -> network2.removeInterest("user1", TopicOfInterest.Ropa));
     }
 
     @Test
@@ -303,7 +300,7 @@ class NetworkTest {
          * el método toString no mantiene el mismo orden que la  *
          * implementación de la tabla (con valores fijos), por   *
          * ello el output no será exactamente el mismo. Lo que   *
-         * consideramos imporante es que la lista de Topics de   *
+         * consideramos importante es que la lista de Topics de  *
          * cada usuario tenga los mismos elementos,              *
          * independientemente del orden en el que se muestren.   */
 
