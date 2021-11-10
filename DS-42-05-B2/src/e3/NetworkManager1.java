@@ -145,7 +145,13 @@ public class NetworkManager1 implements NetworkManager {
             if (table.getValueAt(i, 0) == username) {
                 for (int j = 1; j < columns; j++) {
                     if (table.getValueAt(0, j) == topicOfInterest) {
-                        table.setValueAt(false, i, j);
+                        if (table.getValueAt(i, j).getClass() == Boolean.class) {
+                            if ((boolean) table.getValueAt(i, j)) {
+                                table.setValueAt(false, i, j);
+                            } else {
+                                throw new IllegalArgumentException();
+                            }
+                        }
                     }
                 }
                 return;
@@ -182,7 +188,7 @@ public class NetworkManager1 implements NetworkManager {
                         isInList = false;
                         /* se comprueba que el topic no se haya insertado ya: */
                         for (TopicOfInterest topic : topiclist) {
-                            if (topic == (TopicOfInterest) table.getValueAt(0, j)) {
+                            if (topic == table.getValueAt(0, j)) {
                                 isInList = true;
                             }
                         }
