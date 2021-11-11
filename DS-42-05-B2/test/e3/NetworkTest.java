@@ -255,7 +255,7 @@ class NetworkTest {
     @Test
     public void testToString() {
 
-        /* ---- TEST FOR NETWORK1 ---- */
+        /* ---------------- TEST FOR NETWORK1 ------------------- */
 
         /* Red gestionada mediante una tabla. Utilizando esta     */
         /* implementación, el método toString siempre imprimirá   */
@@ -294,7 +294,7 @@ class NetworkTest {
                 network1.toString());
 
 
-        /* ---- TEST FOR NETWORK2 ---- */
+        /* ---------------- TEST FOR NETWORK2 ------------------- */
 
         /* se debe tener en cuenta que con esta implementación    */
         /* el método toString no mantiene el mismo orden que la   */
