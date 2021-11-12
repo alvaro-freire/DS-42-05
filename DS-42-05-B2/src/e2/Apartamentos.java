@@ -37,9 +37,11 @@ public class Apartamentos {
     }
 
     /**
-     * An anuncio is added to the list anuncioList.
+     * An advertisement is added to the list ads.
      *
-     * @param anuncio Instance of Anuncio
+     * @param anuncio advertisement to add to the list
+     * @throws NullPointerException     if anuncio is null
+     * @throws IllegalArgumentException if anuncio was already in the list
      */
     public void addAnuncio(Anuncio anuncio) {
 
@@ -59,9 +61,11 @@ public class Apartamentos {
     }
 
     /**
-     * An anuncio is removed from anuncioList.
+     * An advertisement is removed from the list ads.
      *
-     * @param anuncio Instance of Anuncio
+     * @param anuncio advertisement to remove from the list
+     * @throws NullPointerException     if anuncio is null
+     * @throws IllegalArgumentException if anuncio was not found in the list
      */
     public void removeAnuncio(Anuncio anuncio) {
 
@@ -83,12 +87,13 @@ public class Apartamentos {
     /**
      * Anuncio at index position is returned.
      *
-     * @param index Instance of Anuncio
+     * @param index index position
      * @return The anuncio corresponding at index
+     * @throws ArrayIndexOutOfBoundsException if the list was empty or index was not valid
      */
     public Anuncio getAnuncio(int index) {
 
-        /* se comprueba si la lista está vacía o si el index es válido */
+        /* se comprueba si la lista está vacía o si el index no es válido */
         if (anuncioList.isEmpty() || index < 0 || index >= anuncioList.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -99,7 +104,6 @@ public class Apartamentos {
     /**
      * anuncioList is cleared.
      *
-     * @return void
      */
     public void clearList() {
         anuncioList.clear();
