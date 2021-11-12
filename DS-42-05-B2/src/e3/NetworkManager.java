@@ -13,18 +13,18 @@ import java.util.List;
 
 public interface NetworkManager {
 
-    void addUser(String user, List<TopicOfInterest> topicsOfInterest);
+    void addUser(String username, List<TopicOfInterest> topicsOfInterest);
 
-    void removeUser(String user);
+    void removeUser(String username);
 
-    void addInterest(String user, TopicOfInterest topicOfInterest);
+    void addInterest(String username, TopicOfInterest topicOfInterest);
 
-    void removeInterest(String user, TopicOfInterest topicOfInterest);
+    void removeInterest(String username, TopicOfInterest topicOfInterest);
 
     List<String> getUsers();
 
     List<TopicOfInterest> getInterests();
 
-    List<TopicOfInterest> getInterestsUser(String user);
+    List<TopicOfInterest> getInterestsUser(String username);
 
 }
