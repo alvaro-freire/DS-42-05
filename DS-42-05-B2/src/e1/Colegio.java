@@ -32,6 +32,13 @@ public class Colegio {
         return integrantesList;
     }
 
+    /**
+     * Checks if a teacher's subject has already a teacher .
+     *
+     * @param docente   The teacher of a subject
+     * @return true if there is a teacher in integrantesList
+     *         with that subject, false otherwise.
+     */
     private boolean findSubject(Docente docente) {
         for (Integrante i : integrantesList) {
             if (i.getClass() == Docente.class && ((Docente) i).getAsignatura() == docente.getAsignatura()) {
@@ -41,6 +48,15 @@ public class Colegio {
         return false;
     }
 
+    /**
+     * Adds a member to the list of members.
+     *
+     * @param integrante                member to add to the list
+     * @throws IllegalArgumentException if the member is a teacher and
+     *                                  his/her subject has already a teacher
+     * @throws IllegalArgumentException if integrante is already in the list
+     * @throws NullPointerException     if integrante is null
+     */
     public void addIntegrante(Integrante integrante) {
 
         if (integrante == null) {
@@ -62,6 +78,13 @@ public class Colegio {
         integrantesList.add(integrante);
     }
 
+    /**
+     * Removes a member from the list of members.
+     *
+     * @param integrante                member to remove from the list
+     * @throws IllegalArgumentException if integrante is not found in the list
+     * @throws NullPointerException     if integrante is null
+     */
     public void removeIntegrante(Integrante integrante) {
 
         if (integrante == null) {
@@ -77,10 +100,18 @@ public class Colegio {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Clears the list of members.
+     */
     public void clearList() {
         integrantesList.clear();
     }
 
+    /**
+     * Prints each of integrant's rewards.
+     *
+     * @return string with all the rewards
+     */
     public String imprimirRecompensas() {
         float recompensaTotal = 0;
         String string = "";
@@ -109,6 +140,11 @@ public class Colegio {
         return string;
     }
 
+    /**
+     * Prints each of integrant's salaries.
+     *
+     * @return string with all the salaries
+     */
     public String imprimirSalarios() {
         int salarioTotal = 0;
         String string = "";
