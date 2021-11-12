@@ -11,6 +11,15 @@ package e2;
 
 public class SortByPrecioTotal implements SortBy {
 
+    /**
+     * Two instances of Anuncio are compared by its
+     * total prize.
+     *
+     * @param a1 Instance of Anuncio
+     * @param a2 Instance of anuncio
+     * @return Zero if they are equals, 1 if a1 is greater
+     * and -1 if a2 is smaller
+     */
     @Override
     public int compare(Anuncio a1, Anuncio a2) {
         int at1, at2;

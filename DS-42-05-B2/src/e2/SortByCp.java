@@ -11,6 +11,15 @@ package e2;
 
 public class SortByCp implements SortBy {
 
+    /**
+     * Two instances of Anuncio are compared by its
+     * cp field.
+     *
+     * @param a1 Instance of Anuncio
+     * @param a2 Instance of anuncio
+     * @return Zero if they are equals, 1 if a1 is greater
+     * and -1 if a2 is smaller
+     */
     @Override
     public int compare(Anuncio a1, Anuncio a2) {
         return Integer.compare(a1.getCp(), a2.getCp());
