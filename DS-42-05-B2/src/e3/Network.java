@@ -32,20 +32,20 @@ public class Network {
         return networkManager;
     }
 
-    public void addUser(String user, List<TopicOfInterest> topicsOfInterest) {
-        networkManager.addUser(user, topicsOfInterest);
+    public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
+        networkManager.addUser(username, topicsOfInterest);
     }
 
-    public void removeUser(String user) {
-        networkManager.removeUser(user);
+    public void removeUser(String username) {
+        networkManager.removeUser(username);
     }
 
-    public void addInterest(String user, TopicOfInterest topicOfInterest) {
-        networkManager.addInterest(user, topicOfInterest);
+    public void addInterest(String username, TopicOfInterest topicOfInterest) {
+        networkManager.addInterest(username, topicOfInterest);
     }
 
-    public void removeInterest(String user, TopicOfInterest topicOfInterest) {
-        networkManager.removeInterest(user, topicOfInterest);
+    public void removeInterest(String username, TopicOfInterest topicOfInterest) {
+        networkManager.removeInterest(username, topicOfInterest);
     }
 
     public List<String> getUsers() {
@@ -56,8 +56,8 @@ public class Network {
         return networkManager.getInterests();
     }
 
-    public List<TopicOfInterest> getInterestsUser(String user) {
-        return networkManager.getInterestsUser(user);
+    public List<TopicOfInterest> getInterestsUser(String username) {
+        return networkManager.getInterestsUser(username);
     }
 
     public String toString() {
