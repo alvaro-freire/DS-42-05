@@ -31,6 +31,7 @@ public class NetworkManager1 implements NetworkManager {
 
     DefaultTableModel table = new DefaultTableModel();
 
+    /* constructor of the table: */
     public NetworkManager1() {
         Object[] firstRow = new Object[columns];
 
@@ -62,6 +63,14 @@ public class NetworkManager1 implements NetworkManager {
         table.setValueAt(TopicOfInterest.Comida, 0, 5);
     }
 
+    /**
+     * Adds a user to the user list.
+     *
+     * @param username                  String with the username of the user
+     * @param topicsOfInterest          List of interests of the user
+     * @throws IllegalArgumentException if the user is already in the list
+     * @throws NullPointerException     if username or topicsOfInterest are null
+     */
     @Override
     public void addUser(String username, List<TopicOfInterest> topicsOfInterest) {
         Object[] newRow = new Object[columns];
@@ -108,6 +117,13 @@ public class NetworkManager1 implements NetworkManager {
 
     }
 
+    /**
+     * Removes a user from the user list.
+     *
+     * @param username                  String with the username of the user
+     * @throws IllegalArgumentException if the user was not found in the list
+     * @throws NullPointerException     if username is null
+     */
     @Override
     public void removeUser(String username) {
 
@@ -128,6 +144,14 @@ public class NetworkManager1 implements NetworkManager {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Adds an interest to an user.
+     *
+     * @param username                  String with the username of the user
+     * @param topicOfInterest           Topic to add to the user
+     * @throws IllegalArgumentException if the user already had the topic
+     * @throws NullPointerException     if username or topicOfInterest are null
+     */
     @Override
     public void addInterest(String username, TopicOfInterest topicOfInterest) {
 
@@ -158,6 +182,14 @@ public class NetworkManager1 implements NetworkManager {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Removes an interest from an user.
+     *
+     * @param username                  String with the username of the user
+     * @param topicOfInterest           Topic to add to the user
+     * @throws IllegalArgumentException if the user did not have the topic already
+     * @throws NullPointerException     if username or topicOfInterest are null
+     */
     @Override
     public void removeInterest(String username, TopicOfInterest topicOfInterest) {
 
@@ -190,6 +222,11 @@ public class NetworkManager1 implements NetworkManager {
         throw new IllegalArgumentException();
     }
 
+    /**
+     * Gives the list of users.
+     *
+     * @return the user list
+     */
     @Override
     public List<String> getUsers() {
         List<String> userList = new ArrayList<>();
@@ -201,6 +238,11 @@ public class NetworkManager1 implements NetworkManager {
         return userList;
     }
 
+    /**
+     * Gives a list containing all the interests from the users.
+     *
+     * @return the topic list
+     */
     @Override
     public List<TopicOfInterest> getInterests() {
         List<TopicOfInterest> topiclist = new ArrayList<>();
@@ -233,6 +275,14 @@ public class NetworkManager1 implements NetworkManager {
         return topiclist;
     }
 
+    /**
+     * Gives a list containing the interests from a user.
+     *
+     * @param username String with the username of the user
+     * @return the topic list
+     * @throws IllegalArgumentException if the user was not found in the list
+     * @throws NullPointerException     if username is null
+     */
     @Override
     public List<TopicOfInterest> getInterestsUser(String username) {
         List<TopicOfInterest> topiclist = new ArrayList<>();

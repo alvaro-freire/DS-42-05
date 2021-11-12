@@ -60,6 +60,11 @@ public class Network {
         return networkManager.getInterestsUser(username);
     }
 
+    /**
+     * Prints the data of the network.
+     *
+     * @return string with all the data of the network
+     */
     public String toString() {
         String string = "";
         List<String> userList = getUsers();
