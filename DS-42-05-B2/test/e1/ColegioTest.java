@@ -74,6 +74,8 @@ class ColegioTest {
         assertThrows(NullPointerException.class, () -> new Docente("Severus", "Snape",
                 40, 1, null));
 
+        assertThrows(NullPointerException.class, () -> Hogwarts.removeIntegrante(null));
+
         /* se envía un parámetro "null" */
         assertThrows(NullPointerException.class, () -> Hogwarts.addIntegrante(null));
 
