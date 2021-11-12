@@ -138,6 +138,14 @@ public class Anuncio implements Comparable<Anuncio> {
                 getNumPlazas(), getTamano(), getCp());
     }
 
+    /**
+     * An instance of Anuncio is compared to another by its
+     * reference number.
+     *
+     * @param o Instance of Anuncio
+     * @return Zero if they are equals, 1 if the calling object
+     * is greater and -1 if the calling object is smaller
+     */
     @Override
     public int compareTo(Anuncio o) {
         return Integer.compare(numReferencia, o.numReferencia);
