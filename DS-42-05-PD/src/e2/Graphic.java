@@ -64,7 +64,7 @@ public class Graphic {
         StringBuilder builder = new StringBuilder();
         //foreach loop that iterates over the keys
         for (Character v : map.keySet()) {
-            builder.append(v.toString()).append(": ");
+            builder.append(v.toString()).append(" --> ");
             //foreach loop for getting the vertices
             for (Character w : map.get(v)) {
                 builder.append(w.toString()).append(" ");
