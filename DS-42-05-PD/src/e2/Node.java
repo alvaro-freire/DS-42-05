@@ -4,7 +4,7 @@ public class Node {
 
     private final char name;
 
-    private final int level;
+    private int level;
 
     Node(char name) {
         this.name = name;
@@ -19,5 +19,8 @@ public class Node {
         return level;
     }
 
+    public void setLevel(int n) {
+        level = n;
+    }
 
 }
