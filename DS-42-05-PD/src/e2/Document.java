@@ -1,19 +1,16 @@
 package e2;
 
-import java.util.List;
-
 public class Document {
 
-    private List<String> dependencias;
+    private char x;
+    private char y;
 
-    Document(List<String> dependencias) {
-        this.dependencias = dependencias;
+    Document() {
+
     }
 
-    public void addTarea(char x, char y) {
-        String dependencia = x + " -> " + y + "\n";
-
-        dependencias.add(dependencia);
+    private Object[] getPair() {
+        return new Object[] {x, y};
     }
 
 }
