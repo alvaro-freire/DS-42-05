@@ -1,5 +1,7 @@
 package e2;
 
-public interface Order {
+import java.util.List;
 
+public interface Order {
+    List<Character> order(Document document);
 }
