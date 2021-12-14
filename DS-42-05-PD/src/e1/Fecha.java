@@ -2,7 +2,6 @@ package e1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Fecha implements Criterio {

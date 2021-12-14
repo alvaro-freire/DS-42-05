@@ -1,8 +1,5 @@
 package e1;
 
-
-import java.util.Date;
-
 public class Billete {
 
     private final String origen;

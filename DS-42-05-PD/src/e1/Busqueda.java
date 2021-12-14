@@ -3,7 +3,7 @@ package e1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Busqueda {
+public final class Busqueda {
 
     private final List<Billete> billetesList = new ArrayList<>();
 
@@ -17,10 +17,10 @@ public class Busqueda {
     }
 
     public List<Billete> filtrar(Criterio... criterios) {
-        List<Billete> modList = new ArrayList<>();
+        List<Billete> modList = new ArrayList<>(billetesList);
 
         for (Criterio criterio : criterios) {
-            modList = criterio.filter(this.billetesList);
+            modList = criterio.filter(modList);
         }
         return modList;
     }
