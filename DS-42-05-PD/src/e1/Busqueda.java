@@ -16,6 +16,10 @@ public final class Busqueda {
         this.billetesList.addAll(billetesList);
     }
 
+    public List<Billete> getBilletesList() {
+        return new ArrayList<>(billetesList);
+    }
+
     public List<Billete> filtrar(Criterio... criterios) {
         List<Billete> modList = new ArrayList<>(billetesList);
 
@@ -25,4 +29,18 @@ public final class Busqueda {
         return modList;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("");
+
+        string.append("Búsqueda {\n\tLista de billetes = {\n");
+
+        for (Billete b : billetesList) {
+            string.append(b.toString()).append("\n");
+        }
+
+        string.append("\t}\n}");
+
+        return string.toString();
+    }
 }

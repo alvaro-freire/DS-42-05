@@ -29,4 +29,14 @@ public class Billete {
     public Date getFecha() {
         return fecha;
     }
+
+    @Override
+    public String toString() {
+        return "\t\tBillete {\n" +
+                "\t\t\torigen = '" + origen + "'\n" +
+                "\t\t\tdestino = '" + destino + "'\n" +
+                "\t\t\tprecio = " + precio + '\n' +
+                "\t\t\tfecha = " + fecha +
+                "\n\t\t}";
+    }
 }

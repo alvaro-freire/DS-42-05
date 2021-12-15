@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Precio implements Criterio {
 
-    private final int precio;
-    private final PriceOrder priceOrder;
+    private int precio;
+    private PriceOrder priceOrder;
 
     public enum PriceOrder {
 
@@ -43,8 +43,20 @@ public class Precio implements Criterio {
         this.priceOrder = priceOrder;
     }
 
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
     public int getPrecio() {
         return precio;
+    }
+
+    public void setPriceOrder(PriceOrder priceOrder) {
+        this.priceOrder = priceOrder;
+    }
+
+    public PriceOrder getPriceOrder() {
+        return priceOrder;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class StrongDependency implements TaskOrder {
             /* get a list of nodes with no parents
              * and order it alphabetically: */
             available.addAll(noParents(map));
-            available = sortAlphabetically(available);
+            available.sort(Comparator.comparingInt(Node::getName));
 
             /* remove the first node: */
             map.remove(available.get(0));
@@ -59,16 +59,5 @@ public class StrongDependency implements TaskOrder {
             }
         }
         return false;
-    }
-
-    public List<Node> sortAlphabetically(List<Node> list) {
-        list.sort(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return Character.compare(o1.getName(), o2.getName());
-            }
-        });
-
-        return list;
     }
 }

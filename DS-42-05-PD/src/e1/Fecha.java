@@ -6,10 +6,38 @@ import java.util.List;
 
 public class Fecha implements Criterio {
 
-    List<Date> dateList = new ArrayList<>();
+    private List<Date> dateList = new ArrayList<>();
 
     Fecha (Date... dates) {
         dateList.addAll(Arrays.asList(dates));
+    }
+
+    public void addFecha(Date fecha) {
+        if (fecha == null) {
+            throw new NullPointerException();
+        }
+
+        if (dateList.contains(fecha)) {
+            throw new IllegalArgumentException();
+        }
+
+        dateList.add(fecha);
+    }
+
+    public void removeOrigen(Date fecha) {
+        if (fecha == null) {
+            throw new NullPointerException();
+        }
+
+        if (!dateList.contains(fecha)) {
+            throw new IllegalArgumentException();
+        }
+
+        dateList.remove(fecha);
+    }
+
+    public void clearOrigen() {
+        dateList.clear();
     }
 
     @Override

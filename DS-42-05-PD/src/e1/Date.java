@@ -38,4 +38,9 @@ public class Date {
     public int hashCode() {
         return Objects.hash(getDay(), getMonth(), getYear());
     }
+
+    @Override
+    public String toString() {
+        return day + "/" + month + "/" + year;
+    }
 }

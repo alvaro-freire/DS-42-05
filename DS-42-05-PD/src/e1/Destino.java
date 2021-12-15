@@ -12,6 +12,34 @@ public class Destino implements Criterio {
         destinoList.addAll(Arrays.asList(origen));
     }
 
+    public void addDestino(String destino) {
+        if (destino == null) {
+            throw new NullPointerException();
+        }
+
+        if (destinoList.contains(destino)) {
+            throw new IllegalArgumentException();
+        }
+
+        destinoList.add(destino);
+    }
+
+    public void removeOrigen(String destino) {
+        if (destino == null) {
+            throw new NullPointerException();
+        }
+
+        if (!destinoList.contains(destino)) {
+            throw new IllegalArgumentException();
+        }
+
+        destinoList.remove(destino);
+    }
+
+    public void clearDestino() {
+        destinoList.clear();
+    }
+
     @Override
     public List<Billete> filter(List<Billete> list) {
         List<Billete> aux = new ArrayList<>();

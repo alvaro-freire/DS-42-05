@@ -24,7 +24,7 @@ public class WeakDependency implements TaskOrder {
             }
         }
 
-        available = sortAlphabetically(available);
+        available.sort(Comparator.comparingInt(Node::getName));
 
         result.add(available.get(0).getName());
 
@@ -37,21 +37,10 @@ public class WeakDependency implements TaskOrder {
             map.remove(available.get(0));
 
             available.remove(0);
-            available = sortAlphabetically(available);
+            available.sort(Comparator.comparingInt(Node::getName));
             result.add(available.get(0).getName());
         }
 
         return result;
-    }
-
-    public List<Node> sortAlphabetically(List<Node> list) {
-        list.sort(new Comparator<Node>() {
-            @Override
-            public int compare(Node o1, Node o2) {
-                return Character.compare(o1.getName(), o2.getName());
-            }
-        });
-
-        return list;
     }
 }
