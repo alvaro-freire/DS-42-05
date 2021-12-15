@@ -6,6 +6,11 @@ public class Dependence {
     private final Node child;
 
     Dependence(Node x, Node y) {
+
+        if (x == null || y == null) {
+            throw new NullPointerException();
+        }
+
         this.parent = x;
         this.child = y;
     }

@@ -3,11 +3,13 @@ package e2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GraphicTest {
 
@@ -128,9 +130,9 @@ class GraphicTest {
 
     @Test
     void testEquals() {
-        assertEquals(hierarchical, new HierarchicalOrder(document.getDocument()).order(document.getDocument()));
-        assertEquals(weakDep, new WeakDependency(document.getDocument()).order(document.getDocument()));
         assertEquals(strongDep, new StrongDependency(document.getDocument()).order(document.getDocument()));
+        assertEquals(weakDep, new WeakDependency(document.getDocument()).order(document.getDocument()));
+        assertEquals(hierarchical, new HierarchicalOrder(document.getDocument()).order(document.getDocument()));
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -153,4 +155,25 @@ class GraphicTest {
 
         assertEquals("Total number of vertices: 9", graph.countVertices());
     }
+
+    @Test
+    void testThrows() {
+        assertThrows(NullPointerException.class, () -> new StrongDependency(null));
+        assertThrows(NullPointerException.class, () -> new WeakDependency(null));
+        assertThrows(NullPointerException.class, () -> new HierarchicalOrder(null));
+
+        assertThrows(NullPointerException.class,
+                () -> new StrongDependency(document.getDocument()).order(null));
+        assertThrows(NullPointerException.class,
+                () -> new WeakDependency(document.getDocument()).order(null));
+        assertThrows(NullPointerException.class,
+                () -> new HierarchicalOrder(document.getDocument()).order(null));
+
+        assertThrows(NullPointerException.class, () -> new Dependence(null, A));
+        assertThrows(NullPointerException.class, () -> new Dependence(A, null));
+        assertThrows(NullPointerException.class, () -> new Dependence(null, null));
+        assertThrows(NullPointerException.class, () -> new Document(null));
+        assertThrows(NullPointerException.class, () -> graph.makeGraph(null));
+    }
+
 }

@@ -7,6 +7,11 @@ public class StrongDependency implements TaskOrder {
     private final Map<Node, List<Node>> map;
 
     StrongDependency(List<Dependence> document) {
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
+
         map = new Graphic().makeGraph(document);
     }
 
@@ -16,6 +21,10 @@ public class StrongDependency implements TaskOrder {
         List<Node> available = new ArrayList<>();
         int size = map.keySet().size();
         int i = 0;
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
 
         while (i < size) {
             /* get a list of nodes with no parents

@@ -10,6 +10,11 @@ public class HierarchicalOrder implements TaskOrder {
     private final Graphic graph = new Graphic();
 
     HierarchicalOrder(List<Dependence> document) {
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
+
         map = graph.makeGraph(document);
     }
 
@@ -17,6 +22,10 @@ public class HierarchicalOrder implements TaskOrder {
     public List<Character> order(List<Dependence> document) {
         List<Character> result = new ArrayList<>();
         List<Character> aux = new ArrayList<>();
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
 
         /* iterate map by levels */
         for (int i = 0; i <= graph.maxLevel(); i++) {

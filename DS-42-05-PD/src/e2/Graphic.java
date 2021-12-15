@@ -11,6 +11,11 @@ public class Graphic {
     }
 
     public Map<Node, List<Node>> makeGraph(List<Dependence> document) {
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
+
         for (Dependence dependence : document) {
             Node x = dependence.getParent();
             Node y = dependence.getChild();

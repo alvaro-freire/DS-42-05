@@ -8,6 +8,11 @@ public class Document {
     private final List<Dependence> document;
 
     Document(List<Dependence> document) {
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
+
         this.document = new ArrayList<>(document);
     }
 

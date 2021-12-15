@@ -7,6 +7,11 @@ public class WeakDependency implements TaskOrder {
     private final Map<Node, List<Node>> map;
 
     WeakDependency(List<Dependence> document) {
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
+
         map = new Graphic().makeGraph(document);
     }
 
@@ -15,6 +20,10 @@ public class WeakDependency implements TaskOrder {
         List<Node> available = new ArrayList<>();
         List<Character> result = new ArrayList<>();
         int size = map.keySet().size();
+
+        if (document == null) {
+            throw new NullPointerException();
+        }
 
         /* add the first available nodes: */
         for (Node node : map.keySet()) {
@@ -27,6 +36,7 @@ public class WeakDependency implements TaskOrder {
 
         result.add(available.get(0).getName());
 
+        /* add to the result list the rest of nodes in order */
         while (result.size() < size) {
             for (Node node : map.get(available.get(0))) {
                 if (!available.contains(node) && !result.contains(node.getName())) {
