@@ -16,7 +16,7 @@ class GraphicTest {
     private List<Dependence> dependences = new ArrayList<>();
 
     private Document document;
-    private Node A, B, C, D, E, F, G, H, J;
+    Node A, B, C, D, E, F, G, H, J;
 
     private List<Character> hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
     private List<Character> weakDep = Arrays.asList('C', 'A', 'B', 'D', 'E', 'F', 'G', 'H', 'J');
