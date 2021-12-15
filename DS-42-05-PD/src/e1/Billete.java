@@ -1,6 +1,6 @@
 package e1;
 
-public class Billete {
+public final class Billete {
 
     private final String origen;
     private final String destino;
@@ -8,6 +8,15 @@ public class Billete {
     private final Date fecha;
 
     Billete (String origen, String destino, int precio, Date fecha) {
+
+        if (origen == null || destino == null || fecha == null) {
+            throw new NullPointerException();
+        }
+
+        if (precio < 0) {
+            throw new IllegalArgumentException();
+        }
+
         this.origen = origen;
         this.destino = destino;
         this.precio = precio;
@@ -32,11 +41,11 @@ public class Billete {
 
     @Override
     public String toString() {
-        return "\t\tBillete {\n" +
-                "\t\t\torigen = '" + origen + "'\n" +
-                "\t\t\tdestino = '" + destino + "'\n" +
-                "\t\t\tprecio = " + precio + '\n' +
-                "\t\t\tfecha = " + fecha +
-                "\n\t\t}";
+        return "\n\tBillete {\n" +
+                "\t\torigen = '" + origen + "'\n" +
+                "\t\tdestino = '" + destino + "'\n" +
+                "\t\tprecio = " + precio + '\n' +
+                "\t\tfecha = " + fecha +
+                "\n\t}\n";
     }
 }

@@ -8,8 +8,8 @@ public class Destino implements Criterio {
 
     private final List<String> destinoList = new ArrayList<>();
 
-    Destino(String... origen) {
-        destinoList.addAll(Arrays.asList(origen));
+    Destino(String... destino) {
+        destinoList.addAll(Arrays.asList(destino));
     }
 
     public void addDestino(String destino) {
@@ -24,7 +24,7 @@ public class Destino implements Criterio {
         destinoList.add(destino);
     }
 
-    public void removeOrigen(String destino) {
+    public void removeDestino(String destino) {
         if (destino == null) {
             throw new NullPointerException();
         }
@@ -52,6 +52,25 @@ public class Destino implements Criterio {
             }
         }
         return aux;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+
+        string.append("Destino [ ");
+
+        for (String s : destinoList) {
+            if (s.equals(destinoList.get(destinoList.size() - 1))) {
+                string.append(s).append(" ");
+            } else {
+                string.append(s).append(", ");
+            }
+        }
+
+        string.append("]");
+
+        return string.toString();
     }
 
 }
