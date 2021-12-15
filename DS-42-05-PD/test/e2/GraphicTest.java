@@ -13,6 +13,7 @@ class GraphicTest {
 
     private final Graphic graph = new Graphic();
     private final Graphic graph1 = new Graphic();
+    private final Graphic graph2 = new Graphic();
     private final List<Dependence> dependences = new ArrayList<>();
 
     private Document document;
@@ -63,11 +64,14 @@ class GraphicTest {
 
     @Test
     void test() {
+        Document document1, document2;
+        Dependence newDependence = new Dependence(E, new Node('X'));
+
         /* create a new dependence in the
          * document and make another graph: */
-        dependences.add(new Dependence(E, new Node('X')));
-        document.addDependences(dependences);
-        graph1.makeGraph(document.getDocument());
+        dependences.add(newDependence);
+        document1 = document.addDependences(dependences);
+        graph1.makeGraph(document1.getDocument());
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -89,6 +93,36 @@ class GraphicTest {
                         "Level 2 --> B D \n" +
                         "Level 3 --> E J \n" +
                         "Level 4 --> X \n", graph1.showLevels(graph1.maxLevel()));
+
+        assertEquals("Total number of vertices: 10", graph1.countVertices());
+
+
+        dependences.clear();
+        /* try to remove a dependence in a document */
+        dependences.add(newDependence);
+        document2 = document1.removeDependences(dependences);
+        graph2.makeGraph(document2.getDocument());
+
+        assertEquals(
+                "Adjacency List for the graph:\n" +
+                        "A --> B D \n" +
+                        "B --> E \n" +
+                        "C --> A F \n" +
+                        "D --> E \n" +
+                        "E --> \n" +
+                        "F --> E J \n" +
+                        "G --> F H \n" +
+                        "H --> J \n" +
+                        "J --> \n", graph2.toString());
+
+        assertEquals(
+                "Levels in the graph:\n" +
+                        "Level 0 --> C G \n" +
+                        "Level 1 --> A F H \n" +
+                        "Level 2 --> B D \n" +
+                        "Level 3 --> E J \n", graph2.showLevels(graph2.maxLevel()));
+
+        assertEquals("Total number of vertices: 9", graph2.countVertices());
     }
 
 

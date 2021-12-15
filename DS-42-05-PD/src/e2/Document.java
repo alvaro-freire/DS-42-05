@@ -15,12 +15,25 @@ public class Document {
         return new ArrayList<>(document);
     }
 
-    public void addDependences(List<Dependence> dependences) {
+    public Document addDependences(List<Dependence> dependences) {
+        List<Dependence> document1 = getDocument();
+
         for (Dependence dependence : dependences) {
-            if (!document.contains(dependence)) {
-                document.add(dependence);
+            if (!document1.contains(dependence)) {
+                document1.add(dependence);
             }
         }
+
+        return new Document(document1);
     }
 
+    public Document removeDependences(List<Dependence> dependences) {
+        List<Dependence> document1 = getDocument();
+
+        for (Dependence dependence : dependences) {
+            document1.remove(dependence);
+        }
+
+        return new Document(document1);
+    }
 }
