@@ -134,7 +134,7 @@ class GraphicTest {
         assertEquals(strongDep, graph.order());
         graph.setOrder(new WeakDependency(graph.getDocument()));
         assertEquals(weakDep, graph.order());
-        graph.setOrder(new HierarchicalOrder(graph.getDocument()));
+        graph.setOrder(new HierarchicalOrder(graph.getDocument(), graph.maxLevel()));
         assertEquals(hierarchical, graph.order());
 
         assertEquals(
@@ -163,14 +163,14 @@ class GraphicTest {
     void testThrows() {
         assertThrows(NullPointerException.class, () -> new StrongDependency(null));
         assertThrows(NullPointerException.class, () -> new WeakDependency(null));
-        assertThrows(NullPointerException.class, () -> new HierarchicalOrder(null));
+        assertThrows(NullPointerException.class, () -> new HierarchicalOrder(null, 0));
 
         assertThrows(NullPointerException.class,
                 () -> new StrongDependency(document).order(null));
         assertThrows(NullPointerException.class,
                 () -> new WeakDependency(document).order(null));
         assertThrows(NullPointerException.class,
-                () -> new HierarchicalOrder(document).order(null));
+                () -> new HierarchicalOrder(document, graph.maxLevel()).order(null));
 
         assertThrows(NullPointerException.class, () -> new Dependence(null, A));
         assertThrows(NullPointerException.class, () -> new Dependence(A, null));

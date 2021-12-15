@@ -7,16 +7,16 @@ import java.util.Map;
 public class HierarchicalOrder implements TaskOrder {
 
     private final Map<Node, List<Node>> map;
-    private final Graphic graph;
+    private final int maxLevel;
 
-    HierarchicalOrder(Document document) {
+    HierarchicalOrder(Document document, int maxLevel) {
 
         if (document == null) {
             throw new NullPointerException();
         }
 
-        graph = new Graphic(document);
-        map = graph.makeGraph();
+        this.maxLevel = maxLevel;
+        this.map = new Graphic(document).makeGraph();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class HierarchicalOrder implements TaskOrder {
         }
 
         /* iterate map by levels */
-        for (int i = 0; i <= graph.maxLevel(); i++) {
+        for (int i = 0; i <= maxLevel; i++) {
             for (Node node : map.keySet()) {
                 if (node.getLevel() == i) {
                     aux.add(node.getName());
