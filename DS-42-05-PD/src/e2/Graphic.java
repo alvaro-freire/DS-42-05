@@ -7,7 +7,7 @@ public class Graphic {
     private final Map<Node, List<Node>> map = new HashMap<>();
 
     public void addNewVertex(Node v) {
-        map.put(v, new LinkedList<Node>());
+        map.put(v, new LinkedList<>());
     }
 
     public Map<Node, List<Node>> makeGraph(List<Dependence> document) {
