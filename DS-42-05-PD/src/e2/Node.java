@@ -23,8 +23,4 @@ public class Node {
         level = n;
     }
 
-    public void addLevel(int n) {
-        level += n;
-    }
-
 }
