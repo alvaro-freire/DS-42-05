@@ -2,19 +2,19 @@ package e2;
 
 public class Dependence {
 
-    private final Node x;
-    private final Node y;
+    private final Node parent;
+    private final Node child;
 
     Dependence(Node x, Node y) {
-        this.x = x;
-        this.y = y;
+        this.parent = x;
+        this.child = y;
     }
 
-    public Node getX() {
-        return x;
+    public Node getParent() {
+        return parent;
     }
 
-    public Node getY() {
-        return y;
+    public Node getChild() {
+        return child;
     }
 }

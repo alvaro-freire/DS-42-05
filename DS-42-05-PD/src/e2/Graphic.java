@@ -14,8 +14,8 @@ public class Graphic {
         Node x, y;
 
         for (Dependence dependence : document) {
-            x = dependence.getX();
-            y = dependence.getY();
+            x = dependence.getParent();
+            y = dependence.getChild();
 
             if (!map.containsKey(x)) {
                 addNewVertex(x);

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -66,5 +67,12 @@ class GraphicTest {
 
     @Test
     void test() {
+        List<Character> hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
+        List<Character> weakDep = Arrays.asList('C', 'A', 'B', 'D', 'E', 'F', 'G', 'H', 'J');
+        List<Character> strongDep = Arrays.asList('C', 'A', 'B', 'D', 'G', 'F', 'E', 'H', 'J');
+
+        assertEquals(hierarchical, new HierarchicalOrder(document).order(document));
+        assertEquals(weakDep, new WeakDependency(document).order(document));
+        assertEquals(strongDep, new StrongDependency(document).order(document));
     }
 }
