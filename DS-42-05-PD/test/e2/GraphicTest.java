@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GraphicTest {
 
-    private Graphic graph = new Graphic();
-    private Graphic graph1 = new Graphic();
-    private List<Dependence> dependences = new ArrayList<>();
+    private final Graphic graph = new Graphic();
+    private final Graphic graph1 = new Graphic();
+    private final List<Dependence> dependences = new ArrayList<>();
 
     private Document document;
     Node A, B, C, D, E, F, G, H, J;
