@@ -11,11 +11,9 @@ public class Graphic {
     }
 
     public Map<Node, List<Node>> makeGraph(List<Dependence> document) {
-        Node x, y;
-
         for (Dependence dependence : document) {
-            x = dependence.getParent();
-            y = dependence.getChild();
+            Node x = dependence.getParent();
+            Node y = dependence.getChild();
 
             if (!map.containsKey(x)) {
                 addNewVertex(x);
