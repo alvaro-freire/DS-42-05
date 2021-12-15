@@ -12,9 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GraphicTest {
 
-    private final Graphic graph = new Graphic();
-    private final Graphic graph1 = new Graphic();
-    private final Graphic graph2 = new Graphic();
+    private Graphic graph;
     private final List<Dependence> dependences = new ArrayList<>();
 
     private Document document;
@@ -55,7 +53,8 @@ class GraphicTest {
         document = new Document(dependences);
 
         // adding edges to the graph
-        graph.makeGraph(document.getDocument());
+        graph = new Graphic(document);
+        graph.makeGraph();
 
         // setting up the tasks lists in order
         hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
@@ -72,7 +71,8 @@ class GraphicTest {
          * document and make another graph: */
         dependences.add(newDependence);
         document1 = document.addDependences(dependences);
-        graph1.makeGraph(document1.getDocument());
+        Graphic graph1 = new Graphic(document1);
+        graph1.makeGraph();
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -102,7 +102,8 @@ class GraphicTest {
         /* try to remove a dependence in a document */
         dependences.add(newDependence);
         document2 = document1.removeDependences(dependences);
-        graph2.makeGraph(document2.getDocument());
+        Graphic graph2 = new Graphic(document2);
+        graph2.makeGraph();
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -129,9 +130,12 @@ class GraphicTest {
 
     @Test
     void testEquals() {
-        assertEquals(strongDep, new StrongDependency(document.getDocument()).order(document.getDocument()));
-        assertEquals(weakDep, new WeakDependency(document.getDocument()).order(document.getDocument()));
-        assertEquals(hierarchical, new HierarchicalOrder(document.getDocument()).order(document.getDocument()));
+        graph.setOrder(new StrongDependency(graph.getDocument()));
+        assertEquals(strongDep, graph.order());
+        graph.setOrder(new WeakDependency(graph.getDocument()));
+        assertEquals(weakDep, graph.order());
+        graph.setOrder(new HierarchicalOrder(graph.getDocument()));
+        assertEquals(hierarchical, graph.order());
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -162,17 +166,17 @@ class GraphicTest {
         assertThrows(NullPointerException.class, () -> new HierarchicalOrder(null));
 
         assertThrows(NullPointerException.class,
-                () -> new StrongDependency(document.getDocument()).order(null));
+                () -> new StrongDependency(document).order(null));
         assertThrows(NullPointerException.class,
-                () -> new WeakDependency(document.getDocument()).order(null));
+                () -> new WeakDependency(document).order(null));
         assertThrows(NullPointerException.class,
-                () -> new HierarchicalOrder(document.getDocument()).order(null));
+                () -> new HierarchicalOrder(document).order(null));
 
         assertThrows(NullPointerException.class, () -> new Dependence(null, A));
         assertThrows(NullPointerException.class, () -> new Dependence(A, null));
         assertThrows(NullPointerException.class, () -> new Dependence(null, null));
         assertThrows(NullPointerException.class, () -> new Document(null));
-        assertThrows(NullPointerException.class, () -> graph.makeGraph(null));
+        assertThrows(NullPointerException.class, () -> new Graphic(null));
     }
 
 }

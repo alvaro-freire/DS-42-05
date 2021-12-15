@@ -7,15 +7,16 @@ import java.util.Map;
 public class HierarchicalOrder implements TaskOrder {
 
     private final Map<Node, List<Node>> map;
-    private final Graphic graph = new Graphic();
+    private final Graphic graph;
 
-    HierarchicalOrder(List<Dependence> document) {
+    HierarchicalOrder(Document document) {
 
         if (document == null) {
             throw new NullPointerException();
         }
 
-        map = graph.makeGraph(document);
+        graph = new Graphic(document);
+        map = graph.makeGraph();
     }
 
     @Override

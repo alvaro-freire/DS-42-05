@@ -3,7 +3,7 @@ package e2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Document {
+public final class Document {
 
     private final List<Dependence> document;
 

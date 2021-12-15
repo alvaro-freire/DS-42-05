@@ -6,13 +6,13 @@ public class WeakDependency implements TaskOrder {
 
     private final Map<Node, List<Node>> map;
 
-    WeakDependency(List<Dependence> document) {
+    WeakDependency(Document document) {
 
         if (document == null) {
             throw new NullPointerException();
         }
 
-        map = new Graphic().makeGraph(document);
+        map = new Graphic(document).makeGraph();
     }
 
     @Override

@@ -6,13 +6,13 @@ public class StrongDependency implements TaskOrder {
 
     private final Map<Node, List<Node>> map;
 
-    StrongDependency(List<Dependence> document) {
+    StrongDependency(Document document) {
 
         if (document == null) {
             throw new NullPointerException();
         }
 
-        map = new Graphic().makeGraph(document);
+        map = new Graphic(document).makeGraph();
     }
 
     @Override

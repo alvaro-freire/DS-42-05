@@ -5,18 +5,37 @@ import java.util.*;
 public class Graphic {
 
     private final Map<Node, List<Node>> map = new HashMap<>();
+    private final Document document;
+    private TaskOrder order;
 
-    public void addNewVertex(Node v) {
-        map.put(v, new LinkedList<>());
-    }
-
-    public Map<Node, List<Node>> makeGraph(List<Dependence> document) {
+    Graphic(Document document) {
 
         if (document == null) {
             throw new NullPointerException();
         }
 
-        for (Dependence dependence : document) {
+        this.document = document;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setOrder(TaskOrder order) {
+        this.order = order;
+    }
+
+    public List<Character> order() {
+        return order.order(document.getDocument());
+    }
+
+    public void addNewVertex(Node v) {
+        map.put(v, new LinkedList<>());
+    }
+
+    public Map<Node, List<Node>> makeGraph() {
+
+        for (Dependence dependence : document.getDocument()) {
             Node x = dependence.getParent();
             Node y = dependence.getChild();
 
