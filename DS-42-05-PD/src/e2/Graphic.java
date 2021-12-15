@@ -11,11 +11,9 @@ public class Graphic {
     }
 
     public Map<Node, List<Node>> makeGraph(List<Dependence> document) {
-        Node x, y;
-
         for (Dependence dependence : document) {
-            x = dependence.getParent();
-            y = dependence.getChild();
+            Node x = dependence.getParent();
+            Node y = dependence.getChild();
 
             if (!map.containsKey(x)) {
                 addNewVertex(x);
@@ -62,69 +60,36 @@ public class Graphic {
     }
 
     //the method counts the number of vertices
-    public void countVertices() {
-        System.out.println("Total number of vertices: " + map.keySet().size());
+    public String countVertices() {
+        return "Total number of vertices: " + map.keySet().size();
     }
 
-    //the method counts the number of edges
-    public void countEdges() {
-        //variable to store number of edges
-        int count = 0;
-        for (Node x : map.keySet()) {
-            count = count + map.get(x).size();
-        }
-
-        System.out.println("Total number of edges: " + count);
-    }
-
-    //checks a graph has vertex or not
-    public void containsVertex(Node x) {
-        if (map.containsKey(x)) {
-            System.out.println("The graph contains " + x.getName() + " as a vertex.");
-        } else {
-            System.out.println("The graph does not contain " + x.getName() + " as a vertex.");
-        }
-    }
-
-    //checks a graph has edge or not
-    //where s and d are the two parameters that represent source(vertex) and destination (vertex)
-    public void containsEdge(Node x, Node y) {
-        if (map.get(x).contains(y)) {
-            System.out.println("The graph has an edge between " + x.getName() + " and " + y.getName() + ".");
-        } else {
-            System.out.println("There is no edge between " + x.getName() + " and " + y.getName() + ".");
-        }
-    }
-
-    // checks if there are negative levels and
-    // puts all of them in the correct way ( >= 0 )
-    public void checkLevels() {
-        int levelUp;
-        for (Node node : map.keySet()) {
-            if (node.getLevel() < 0) {
-                levelUp = node.getLevel() * -1;
-                for (Node nodeUp : map.keySet()) {
-                    nodeUp.addLevel(levelUp);
-                }
-                break;
-            }
-        }
-    }
-
-    public void showLevels() {
+    public String showLevels(int maxLevel) {
         StringBuilder builder = new StringBuilder();
-        checkLevels();
+        List<Character> nodes = new ArrayList<>();
 
-        //foreach loop that iterates over the keys
-        for (Node v : map.keySet()) {
-            builder.append(v.getName());
-            builder.append(" --> ");
-            builder.append(v.getLevel());
+        builder.append("Levels in the graph:\n");
+
+        //foreach loop that iterates over the levels:
+        for (int i = 0; i <= maxLevel; i++) {
+            builder.append("Level ").append(i).append(" --> ");
+            for (Node node : map.keySet()) {
+                if (node.getLevel() == i) {
+                    nodes.add(node.getName());
+                }
+            }
+            nodes.sort(null);
+
+            for (Character character : nodes) {
+                builder.append(character).append(" ");
+            }
+
+            nodes.clear();
+
             builder.append("\n");
         }
 
-        //prints the adjacency matrix that represents the graph
-        System.out.println("Level of each node in the graph:\n" + builder);
+        return builder.toString();
     }
 
     public int maxLevel() {
@@ -145,18 +110,42 @@ public class Graphic {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        List<Character> parents = new ArrayList<>();
 
         builder.append("Adjacency List for the graph:\n");
 
         //foreach loop that iterates over the keys
         for (Node v : map.keySet()) {
-            builder.append(v.getName()).append(" --> ");
-            //foreach loop for getting the vertices
-            for (Node w : map.get(v)) {
-                builder.append(w.getName()).append(" ");
-            }
-            builder.append("\n");
+            parents.add(v.getName());
         }
+
+        parents.sort(null);
+
+        for (Character parent : parents) {
+            for (Node v : map.keySet()) {
+                if (parent == v.getName()) {
+                    builder.append(parent).append(" --> ");
+                    for (Node w : map.get(v)) {
+                        builder.append(w.getName()).append(" ");
+                    }
+                    builder.append("\n");
+                }
+            }
+        }
+
         return (builder.toString());
     }
 }
+
+/*
+
+
+builder.append(v.getName()).append(" --> ");
+        //foreach loop for getting the vertices
+        for (Node w : map.get(v)) {
+        builder.append(w.getName()).append(" ");
+        }
+        builder.append("\n");
+
+
+*/
