@@ -7,8 +7,7 @@ public class WeakDependency implements TaskOrder {
     private final Map<Node, List<Node>> map;
 
     WeakDependency(List<Dependence> document) {
-        Graphic graph = new Graphic();
-        map = graph.makeGraph(document);
+        map = new Graphic().makeGraph(document);
     }
 
     @Override

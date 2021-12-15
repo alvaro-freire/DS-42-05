@@ -13,7 +13,8 @@ class GraphicTest {
 
     Graphic graph = new Graphic();
     Graphic graph1 = new Graphic();
-    List<Dependence> document = new ArrayList<>();
+    Document document;
+    List<Dependence> dependences = new ArrayList<>();
     Node A, B, C, D, E, F, G, H, J;
     List<Character> hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
     List<Character> weakDep = Arrays.asList('C', 'A', 'B', 'D', 'E', 'F', 'G', 'H', 'J');
@@ -34,21 +35,23 @@ class GraphicTest {
 
         // setting up the "document" with
         // its dependencies (X -> Y):
-        document.clear();
-        document.add(new Dependence(C, A));
-        document.add(new Dependence(C, F));
-        document.add(new Dependence(A, B));
-        document.add(new Dependence(A, D));
-        document.add(new Dependence(B, E));
-        document.add(new Dependence(D, E));
-        document.add(new Dependence(F, E));
-        document.add(new Dependence(G, F));
-        document.add(new Dependence(G, H));
-        document.add(new Dependence(F, J));
-        document.add(new Dependence(H, J));
+        dependences.clear();
+        dependences.add(new Dependence(C, A));
+        dependences.add(new Dependence(C, F));
+        dependences.add(new Dependence(A, B));
+        dependences.add(new Dependence(A, D));
+        dependences.add(new Dependence(B, E));
+        dependences.add(new Dependence(D, E));
+        dependences.add(new Dependence(F, E));
+        dependences.add(new Dependence(G, F));
+        dependences.add(new Dependence(G, H));
+        dependences.add(new Dependence(F, J));
+        dependences.add(new Dependence(H, J));
+
+        document = new Document(dependences);
 
         // adding edges to the graph
-        graph.makeGraph(document);
+        graph.makeGraph(document.getDocument());
 
         // setting up the tasks lists in order
         hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
@@ -58,9 +61,11 @@ class GraphicTest {
 
     @Test
     void test() {
-        document.add(new Dependence(E, new Node('X')));
-
-        graph1.makeGraph(document);
+        /* create a new dependence in the
+         * document and make another graph: */
+        dependences.add(new Dependence(E, new Node('X')));
+        document.addDependences(dependences);
+        graph1.makeGraph(document.getDocument());
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
@@ -87,9 +92,9 @@ class GraphicTest {
 
     @Test
     void testEquals() {
-        assertEquals(hierarchical, new HierarchicalOrder(document).order(document));
-        assertEquals(weakDep, new WeakDependency(document).order(document));
-        assertEquals(strongDep, new StrongDependency(document).order(document));
+        assertEquals(hierarchical, new HierarchicalOrder(document.getDocument()).order(document.getDocument()));
+        assertEquals(weakDep, new WeakDependency(document.getDocument()).order(document.getDocument()));
+        assertEquals(strongDep, new StrongDependency(document.getDocument()).order(document.getDocument()));
 
         assertEquals(
                 "Adjacency List for the graph:\n" +
