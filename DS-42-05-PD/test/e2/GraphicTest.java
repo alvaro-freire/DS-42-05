@@ -3,14 +3,19 @@ package e2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GraphicTest {
 
     Graphic graph = new Graphic();
+    List<Dependence> document = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
+        // setting up the nodes
         Node A = new Node('A');
         Node B = new Node('B');
         Node C = new Node('C');
@@ -21,32 +26,39 @@ class GraphicTest {
         Node H = new Node('H');
         Node J = new Node('J');
 
-        //adding edges to the graph
-        graph.addNewEdge(C, A);
-        graph.addNewEdge(C, F);
-        graph.addNewEdge(A, B);
-        graph.addNewEdge(A, D);
-        graph.addNewEdge(B, E);
-        graph.addNewEdge(D, E);
-        graph.addNewEdge(F, E);
-        graph.addNewEdge(G, F);
-        graph.addNewEdge(G, H);
-        graph.addNewEdge(F, J);
-        graph.addNewEdge(H, J);
+        // setting up the "document" with
+        // its dependencies (X -> Y):
+        document.add(new Dependence(C, A));
+        document.add(new Dependence(C, F));
+        document.add(new Dependence(A, B));
+        document.add(new Dependence(A, D));
+        document.add(new Dependence(B, E));
+        document.add(new Dependence(D, E));
+        document.add(new Dependence(F, E));
+        document.add(new Dependence(G, F));
+        document.add(new Dependence(G, H));
+        document.add(new Dependence(F, J));
+        document.add(new Dependence(H, J));
 
-        //prints the adjacency matrix that represents the graph
-        System.out.println("Adjacency List for the graph:\n" + graph.toString());
+        // adding edges to the graph
+        graph.makeGraph(document);
 
-        //counts the number of vertices in the graph
+        // prints the adjacency matrix that represents the graph
+        System.out.println(graph.toString());
+
+        // prints the weights of each node in the matrix
+        graph.showLevels();
+
+        // counts the number of vertices in the graph
         graph.countVertices();
 
-        //counts the number of edges in the graph
+        // counts the number of edges in the graph
         graph.countEdges();
 
-        //checks whether an edge is present or not between the two specified vertices
+        // checks whether an edge is present or not between the two specified vertices
         graph.containsEdge(C, A);
         graph.containsEdge(C, F);
-        //checks whether vertex is present or not
+        // checks whether vertex is present or not
         graph.containsVertex(H);
         graph.containsVertex(J);
     }
