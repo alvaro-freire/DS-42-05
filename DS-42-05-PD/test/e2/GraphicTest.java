@@ -13,9 +13,11 @@ class GraphicTest {
 
     Graphic graph = new Graphic();
     Graphic graph1 = new Graphic();
-    Document document;
     List<Dependence> dependences = new ArrayList<>();
+
+    Document document;
     Node A, B, C, D, E, F, G, H, J;
+
     List<Character> hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
     List<Character> weakDep = Arrays.asList('C', 'A', 'B', 'D', 'E', 'F', 'G', 'H', 'J');
     List<Character> strongDep = Arrays.asList('C', 'A', 'B', 'D', 'G', 'F', 'E', 'H', 'J');
