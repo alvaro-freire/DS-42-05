@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Fecha implements Criterio {
 
-    private List<Date> dateList = new ArrayList<>();
+    private final List<Date> dateList = new ArrayList<>();
 
     Fecha (Date... dates) {
         dateList.addAll(Arrays.asList(dates));
@@ -24,7 +24,7 @@ public class Fecha implements Criterio {
         dateList.add(fecha);
     }
 
-    public void removeOrigen(Date fecha) {
+    public void removeFecha(Date fecha) {
         if (fecha == null) {
             throw new NullPointerException();
         }
@@ -36,7 +36,7 @@ public class Fecha implements Criterio {
         dateList.remove(fecha);
     }
 
-    public void clearOrigen() {
+    public void clearFecha() {
         dateList.clear();
     }
 
@@ -52,5 +52,25 @@ public class Fecha implements Criterio {
             }
         }
         return aux;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        int last = dateList.size() - 1;
+
+        string.append("Fecha [ ");
+
+        for (Date d : dateList) {
+            if (d.equals(dateList.get(last))) {
+                string.append(d).append(" ");
+            } else {
+                string.append(d).append(", ");
+            }
+        }
+
+        string.append("]");
+
+        return string.toString();
     }
 }

@@ -53,4 +53,24 @@ public class Origen implements Criterio {
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        int last = origenList.size() - 1;
+
+        string.append("Origen [ ");
+
+        for (String s : origenList) {
+            if (s.equals(origenList.get(last))) {
+                string.append(s).append(" ");
+            } else {
+                string.append(s).append(", ");
+            }
+        }
+
+        string.append("]");
+
+        return string.toString();
+    }
 }

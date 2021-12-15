@@ -8,8 +8,9 @@ public final class Busqueda {
     private final List<Billete> billetesList = new ArrayList<>();
 
     Busqueda (List<Billete> billetesList) {
+
         if (billetesList == null) {
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         /* se añaden todos los billetes a la lista */
@@ -31,16 +32,43 @@ public final class Busqueda {
 
     @Override
     public String toString() {
-        StringBuilder string = new StringBuilder("");
+        StringBuilder string = new StringBuilder();
 
-        string.append("Búsqueda {\n\tLista de billetes = {\n");
+        string.append("*************** Búsqueda ***************\n");
+        string.append("Lista de billetes (sin filtros):\n");
 
         for (Billete b : billetesList) {
-            string.append(b.toString()).append("\n");
+            string.append(b.toString());
         }
-
-        string.append("\t}\n}");
 
         return string.toString();
     }
+
+    public String toString(Criterio... criterios) {
+        List<Billete> filterList;
+        StringBuilder string = new StringBuilder();
+        int cnt = 1;
+
+        filterList = filtrar(criterios);
+
+        string.append("*************** Búsqueda ***************\n");
+        string.append("Filtros: ");
+
+        for (Criterio c : criterios) {
+            if (cnt == criterios.length) {
+                string.append(c.toString()).append(" ");
+            } else {
+                string.append(c.toString()).append(" || ");
+                cnt++;
+            }
+        }
+        string.append(":\n");
+
+        for (Billete b : filterList) {
+            string.append(b.toString());
+        }
+
+        return string.toString();
+    }
+
 }

@@ -10,35 +10,55 @@ public class Precio implements Criterio {
 
     public enum PriceOrder {
 
-        LOWER {
+        LOWER("<") {
+
             @Override
             public boolean compare(int a, int b) {
                 return a < b;
             }
         },
-        LOWEREQ {
+        LOWEREQ("<=") {
             @Override
             public boolean compare(int a, int b) {
                 return a <= b;
             }
         },
-        HIGHER {
+        HIGHER(">") {
             @Override
             public boolean compare(int a, int b) {
                 return a > b;
             }
         },
-        HIGHEREQ {
+        HIGHEREQ(">=") {
             @Override
             public boolean compare(int a, int b) {
                 return a >= b;
             }
         };
 
+        private final String operation;
+
+        PriceOrder(String c) {
+            this.operation = c;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
         public abstract boolean compare(int a, int b);
     }
 
     Precio(int precio, PriceOrder priceOrder) {
+
+        if (precio < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        if (priceOrder == null) {
+            throw new NullPointerException();
+        }
+
         this.precio = precio;
         this.priceOrder = priceOrder;
     }
@@ -69,5 +89,10 @@ public class Precio implements Criterio {
             }
         }
         return aux;
+    }
+
+    @Override
+    public String toString() {
+        return "Precio (" + priceOrder.getOperation() + precio + ")";
     }
 }
