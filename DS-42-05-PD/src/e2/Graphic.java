@@ -136,16 +136,3 @@ public class Graphic {
         return (builder.toString());
     }
 }
-
-/*
-
-
-builder.append(v.getName()).append(" --> ");
-        //foreach loop for getting the vertices
-        for (Node w : map.get(v)) {
-        builder.append(w.getName()).append(" ");
-        }
-        builder.append("\n");
-
-
-*/
