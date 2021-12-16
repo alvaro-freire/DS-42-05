@@ -133,10 +133,8 @@ public class Graphic {
     //here we have overridden the toString() method of the StringBuilder class
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder("Adjacency List for the graph:\n");
         List<Character> parents = new ArrayList<>();
-
-        builder.append("Adjacency List for the graph:\n");
 
         //foreach loop that iterates over the keys
         for (Node v : map.keySet()) {

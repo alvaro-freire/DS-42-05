@@ -1,6 +1,6 @@
 package e1;
 
-public class Date {
+public final class Date {
 
     private final int day;
     private final int month;
