@@ -16,7 +16,7 @@ class GraphicTest {
     private final List<Dependence> dependences = new ArrayList<>();
 
     private Document document;
-    Node A, B, C, D, E, F, G, H, J;
+    Node A, B, C, D, E, F, G, H, J, K;
 
     private List<Character> hierarchical = Arrays.asList('C', 'G', 'A', 'F', 'H', 'B', 'D', 'E', 'J');
     private List<Character> weakDep = Arrays.asList('C', 'A', 'B', 'D', 'E', 'F', 'G', 'H', 'J');
@@ -34,6 +34,7 @@ class GraphicTest {
         G = new Node('G');
         H = new Node('H');
         J = new Node('J');
+        K = new Node('K');
 
         // setting up the "document" with
         // its dependencies (X -> Y):
@@ -64,7 +65,7 @@ class GraphicTest {
 
     @Test
     void test() {
-        Document document1, document2;
+        Document document1, document2, document3;
         Dependence newDependence = new Dependence(E, new Node('X'));
 
         /* create a new dependence in the
@@ -125,6 +126,46 @@ class GraphicTest {
                         "Level 3 --> E J \n", graph2.showLevels(graph2.maxLevel()));
 
         assertEquals("Total number of vertices: 9", graph2.countVertices());
+
+        dependences.clear();
+
+        dependences.add(new Dependence(A, B));
+        dependences.add(new Dependence(A, C));
+        dependences.add(new Dependence(B, D));
+        dependences.add(new Dependence(B, E));
+        dependences.add(new Dependence(C, F));
+        dependences.add(new Dependence(C, G));
+        dependences.add(new Dependence(D, H));
+        dependences.add(new Dependence(G, K));
+        dependences.add(new Dependence(H, J));
+
+        document3 = new Document(dependences);
+        Graphic graph3 = new Graphic(document3);
+        graph3.makeGraph();
+
+        assertEquals(
+                "Adjacency List for the graph:\n" +
+                        "A --> B C \n" +
+                        "B --> D E \n" +
+                        "C --> F G \n" +
+                        "D --> H \n" +
+                        "E --> \n" +
+                        "F --> \n" +
+                        "G --> K \n" +
+                        "H --> J \n" +
+                        "J --> \n" +
+                        "K --> \n", graph3.toString());
+
+        assertEquals(
+                "Levels in the graph:\n" +
+                        "Level 0 --> A \n" +
+                        "Level 1 --> B C \n" +
+                        "Level 2 --> D E F G \n" +
+                        "Level 3 --> H K \n" +
+                        "Level 4 --> J \n", graph3.showLevels(graph3.maxLevel()));
+
+        assertEquals("Total number of vertices: 10", graph3.countVertices());
+
     }
 
 
