@@ -65,8 +65,10 @@ class GraphicTest {
 
     @Test
     void test() {
-        Document document1, document2, document3;
-        Dependence newDependence = new Dependence(E, new Node('X'));
+        Document document1;
+        Dependence newDependence = new Dependence(E, K);
+
+        /* *********************** FIRST GRAPH *********************** */
 
         /* create a new dependence in the
          * document and make another graph: */
@@ -81,12 +83,12 @@ class GraphicTest {
                         "B --> E \n" +
                         "C --> A F \n" +
                         "D --> E \n" +
-                        "E --> X \n" +
+                        "E --> K \n" +
                         "F --> E J \n" +
                         "G --> F H \n" +
                         "H --> J \n" +
                         "J --> \n" +
-                        "X --> \n", graph1.toString());
+                        "K --> \n", graph1.toString());
 
         assertEquals(
                 "Levels in the graph:\n" +
@@ -94,11 +96,14 @@ class GraphicTest {
                         "Level 1 --> A F H \n" +
                         "Level 2 --> B D \n" +
                         "Level 3 --> E J \n" +
-                        "Level 4 --> X \n", graph1.showLevels(graph1.maxLevel()));
+                        "Level 4 --> K \n", graph1.showLevels(graph1.maxLevel()));
 
         assertEquals("Total number of vertices: 10", graph1.countVertices());
 
 
+        /* *********************** SECOND GRAPH *********************** */
+
+        Document document2;
         dependences.clear();
         /* try to remove a dependence in a document */
         dependences.add(newDependence);
@@ -127,8 +132,17 @@ class GraphicTest {
 
         assertEquals("Total number of vertices: 9", graph2.countVertices());
 
-        dependences.clear();
+        graph2.setOrder(new StrongDependency(graph2.getDocument()));
+        assertEquals(strongDep, graph2.order());
+        graph2.setOrder(new WeakDependency(graph2.getDocument()));
+        assertEquals(weakDep, graph2.order());
+        graph2.setOrder(new HierarchicalOrder(graph2.getDocument(), graph2.maxLevel()));
+        assertEquals(hierarchical, graph2.order());
 
+
+        /* *********************** THIRD GRAPH *********************** */
+
+        dependences.clear();
         dependences.add(new Dependence(A, B));
         dependences.add(new Dependence(A, C));
         dependences.add(new Dependence(B, D));
@@ -136,9 +150,11 @@ class GraphicTest {
         dependences.add(new Dependence(C, F));
         dependences.add(new Dependence(C, G));
         dependences.add(new Dependence(D, H));
+        dependences.add(new Dependence(E, H));
         dependences.add(new Dependence(G, K));
         dependences.add(new Dependence(H, J));
 
+        Document document3;
         document3 = new Document(dependences);
         Graphic graph3 = new Graphic(document3);
         graph3.makeGraph();
@@ -149,7 +165,7 @@ class GraphicTest {
                         "B --> D E \n" +
                         "C --> F G \n" +
                         "D --> H \n" +
-                        "E --> \n" +
+                        "E --> H \n" +
                         "F --> \n" +
                         "G --> K \n" +
                         "H --> J \n" +
@@ -165,6 +181,18 @@ class GraphicTest {
                         "Level 4 --> J \n", graph3.showLevels(graph3.maxLevel()));
 
         assertEquals("Total number of vertices: 10", graph3.countVertices());
+
+        /* set up the order results: */
+        strongDep = Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K');
+        weakDep = Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K');
+        hierarchical = Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'J');
+
+        graph3.setOrder(new StrongDependency(graph3.getDocument()));
+        assertEquals(strongDep, graph3.order());
+        graph3.setOrder(new WeakDependency(graph3.getDocument()));
+        assertEquals(weakDep, graph3.order());
+        graph3.setOrder(new HierarchicalOrder(graph3.getDocument(), graph3.maxLevel()));
+        assertEquals(hierarchical, graph3.order());
 
     }
 
