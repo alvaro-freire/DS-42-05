@@ -5,70 +5,88 @@ import java.util.List;
 
 public final class Busqueda {
 
-    private final List<Billete> billetesList = new ArrayList<>();
+    private final List<Billete> list;
 
-    Busqueda (List<Billete> billetesList) {
-
-        if (billetesList == null) {
-            throw new NullPointerException();
-        }
-
-        /* se añaden todos los billetes a la lista */
-        this.billetesList.addAll(billetesList);
+    private Busqueda(Builder builder) {
+        list = builder.list;
     }
 
-    public List<Billete> getBilletesList() {
-        return new ArrayList<>(billetesList);
+    public List<Billete> getList() {
+        return new ArrayList<>(list);
     }
 
-    public List<Billete> filtrar(Criterio... criterios) {
-        List<Billete> modList = new ArrayList<>(billetesList);
+    public static class Builder {
 
-        for (Criterio criterio : criterios) {
-            modList = criterio.filter(modList);
-        }
-        return modList;
-    }
+        private List<Billete> list = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        StringBuilder string = new StringBuilder();
+        Builder (List<Billete> billetesList) {
 
-        string.append("*************** Búsqueda ***************\n");
-        string.append("Lista de billetes (sin filtros):\n");
-
-        for (Billete b : billetesList) {
-            string.append(b.toString());
-        }
-
-        return string.toString();
-    }
-
-    public String toString(Criterio... criterios) {
-        List<Billete> filterList;
-        StringBuilder string = new StringBuilder();
-        int cnt = 1;
-
-        filterList = filtrar(criterios);
-
-        string.append("*************** Búsqueda ***************\n");
-        string.append("Filtros: ");
-
-        for (Criterio c : criterios) {
-            if (cnt == criterios.length) {
-                string.append(c.toString()).append(" ");
-            } else {
-                string.append(c.toString()).append(" || ");
-                cnt++;
+            if (billetesList == null) {
+                throw new NullPointerException();
             }
-        }
-        string.append(":\n");
 
-        for (Billete b : filterList) {
-            string.append(b.toString());
+            /* se añaden todos los billetes a la lista */
+            list.addAll(billetesList);
         }
 
-        return string.toString();
+        public Busqueda build() {
+            return new Busqueda(this);
+        }
+
+        public Builder origen(String... origenes) {
+            List<Billete> aux = new ArrayList<>();
+
+            for (Billete b : list) {
+                for (String s : origenes) {
+                    if (s.equals(b.getOrigen())) {
+                        aux.add(b);
+                    }
+                }
+            }
+            list = aux;
+            return this;
+        }
+
+        public Builder destino(String... destinos) {
+            List<Billete> aux = new ArrayList<>();
+
+            for (Billete b : list) {
+                for (String s : destinos) {
+                    if (s.equals(b.getDestino())) {
+                        aux.add(b);
+                    }
+                }
+            }
+            list = aux;
+            return this;
+        }
+
+        public Builder precio(int precio, PriceOrder priceOrder) {
+            List<Billete> aux = new ArrayList<>();
+
+            for (Billete b : list) {
+                if (priceOrder.compare(b.getPrecio(), precio)) {
+                    aux.add(b);
+                }
+            }
+            list = aux;
+            return this;
+        }
+
+        public Builder fecha(Date... fechas) {
+            List<Billete> aux = new ArrayList<>();
+
+            for (Billete b : list) {
+                for (Date d : fechas) {
+                    if (d.equals(b.getFecha())) {
+                        aux.add(b);
+                    }
+                }
+            }
+            list = aux;
+            return this;
+        }
+
     }
 
 }
