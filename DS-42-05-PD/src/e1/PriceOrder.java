@@ -2,41 +2,30 @@ package e1;
 
 public enum PriceOrder {
 
-    LOWER("<") {
-
+    LOWER {
         @Override
         public boolean compare(int a, int b) {
             return a < b;
         }
     },
-    LOWEREQ("<=") {
+    LOWEREQ {
         @Override
         public boolean compare(int a, int b) {
             return a <= b;
         }
     },
-    HIGHER(">") {
+    HIGHER {
         @Override
         public boolean compare(int a, int b) {
             return a > b;
         }
     },
-    HIGHEREQ(">=") {
+    HIGHEREQ {
         @Override
         public boolean compare(int a, int b) {
             return a >= b;
         }
     };
-
-    private final String operation;
-
-    PriceOrder(String c) {
-        this.operation = c;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
 
     public abstract boolean compare(int a, int b);
 }

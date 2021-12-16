@@ -41,6 +41,9 @@ class BusquedaTest {
         billeteList.add(b4);
         billeteList.add(b5);
 
+        /* se limpia la lista de comprobación */
+        result.clear();
+
     }
 
     @Test
@@ -53,14 +56,14 @@ class BusquedaTest {
         result.add(b4);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Santiago", "Lugo").build();
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Santiago", "Lugo").build();
         assertEquals(result, busqueda.getList());
 
         /* se eliminan los billetes con origen = "Santiago" de la lista de comprobación */
         result.remove(b3);
         result.remove(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Lugo").build();
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Lugo").build();
         assertEquals(result, busqueda.getList());
 
         /* se añaden los billetes con origen = "Coruña" || "Lugo" || "Vigo" a la lista de comprobación */
@@ -69,7 +72,7 @@ class BusquedaTest {
         result.add(b2);
         result.add(b4);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Lugo", "Vigo").build();
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Lugo", "Vigo").build();
         assertEquals(result, busqueda.getList());
 
     }
@@ -84,14 +87,14 @@ class BusquedaTest {
         result.add(b4);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).destino("Vigo", "Ourense").build();
+        busqueda = new Busqueda.Criterios(billeteList).destino("Vigo", "Ourense").build();
         assertEquals(result, busqueda.getList());
 
         /* se eliminan los billetes con destino = "Ourense" */
         result.remove(b2);
         result.remove(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).destino("Vigo").build();
+        busqueda = new Busqueda.Criterios(billeteList).destino("Vigo").build();
         assertEquals(result, busqueda.getList());
 
         /* se añaden los billetes con destino = "Vigo" || "Coruña" a la lista de comprobación */
@@ -100,7 +103,7 @@ class BusquedaTest {
         result.add(b3);
         result.add(b4);
 
-        busqueda = new Busqueda.Builder(billeteList).destino("Vigo", "Coruña").build();
+        busqueda = new Busqueda.Criterios(billeteList).destino("Vigo", "Coruña").build();
         assertEquals(result, busqueda.getList());
 
     }
@@ -114,16 +117,20 @@ class BusquedaTest {
         result.add(b2);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).precio(15, PriceOrder.LOWEREQ).build();
+        busqueda = new Busqueda.Criterios(billeteList).precio(15, PriceOrder.LOWEREQ).build();
         assertEquals(result, busqueda.getList());
+
+        /* Filtro de precio: > 15 */
 
         /* se añaden los billetes que corresponden al filtro */
         result.clear();
         result.add(b3);
         result.add(b4);
 
-        busqueda = new Busqueda.Builder(billeteList).precio(15, PriceOrder.HIGHER).build();
+        busqueda = new Busqueda.Criterios(billeteList).precio(15, PriceOrder.HIGHER).build();
         assertEquals(result, busqueda.getList());
+
+        /* Filtro de precio: < 18 */
 
         /* se añaden los billetes que corresponden al filtro */
         result.clear();
@@ -131,7 +138,19 @@ class BusquedaTest {
         result.add(b2);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).precio(18, PriceOrder.LOWER).build();
+        busqueda = new Busqueda.Criterios(billeteList).precio(18, PriceOrder.LOWER).build();
+        assertEquals(result, busqueda.getList());
+
+        /* Filtro de precio: >= 15 */
+
+        /* se añaden los billetes que corresponden al filtro */
+        result.clear();
+        result.add(b1);
+        result.add(b2);
+        result.add(b3);
+        result.add(b4);
+
+        busqueda = new Busqueda.Criterios(billeteList).precio(15, PriceOrder.HIGHEREQ).build();
         assertEquals(result, busqueda.getList());
 
     }
@@ -145,13 +164,13 @@ class BusquedaTest {
         result.add(b3);
         result.add(b4);
 
-        busqueda = new Busqueda.Builder(billeteList).fecha(d1, d3, d5).build();
+        busqueda = new Busqueda.Criterios(billeteList).fecha(d1, d3, d5).build();
         assertEquals(result, busqueda.getList());
 
         /* se elimina el billete con fecha '3/12/2021' */
         result.remove(b4);
 
-        busqueda = new Busqueda.Builder(billeteList).fecha(d1, d5).build();
+        busqueda = new Busqueda.Criterios(billeteList).fecha(d1, d5).build();
         assertEquals(result, busqueda.getList());
 
         /* se añaden los billetes que corresponden al filtro */
@@ -159,7 +178,7 @@ class BusquedaTest {
         result.add(b2);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).fecha(d2, d4).build();
+        busqueda = new Busqueda.Criterios(billeteList).fecha(d2, d4).build();
         assertEquals(result, busqueda.getList());
 
     }
@@ -177,7 +196,7 @@ class BusquedaTest {
         result.add(b4);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Santiago", "Lugo").
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Santiago", "Lugo").
                 destino("Vigo", "Ourense").build();
         assertEquals(result, busqueda.getList());
 
@@ -186,7 +205,7 @@ class BusquedaTest {
         result.add(b1);
         result.add(b5);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Santiago", "Lugo").destino("Vigo", "Ourense").
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Santiago", "Lugo").destino("Vigo", "Ourense").
                 precio(15, PriceOrder.LOWEREQ).build();
         assertEquals(result, busqueda.getList());
 
@@ -194,68 +213,35 @@ class BusquedaTest {
         result.clear();
         result.add(b1);
 
-        busqueda = new Busqueda.Builder(billeteList).origen("Coruña", "Santiago", "Lugo").destino("Vigo", "Ourense").
+        busqueda = new Busqueda.Criterios(billeteList).origen("Coruña", "Santiago", "Lugo").destino("Vigo", "Ourense").
                 precio(15, PriceOrder.LOWEREQ).fecha(d1, d3, d5).build();
         assertEquals(result, busqueda.getList());
 
         /* se cambia el orden de los filtros */
 
-        busqueda = new Busqueda.Builder(billeteList).destino("Vigo", "Ourense").fecha(d1, d3, d5).
+        busqueda = new Busqueda.Criterios(billeteList).destino("Vigo", "Ourense").fecha(d1, d3, d5).
                 origen("Coruña", "Santiago", "Lugo").precio(15, PriceOrder.LOWEREQ).build();
         assertEquals(result, busqueda.getList());
 
     }
 
-    //@Test
+    @Test
     public void testToString() {
 
-        assertEquals("*************** Búsqueda ***************\n" +
-                "Lista de billetes (sin filtros):\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Coruña'\n" +
-                "\t\tdestino = 'Vigo'\n" +
-                "\t\tprecio = 15\n" +
-                "\t\tfecha = 1/12/2021\n" +
-                "\t}\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Vigo'\n" +
-                "\t\tdestino = 'Ourense'\n" +
-                "\t\tprecio = 15\n" +
-                "\t\tfecha = 2/12/2021\n" +
-                "\t}\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Santiago'\n" +
-                "\t\tdestino = 'Coruña'\n" +
-                "\t\tprecio = 20\n" +
-                "\t\tfecha = 5/12/2021\n" +
-                "\t}\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Lugo'\n" +
-                "\t\tdestino = 'Vigo'\n" +
-                "\t\tprecio = 18\n" +
-                "\t\tfecha = 3/12/2021\n" +
-                "\t}\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Santiago'\n" +
-                "\t\tdestino = 'Ourense'\n" +
-                "\t\tprecio = 10\n" +
-                "\t\tfecha = 4/12/2021\n" +
-                "\t}\n", busqueda.toString());
+        busqueda = new Busqueda.Criterios(billeteList).build();
 
-        assertEquals("*************** Búsqueda ***************\n" +
-                "Filtros: Origen [ Coruña, Santiago, Lugo ] || Destino [ Vigo, Ourense ] || Precio (<=15) || Fecha [ 1/12/2021, 3/12/2021, 5/12/2021 ] :\n" +
-                "\n" +
-                "\tBillete {\n" +
-                "\t\torigen = 'Coruña'\n" +
-                "\t\tdestino = 'Vigo'\n" +
-                "\t\tprecio = 15\n" +
-                "\t\tfecha = 1/12/2021\n" +
-                "\t}\n", busqueda.toString());
+        assertEquals("* Lista de billetes:\n" +
+                "\nBillete { origen='Coruña' | destino='Vigo' | precio=15 | fecha=1/12/2021 }\n" +
+                "\nBillete { origen='Vigo' | destino='Ourense' | precio=15 | fecha=2/12/2021 }\n" +
+                "\nBillete { origen='Santiago' | destino='Coruña' | precio=20 | fecha=5/12/2021 }\n" +
+                "\nBillete { origen='Lugo' | destino='Vigo' | precio=18 | fecha=3/12/2021 }\n" +
+                "\nBillete { origen='Santiago' | destino='Ourense' | precio=10 | fecha=4/12/2021 }\n", busqueda.toString());
+
+        busqueda = new Busqueda.Criterios(billeteList).destino("Vigo", "Ourense").fecha(d1, d3, d5).
+                origen("Coruña", "Santiago", "Lugo").precio(15, PriceOrder.LOWEREQ).build();
+
+        assertEquals("* Lista de billetes:\n" +
+                "\nBillete { origen='Coruña' | destino='Vigo' | precio=15 | fecha=1/12/2021 }\n", busqueda.toString());
 
     }
 
@@ -263,7 +249,7 @@ class BusquedaTest {
     public void testThrows() {
 
         /* NullPointerException Throws */
-        assertThrows(NullPointerException.class, () -> new Busqueda.Builder(null));
+        assertThrows(NullPointerException.class, () -> new Busqueda.Criterios(null));
         assertThrows(NullPointerException.class, () -> new Billete(null, "Coruña", 0, d1));
         assertThrows(NullPointerException.class, () -> new Billete("Coruña", null, 0, d1));
         assertThrows(NullPointerException.class, () -> new Billete("Coruña", "Vigo", 0, null));

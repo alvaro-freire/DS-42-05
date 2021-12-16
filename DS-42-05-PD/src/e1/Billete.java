@@ -1,7 +1,5 @@
 package e1;
 
-import java.util.Objects;
-
 public final class Billete {
 
     private final String origen;
@@ -46,24 +44,13 @@ public final class Billete {
         if (this == o) return true;
         if (o == null || o.getClass() != getClass()) return false;
         Billete billete = (Billete) o;
-        return getPrecio() == billete.getPrecio() &&
-                getOrigen().equals(billete.getOrigen()) &&
-                getDestino().equals(billete.getDestino()) &&
-                getFecha().equals(billete.getFecha());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getOrigen(), getDestino(), getPrecio(), getFecha());
+        return getPrecio() == billete.getPrecio() && getOrigen().equals(billete.getOrigen()) && getDestino().equals(billete.getDestino()) && getFecha().equals(billete.getFecha());
     }
 
     @Override
     public String toString() {
-        return "\n\tBillete {\n" +
-                "\t\torigen = '" + origen + "'\n" +
-                "\t\tdestino = '" + destino + "'\n" +
-                "\t\tprecio = " + precio + '\n' +
-                "\t\tfecha = " + fecha +
-                "\n\t}\n";
+        return "\nBillete { origen='" + origen + "' | destino='" + destino + "' | precio=" + precio +
+                " | fecha=" + fecha +
+                " }\n";
     }
 }

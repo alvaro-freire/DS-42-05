@@ -7,7 +7,7 @@ public final class Busqueda {
 
     private final List<Billete> list;
 
-    private Busqueda(Builder builder) {
+    private Busqueda(Criterios builder) {
         list = builder.list;
     }
 
@@ -15,11 +15,11 @@ public final class Busqueda {
         return new ArrayList<>(list);
     }
 
-    public static class Builder {
+    public static class Criterios {
 
         private List<Billete> list = new ArrayList<>();
 
-        Builder (List<Billete> billetesList) {
+        Criterios(List<Billete> billetesList) {
 
             if (billetesList == null) {
                 throw new NullPointerException();
@@ -33,60 +33,59 @@ public final class Busqueda {
             return new Busqueda(this);
         }
 
-        public Builder origen(String... origenes) {
+        public Criterios origen(String... origenes) {
             List<Billete> aux = new ArrayList<>();
 
-            for (Billete b : list) {
-                for (String s : origenes) {
-                    if (s.equals(b.getOrigen())) {
+            for (Billete b : list)
+                for (String s : origenes)
+                    if (s.equals(b.getOrigen()))
                         aux.add(b);
-                    }
-                }
-            }
             list = aux;
             return this;
         }
 
-        public Builder destino(String... destinos) {
+        public Criterios destino(String... destinos) {
             List<Billete> aux = new ArrayList<>();
 
-            for (Billete b : list) {
-                for (String s : destinos) {
-                    if (s.equals(b.getDestino())) {
+            for (Billete b : list)
+                for (String s : destinos)
+                    if (s.equals(b.getDestino()))
                         aux.add(b);
-                    }
-                }
-            }
             list = aux;
             return this;
         }
 
-        public Builder precio(int precio, PriceOrder priceOrder) {
+        public Criterios precio(int precio, PriceOrder priceOrder) {
             List<Billete> aux = new ArrayList<>();
 
-            for (Billete b : list) {
-                if (priceOrder.compare(b.getPrecio(), precio)) {
+            for (Billete b : list)
+                if (priceOrder.compare(b.getPrecio(), precio))
                     aux.add(b);
-                }
-            }
             list = aux;
             return this;
         }
 
-        public Builder fecha(Date... fechas) {
+        public Criterios fecha(Date... fechas) {
             List<Billete> aux = new ArrayList<>();
 
-            for (Billete b : list) {
-                for (Date d : fechas) {
-                    if (d.equals(b.getFecha())) {
+            for (Billete b : list)
+                for (Date d : fechas)
+                    if (d.equals(b.getFecha()))
                         aux.add(b);
-                    }
-                }
-            }
             list = aux;
             return this;
         }
 
     }
 
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("* Lista de billetes:\n");
+
+        for (Billete b : list) {
+            string.append(b.toString());
+        }
+
+        return string.toString();
+    }
 }
